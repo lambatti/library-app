@@ -73,7 +73,6 @@
 				<configuration>
 					<source>1.11</source>
 					<target>1.11</target>
-					<release>1.11</release>
 				</configuration>
 			</plugin>
 		</plugins>
