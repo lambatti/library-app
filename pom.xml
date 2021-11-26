@@ -67,13 +67,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<executable>ng</executable>
-					<workingDirectory>src/main/resources/frontend/angular/</workingDirectory>
-					<arguments>
-						<argument>build</argument>
-					</arguments>
-				</configuration>
 			</plugin>
 
 
