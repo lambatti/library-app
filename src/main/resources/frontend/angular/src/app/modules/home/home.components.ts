@@ -5,11 +5,11 @@ import {Book} from "../../model/book/book.model";
 
 
 @Component({
-    selector: "home",
+    selector: "appHomePage",
     templateUrl: "home.components.html",
     styleUrls: ["home.component.scss"]
 })
-export class HomeComponents {
+export class HomeComponent {
     public isDisplayedBook: number = null;
     public booksPerPage: number = 10;
     public selectedPage: number = 1;
