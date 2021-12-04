@@ -1,7 +1,7 @@
 package com.software.architecture.libraryapp.model;
 
 public enum Genres {
-    FSF("fantasy, science-fiction"),
+    FSF("fantasy, science fiction"),
     KST("kryminał, sensacja, thriller"),
     LOR("literatura obyczajowa, romans"),
     LM("literatura młodzieżowa"),

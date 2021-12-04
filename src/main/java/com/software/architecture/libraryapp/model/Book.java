@@ -12,9 +12,9 @@ public class Book {
     private String title;
     private String author;
     private String publicationDate;
-    // TODO: private Genres genre(?)
-    private String genre;
-    private boolean isHard;
+    // TODO: private Genres genre(?) DONE
+    private Genres genre;
+    private boolean isHardcover;
     private int count;
     private boolean isAvailable;
     private String description;
@@ -47,12 +47,12 @@ public class Book {
         return publicationDate;
     }
 
-    public String getGenre() {
+    public Genres getGenre() {
         return genre;
     }
 
-    public boolean isHard() {
-        return isHard;
+    public boolean isHardcover() {
+        return isHardcover;
     }
 
     public int getCount() {

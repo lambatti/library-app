@@ -1,9 +1,7 @@
 package com.software.architecture.libraryapp.model;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -19,20 +17,21 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    // TODO: enum register question
-    private Integer registerQuestion;
-    // TODO: enum gender
-    private Integer gender;
+    // TODO: enum register question DONE
+    private RegistrationQuestions registrationQuestion;
+    private String registrationQuestionAnswer;
+    // TODO: enum gender DONE
+    private Genders gender;
     private LocalDate birthDate;
     // TODO: how to insert it to table?
-    private LocalDate createAccountDate = LocalDate.now();
+    private LocalDate accountCreationDate = LocalDate.now();
 
     public User() {
 
     }
 
-    public void setCreateAccountDate(LocalDate createAccountDate) {
-        this.createAccountDate = createAccountDate;
+    public void setAccountCreationDate(LocalDate createAccountDate) {
+        this.accountCreationDate = createAccountDate;
     }
 
     public Integer getId() {
@@ -55,11 +54,15 @@ public class User {
         return email;
     }
 
-    public Integer getRegisterQuestion() {
-        return registerQuestion;
+    public RegistrationQuestions getRegistrationQuestion() {
+        return registrationQuestion;
     }
 
-    public Integer getGender() {
+    public String getRegistrationQuestionAnswer() {
+        return registrationQuestionAnswer;
+    }
+
+    public Genders getGender() {
         return gender;
     }
 
@@ -67,7 +70,7 @@ public class User {
         return birthDate;
     }
 
-    public LocalDate getCreateAccountDate() {
-        return createAccountDate;
+    public LocalDate getAccountCreationDate() {
+        return accountCreationDate;
     }
 }
