@@ -1,17 +1,38 @@
+@import 'src/styles.scss';
 
-header {
-
-    background-color: lightblue;
-
-}
-.card {
-    img {
+.wrapper {
+    margin: 40px 5vw;
+    @include respond-to('large') {
+        margin: 40px 15vw;
     }
-}
-aside{
-    transform: translateX(50px);
-}
-.btn-size{
-    width: 20px;
-    height: 20px;
+
+    .books-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        justify-items: center;
+        gap: 40px;
+
+        .book-image {
+            position: relative;
+
+            .available {
+                &:hover {
+                    filter: contrast(175%) brightness(103%);
+                }
+            }
+
+            .disabled {
+                filter: grayscale(100%) blur(2px);
+            }
+
+            p {
+                position: absolute;
+                top: calc(50% - map-get($font-size, '20') / 2);
+                left: 15%;
+                color: map-get($colors, 'white');
+                font-size: map-get($font-size, '20');
+                font-weight: bold;
+            }
+        }
+    }
 }

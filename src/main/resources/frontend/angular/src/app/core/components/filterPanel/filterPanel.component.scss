@@ -1,0 +1,12 @@
+@import 'src/styles.scss';
+
+aside {
+    width: 50vw;
+    height: 100vh;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    z-index: 10;
+    background-color: map-get($colors, 'main');
+    display: none; //TODO add configuration
+}

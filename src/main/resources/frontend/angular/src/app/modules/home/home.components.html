@@ -1,1 +1,15 @@
-<appHeader></appHeader> <appFilter></appFilter>
+<appHeader></appHeader>
+
+<div class="wrapper">
+    <appFilter></appFilter>
+    <div class="books-wrapper">
+        <div class="book-image" *ngFor="let book of books">
+            <img
+                [class.available]="book.isAvailable"
+                [class.disabled]="!book.isAvailable"
+                [src]="book.coverUrl"
+            />
+            <p *ngIf="!book.isAvailable">Niedostępna</p>
+        </div>
+    </div>
+</div>
