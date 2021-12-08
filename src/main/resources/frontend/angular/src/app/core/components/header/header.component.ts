@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'appHeader',
-    templateUrl: 'header.component.html'
+    templateUrl: 'header.component.html',
+    styleUrls: ['header.component.scss']
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+    public isActive: boolean = false;
+    public isHome: boolean = true;
+    public isLoggedIn: boolean = false;
+    public user: string = 'kamil';
+}

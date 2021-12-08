@@ -1,5 +1,22 @@
-
-
 <header>
-    gfhjds
+    <div class="logo-section">
+        <div *ngIf="isHome" (click)="isActive = !isActive" class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        <a [href]="'#'">LOGO</a>
+    </div>
+    <div *ngIf="!isLoggedIn" class="panel">
+        <a [href]="'#'">Rejestracja</a>
+        <a [href]="'#'">Logowanie</a>
+    </div>
+    <div class="user-control" *ngIf="isLoggedIn">
+        <p>Witaj {{ user }}</p>
+        <select>
+            <option class="option-panel">Moje książki</option>
+            <option class="option-panel">Moje konto</option>
+            <option class="option-panel">Wyloguj się</option>
+        </select>
+    </div>
 </header>
