@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-register',
+    selector: 'appRegisterPage',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit(): void {}
+export class RegisterComponent {
+    public answers: Array<string> = [
+        'Czy masz kota?',
+        'Czy lubisz chodzić na studia?',
+        'Jaki jest twój ulubiony przedmiot?'
+    ];
 }

@@ -1,1 +1,52 @@
-<p>register works!</p>
+<div class="wrapper">
+    <div class="firstSection">
+        <div class="image"></div>
+    </div>
+    <div class="secondSection">
+        <h1>Rejestracja</h1>
+        <form class="login--form">
+            <div>
+                <label class="login--label">Imię</label>
+                <input class="inputStyle" />
+            </div>
+            <div>
+                <label class="login--label">Nazwisko</label>
+                <input class="inputStyle" />
+            </div>
+            <div>
+                <label class="login--label">Email</label>
+                <input
+                    class="inputStyle"
+                    type="email"
+                    placeholder="przyklad@ex.com"
+                />
+            </div>
+            <div>
+                <label class="login--label">Hasło</label>
+                <input class="inputStyle" type="password" />
+            </div>
+            <div>
+                <label class="login--label">Powtórz hasło</label>
+                <input class="inputStyle" type="password" />
+            </div>
+
+            <select class="inputStyle">
+                <option [value]="">--Wybierz pytanie--</option>
+                <option [value]="answer" *ngFor="let answer of answers">
+                    {{ answer }}
+                </option>
+            </select>
+            <div>
+                <label class="login--label">Odpowiedź</label>
+                <input class="inputStyle" />
+            </div>
+            <p class="login--label redirect--login" routerLink="/login">
+                Posiadasz już konto, kliknij tutaj
+            </p>
+            <p class="login--label redirect--login" routerLink="/">
+                Chcę kontynuować bez logowania.
+            </p>
+            <button class="btn--secondary" type="submit">Zarejestruj</button>
+        </form>
+    </div>
+</div>

@@ -22,18 +22,19 @@ $breakpoints: (
     'extra-small': (
         min-width: 576px
     ),
-    'small': (
-        min-width: 768px
-    ),
     // tablets
+    'small':
+        (
+            min-width: 768px
+        ),
+    // laptops
     'medium':
         (
             min-width: 992px
         ),
-    // laptops
+    // desktop
     'large':
         (
             min-width: 1200px
         )
-        // desktop
 ) !default;

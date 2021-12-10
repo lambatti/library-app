@@ -7,3 +7,49 @@
         font-size: map-get($font-size, '16');
     }
 }
+
+.inputStyle {
+    border: none;
+    border-radius: 20px;
+    background-color: map-get($colors, 'main');
+    height: 30px;
+    padding-left: 10px;
+    width: 100%;
+    margin-top: 2px;
+
+    ::placeholder {
+        color: map-get($colors, 'gray');
+        font-weight: 600;
+    }
+}
+
+.btn--primary {
+}
+
+.btn--secondary {
+    background: none;
+    border-radius: 20px;
+    border: 1px solid map-get($colors, 'main');
+    color: map-get($colors, 'main');
+    font-size: map-get($font-size, '20');
+    padding: 5px 15px;
+
+    &:hover {
+        border-color: map-get($colors, 'white');
+        color: map-get($colors, 'white');
+        background-color: map-get($colors, 'main');
+    }
+}
+
+.login--label {
+    font-size: map-get($font-size, '13');
+    font-weight: 600;
+}
+
+.redirect--login {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.login--form {
+}
