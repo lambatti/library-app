@@ -1,0 +1,9 @@
+@mixin bookDescriptionFont {
+    font-size: map-get($font-size, '10');
+    @include respond-to('small') {
+        font-size: map-get($font-size, '13');
+    }
+    @include respond-to('medium') {
+        font-size: map-get($font-size, '16');
+    }
+}

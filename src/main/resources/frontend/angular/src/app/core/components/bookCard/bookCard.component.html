@@ -1,1 +1,38 @@
-<div class="card"></div>
+<div class="card" [id]="selectedBook">
+    <img [src]="displayedBook?.coverUrl" />
+    <div class="info">
+        <h3>{{ displayedBook?.name }}</h3>
+        <!--TODO dodać przycisk zamykania panelu -->
+
+        <div class="bookPanel">
+            <div class="bookPanelContent">
+                <h6>Autor:</h6>
+                <p class="bookData">{{ displayedBook.author }}</p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Rok wydania:</h6>
+                <p class="bookData">
+                    {{ displayedBook.publicationDate.slice(6, 10) }}
+                </p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Gatunek:</h6>
+                <p class="bookData">{{ displayedBook.genre }}</p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Oprawa:</h6>
+                <p class="bookData">
+                    {{ displayedBook.isHard ? 'Twarda' : 'Miękka' }}
+                </p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Dostępność:</h6>
+                <p class="bookData">{{ displayedBook.count }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="bookDescription">
+        <h6>Opis:</h6>
+        <p>{{ displayedBook?.description }}</p>
+    </div>
+</div>

@@ -35,4 +35,20 @@
             }
         }
     }
+
+    .pageControlButton {
+        margin-top: 10px;
+        button {
+            margin: 5px;
+            border: 1px solid white;
+            background-color: map-get($colors, 'main');
+            color: map-get($colors, 'white');
+            padding: 5px 10px;
+            &:hover {
+                background: none;
+                border: 1px solid map-get($colors, 'main');
+                color: map-get($colors, 'main');
+            }
+        }
+    }
 }

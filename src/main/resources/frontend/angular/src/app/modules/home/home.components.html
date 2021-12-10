@@ -2,14 +2,29 @@
 
 <div class="wrapper">
     <appFilter></appFilter>
+
     <div class="books-wrapper">
-        <div class="book-image" *ngFor="let book of books">
+        <a
+            [href]='"#"+book.id'
+            class="book-image"
+            *ngFor="let book of books"
+            (click)="getBookId(book.id)"
+        >
             <img
                 [class.available]="book.isAvailable"
                 [class.disabled]="!book.isAvailable"
                 [src]="book.coverUrl"
             />
             <p *ngIf="!book.isAvailable">Niedostępna</p>
-        </div>
+        </a>
+    </div>
+
+    <div *ngIf="isDisplayedBook !== null">
+        <appBookCard [selectedBook]="this.isDisplayedBook"></appBookCard>
+    </div>
+    <div class="pageControlButton">
+        <button *ngFor="let page of pageNumbers" (click)="changePage(page)">
+            {{page}}
+        </button>
     </div>
 </div>

@@ -13,6 +13,7 @@ export class HomeComponent {
     public selectedPage: number = 1;
 
     constructor(private _repository: BookRepository) {}
+
     get books(): Array<Book> {
         let pageIndex = (this.selectedPage - 1) * this.booksPerPage;
         return this._repository
@@ -33,6 +34,7 @@ export class HomeComponent {
     }
 
     getBookId(id: number) {
+        console.log(id);
         if (this.isDisplayedBook !== null && this.isDisplayedBook === id) {
             this.isDisplayedBook = null;
             this.booksPerPage = 10;
@@ -40,11 +42,8 @@ export class HomeComponent {
             this.isDisplayedBook = null;
             this.booksPerPage = 10;
         } else {
+            this.booksPerPage = 5;
             this.isDisplayedBook = id;
         }
-    }
-
-    get displayedBook(): Book {
-        return this.books.find(b => b.id === this.isDisplayedBook);
     }
 }
