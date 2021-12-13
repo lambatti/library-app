@@ -13,9 +13,10 @@
     </div>
     <div class="user-control" *ngIf="isLoggedIn">
         <p>Witaj {{ user }}</p>
-        <select>
-            <option class="option-panel">Moje książki</option>
-            <option class="option-panel">Moje konto</option>
+        <select (change)="navigationSelect($any($event.target).value)">
+            <option></option>
+            <option class="option-panel" value="myBooks">Moje książki</option>
+            <option class="option-panel" value="account">Moje konto</option>
             <option class="option-panel">Wyloguj się</option>
         </select>
     </div>
