@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-    public answers: Array<string> = [
+    public questions: Array<string> = [
         'Czy masz kota?',
         'Czy lubisz chodzić na studia?',
         'Jaki jest twój ulubiony przedmiot?'
