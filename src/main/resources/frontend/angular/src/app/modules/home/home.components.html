@@ -2,7 +2,6 @@
 
 <div class="wrapper">
     <appFilter></appFilter>
-
     <div class="books-wrapper">
         <a
             [href]='"#"+book.id'
@@ -14,6 +13,7 @@
                 [class.available]="book.isAvailable"
                 [class.disabled]="!book.isAvailable"
                 [src]="book.coverUrl"
+                alt=""
             />
             <p *ngIf="!book.isAvailable">Niedostępna</p>
         </a>
@@ -23,8 +23,6 @@
         <appBookCard [selectedBook]="this.isDisplayedBook"></appBookCard>
     </div>
     <div class="pageControlButton">
-        <button *ngFor="let page of pageNumbers" (click)="changePage(page)">
-            {{page}}
-        </button>
+        <button *ngFor="let page of pageNumbers" (click)="changePage(page)">{{page}}</button>
     </div>
 </div>

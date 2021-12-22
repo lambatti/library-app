@@ -6,7 +6,7 @@ import { Book } from './book.model';
 export class BookRepository {
     private books: Array<Book> = [];
     private authors: Array<string> = [];
-    private category: string = '';
+    //private category: string = '';
 
     constructor(private _dataSource: StaticDataSource) {
         _dataSource.getBooks().subscribe(data => {
@@ -19,10 +19,9 @@ export class BookRepository {
     }
 
     getBooks(category: string = null) {
-        return this.books.filter(
-            b => category === null || b.author === category
-        );
+        return this.books.filter(b => category === null || b.author === category);
     }
+
     getBookById(id: number) {
         return this.books.find(i => i.id === id);
     }

@@ -11,6 +11,7 @@ export class BookCardComponent {
     @Input() selectedBook: number;
 
     constructor(private _repository: BookRepository) {}
+
     get displayedBook(): Book {
         return this._repository.getBookById(this.selectedBook);
     }
