@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { BookRepository } from '../../model/book/book.repository';
 import { Book } from '../../model/book/book.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AsideService } from '../../core/services/asideService.service';
 
 @Component({
     selector: 'appHomePage',
@@ -8,42 +10,49 @@ import { Book } from '../../model/book/book.model';
     styleUrls: ['home.component.scss']
 })
 export class HomeComponent {
-    public isDisplayedBook: number = null;
-    public booksPerPage: number = 10;
     public selectedPage: number = 1;
+    public genre: string;
+    public isActive: boolean = true;
+    private widthSize: number = window.innerWidth;
 
-    constructor(private _repository: BookRepository) {}
+    constructor(
+        private _repository: BookRepository,
+        private router: Router,
+        activateRoute: ActivatedRoute,
+        private _asideService: AsideService
+    ) {
+        activateRoute.params.subscribe(params => {
+            this.genre = params['genre'] || null;
+        });
+    }
 
     get books(): Array<Book> {
-        let pageIndex = (this.selectedPage - 1) * this.booksPerPage;
+        let pageIndex = (this.selectedPage - 1) * this._asideService.breakPoints(this.widthSize);
+        console.log(pageIndex);
+
         return this._repository
             .getBooks()
-            .slice(pageIndex, pageIndex + this.booksPerPage);
+            .filter(b => this.genre === null || this.genre === b.genre)
+            .slice(pageIndex, pageIndex + this._asideService.breakPoints(this.widthSize));
     }
 
     changePage(newPage: number) {
         this.selectedPage = newPage;
+        console.log(window.innerWidth);
     }
 
     get pageNumbers(): Array<number> {
         return Array(
-            Math.ceil(this._repository.getBooks().length / this.booksPerPage)
+            Math.ceil(
+                this._repository.getBooks().length / this._asideService.breakPoints(this.widthSize)
+            )
         )
             .fill(0)
             .map((x, i) => i + 1);
     }
 
-    getBookId(id: number) {
-        console.log(id);
-        if (this.isDisplayedBook !== null && this.isDisplayedBook === id) {
-            this.isDisplayedBook = null;
-            this.booksPerPage = 10;
-        } else if (!this.books.find(b => b.id === id).isAvailable) {
-            this.isDisplayedBook = null;
-            this.booksPerPage = 10;
-        } else {
-            this.booksPerPage = 5;
-            this.isDisplayedBook = id;
-        }
+    @HostListener('window:resize', ['$event'])
+    onResize(event: any) {
+        this.widthSize = event.target.innerWidth;
     }
 }

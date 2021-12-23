@@ -6,7 +6,6 @@
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 2fr 2fr;
     padding: 5%;
-    margin-top: 5%;
     box-shadow: 5px 5px 20px map-get($colors, 'shadow');
     @include respond-to('medium') {
         grid-template-columns: 1fr 2fr 2fr;

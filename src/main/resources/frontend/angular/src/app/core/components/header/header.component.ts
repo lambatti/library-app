@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AsideService } from '../../services/asideService.service';
 
 @Component({
     selector: 'appHeader',
@@ -7,11 +8,10 @@ import { Router } from '@angular/router';
     styleUrls: ['header.component.scss']
 })
 export class HeaderComponent {
-    constructor(private router: Router) {}
+    constructor(private router: Router, public _asideService: AsideService) {}
 
-    public isActive: boolean = false;
     public isHome: boolean = true;
-    public isLoggedIn: boolean = true;
+    public isLoggedIn: boolean = false;
     public user: string = 'kamil';
 
     navigationSelect(location: string) {

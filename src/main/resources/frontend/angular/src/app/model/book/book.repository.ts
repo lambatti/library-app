@@ -6,6 +6,8 @@ import { Book } from './book.model';
 export class BookRepository {
     private books: Array<Book> = [];
     private authors: Array<string> = [];
+    private genre: Array<string> = [];
+
     //private category: string = '';
 
     constructor(private _dataSource: StaticDataSource) {
@@ -13,6 +15,10 @@ export class BookRepository {
             this.books = data;
             this.authors = data
                 .map(a => a.author)
+                .filter((c, index, array) => array.indexOf(c) === index)
+                .sort();
+            this.genre = data
+                .map(c => c.genre)
                 .filter((c, index, array) => array.indexOf(c) === index)
                 .sort();
         });
@@ -24,6 +30,10 @@ export class BookRepository {
 
     getBookById(id: number) {
         return this.books.find(i => i.id === id);
+    }
+
+    getGenre(): Array<string> {
+        return this.genre;
     }
 
     getAuthors(): Array<string> {

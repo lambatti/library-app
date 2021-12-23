@@ -1,6 +1,6 @@
 <header>
     <div class="logo-section">
-        <div *ngIf="isHome" (click)="isActive = !isActive" class="hamburger">
+        <div *ngIf="isHome" (click)="_asideService.hide()" class="hamburger">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>

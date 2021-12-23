@@ -1,20 +1,44 @@
 @import 'src/styles.scss';
 
 .wrapper {
-    margin: 40px 5vw;
-    @include respond-to('large') {
-        margin: 40px 15vw;
+    margin: 0 5vw;
+    height: 100vh;
+
+    @include respond-to('medium') {
+        margin: 0;
+        display: flex;
+    }
+
+    .filterWrapper {
+        @include respond-to('medium') {
+        }
     }
 
     .books-wrapper {
         display: grid;
+        padding-top: 15vh;
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         justify-items: center;
         gap: 40px;
+        @include respond-to('medium') {
+            width: 100%;
+            margin: 5% 5% 0 5%;
+            padding-top: 5vh;
+        }
+
+        h1 {
+            grid-column: 1/-1;
+        }
 
         .book-image {
+            width: 200px;
+            height: 250px;
             position: relative;
-
+            div {
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+            }
             .available {
                 &:hover {
                     filter: contrast(175%) brightness(103%);
@@ -37,13 +61,21 @@
     }
 
     .pageControlButton {
-        margin-top: 10px;
+        margin: 10px 0 20px 0;
+
+        display: flex;
+        justify-items: end;
+        grid-column: 1/-1;
+
         button {
+            width: 40px;
+            height: 40px;
             margin: 5px;
             border: 1px solid white;
             background-color: map-get($colors, 'main');
             color: map-get($colors, 'white');
             padding: 5px 10px;
+
             &:hover {
                 background: none;
                 border: 1px solid map-get($colors, 'main');

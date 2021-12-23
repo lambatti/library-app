@@ -1,1 +1,13 @@
-<aside>kjgdfksgflkjdas</aside>
+<aside [class.toggle]="_asideService.isActive">
+    <div class="searchSection">
+        <h1>Znajdź swoją książkę</h1>
+        <input class="inputSearch" type="search" placeholder="Szukaj..." />
+    </div>
+    <div class="filterSection">
+        <a>Nowości</a>
+        <a>Dostępne</a>
+        <a [routerLink]="['/books', item]" *ngFor="let item of getGenre()">
+            {{ item }}
+        </a>
+    </div>
+</aside>
