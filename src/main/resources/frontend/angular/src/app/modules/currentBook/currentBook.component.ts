@@ -9,7 +9,7 @@ import { Book } from '../../model/book/book.model';
     styleUrls: ['currentBook.component.scss']
 })
 export class CurrentBookComponent {
-    private id: number;
+    private readonly id: number;
 
     constructor(private _service: BookRepository, activateRoute: ActivatedRoute) {
         this.id = Number(activateRoute.snapshot.params['id']);
@@ -18,4 +18,6 @@ export class CurrentBookComponent {
     get currentBook(): Book {
         return this._service.getBookById(this.id);
     }
+
+    borrowBook() {}
 }

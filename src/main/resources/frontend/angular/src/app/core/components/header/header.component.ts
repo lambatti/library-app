@@ -11,7 +11,7 @@ export class HeaderComponent {
     constructor(private router: Router, public _asideService: AsideService) {}
 
     public isHome: boolean = true;
-    public isLoggedIn: boolean = false;
+    public isLoggedIn: boolean = true;
     public user: string = 'kamil';
 
     navigationSelect(location: string) {

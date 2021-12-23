@@ -1,7 +1,7 @@
 <div class="card" [id]="selectedBook">
     <img [src]="displayedBook?.coverUrl" alt="" />
     <div class="info">
-        <h3>{{ displayedBook?.name }}</h3>
+        <h2>{{ displayedBook?.name }}</h2>
         <div class="bookPanel">
             <div class="bookPanelContent">
                 <h6>Autor:</h6>
@@ -25,12 +25,19 @@
             </div>
             <div class="bookPanelContent">
                 <h6>Dostępność:</h6>
-                <p class="bookData">{{ displayedBook.count }}</p>
+                <p class="bookData">
+                    {{ displayedBook.count !== 0 ? displayedBook.count : 'Niedostępna' }}
+                </p>
             </div>
         </div>
     </div>
     <div class="bookDescription">
         <h6>Opis:</h6>
         <p>{{ displayedBook?.description }}</p>
+    </div>
+    <div class="buttonWrapper" *ngIf="displayedBook.isAvailable">
+        <button>Wypożycz</button>
+        <!--        <button>Prolonguj</button>-->
+        <!--        <button>Zwróć</button>-->
     </div>
 </div>

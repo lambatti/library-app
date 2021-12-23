@@ -37,13 +37,13 @@
             .bookPanelContent {
                 display: flex;
                 justify-content: space-between;
+
                 h6 {
                     @include bookDescriptionFont;
                 }
 
                 .bookData {
                     @include bookDescriptionFont;
-
                     justify-self: end;
                 }
             }
@@ -53,6 +53,7 @@
     .bookDescription {
         margin: 10px 0;
         grid-column: 1/-1;
+
         h6 {
             @include bookDescriptionFont;
         }
@@ -63,6 +64,27 @@
 
         @include respond-to('medium') {
             grid-column: 3/-1;
+        }
+    }
+
+    .buttonWrapper {
+        justify-self: flex-end;
+        grid-column: 1/-1;
+
+        button {
+            margin-left: 10px;
+            width: 100px;
+            height: 50px;
+            border: none;
+            font-size: map-get($font-size, '13');
+            color: map-get($colors, 'black');
+            font-weight: bold;
+            border-radius: 20px;
+            background-color: map-get($colors, 'white');
+            box-shadow: 10px -5px 20px map-get($colors, 'shadow');
+            &:hover {
+                color: map-get($colors, 'main');
+            }
         }
     }
 }
