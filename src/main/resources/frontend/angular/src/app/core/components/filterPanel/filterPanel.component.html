@@ -4,9 +4,14 @@
         <input class="inputSearch" type="search" placeholder="Szukaj..." />
     </div>
     <div class="filterSection">
-        <a>Nowości</a>
-        <a>Dostępne</a>
-        <a [routerLink]="['/books', item]" *ngFor="let item of getGenre()">
+        <a class="filterItem">Nowości</a>
+        <a class="filterItem">Dostępne</a>
+        <a
+            class="filterItem"
+            (click)="_asideService.isActive = false"
+            [routerLink]="['/books', item]"
+            *ngFor="let item of getGenre()"
+        >
             {{ item }}
         </a>
     </div>

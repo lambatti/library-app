@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { BookRepository } from '../../../model/book/book.repository';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Book } from '../../../model/book/book.model';
 import { AsideService } from '../../services/asideService.service';
 
 @Component({
@@ -25,9 +24,5 @@ export class FilterPanelComponent {
 
     getGenre(): string[] {
         return this._service.getGenre();
-    }
-
-    filterByGenre(): Book[] {
-        return this._service.getBooks().filter(b => this.genre === null || this.genre === b.genre);
     }
 }
