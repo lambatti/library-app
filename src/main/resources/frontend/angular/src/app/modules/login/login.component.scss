@@ -3,24 +3,50 @@
 .wrapper {
     display: grid;
     grid-template-rows: 2fr 3fr;
-    width: 100vw;
     height: 100vh;
     justify-items: center;
+    @include respond-to('medium') {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+    }
     .firstSection {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100vw;
         background-color: map-get($colors, 'main');
+        @include respond-to('medium') {
+            width: 50vw;
+        }
         .image {
             width: 100%;
             height: 80%;
             margin: auto;
             background-image: url('../../../assets/loginImage.svg');
             background-repeat: no-repeat;
+            background-position: center;
+            background-origin: border-box;
         }
     }
 
     .secondSection {
+        margin: 5% 10%;
+        display: grid;
+        grid-template-rows: 1fr 3fr;
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 90%;
+            justify-self: center;
+            input {
+            }
+        }
+        .formWrapper {
+        }
     }
 }

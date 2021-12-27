@@ -7,26 +7,26 @@
         <form class="login--form">
             <div>
                 <label class="login--label">Imię</label>
-                <input class="inputStyle" />
+                <input class="input--primary" />
             </div>
             <div>
                 <label class="login--label">Nazwisko</label>
-                <input class="inputStyle" />
+                <input class="input--primary" />
             </div>
             <div>
                 <label class="login--label">Email</label>
-                <input class="inputStyle" type="email" placeholder="przyklad@ex.com" />
+                <input class="input--primary" type="email" placeholder="przyklad@ex.com" />
             </div>
             <div>
                 <label class="login--label">Hasło</label>
-                <input class="inputStyle" type="password" />
+                <input class="input--primary" type="password" />
             </div>
             <div>
                 <label class="login--label">Powtórz hasło</label>
-                <input class="inputStyle" type="password" />
+                <input class="input--primary" type="password" />
             </div>
 
-            <select class="inputStyle">
+            <select class="input--primary">
                 <option [value]="">--Wybierz pytanie--</option>
                 <option [value]="question" *ngFor="let question of questions">
                     {{ question }}
@@ -34,7 +34,7 @@
             </select>
             <div>
                 <label class="login--label">Odpowiedź</label>
-                <input class="inputStyle" />
+                <input class="input--primary" />
             </div>
             <p class="login--label redirect--login" routerLink="/login">
                 Posiadasz już konto, kliknij tutaj

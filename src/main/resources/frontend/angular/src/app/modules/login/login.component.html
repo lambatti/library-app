@@ -3,13 +3,23 @@
         <div class="image"></div>
     </div>
     <div class="secondSection">
-        <div>
-            <h1>Logowanie</h1>
-            <form>
-                <input placeholder="login" />
-                <input placeholder="hasło" />
-                <button>Zaloguj</button>
-            </form>
-        </div>
+        <h1>Logowanie</h1>
+        <form class="login--form formWrapper">
+            <div>
+                <label class="login--label">Login</label>
+                <input class="input--primary" />
+            </div>
+            <div>
+                <label class="login--label">Hasło</label>
+                <input class="input--primary" />
+            </div>
+            <p class="login--label redirect--login" routerLink="/register">
+                Nie posiadasz konta, kliknji tutaj
+            </p>
+            <p class="login--label redirect--login" routerLink="/">
+                Chcę kontynuować bez logowania
+            </p>
+            <button class="btn--secondary" type="submit">Zaloguj</button>
+        </form>
     </div>
 </div>
