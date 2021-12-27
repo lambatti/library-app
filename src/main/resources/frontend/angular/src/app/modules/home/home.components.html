@@ -1,8 +1,8 @@
-<appHeader></appHeader>
+<appHeader [isHide]="true"></appHeader>
 <div class="wrapper">
     <appFilter class="filterWrapper"></appFilter>
     <div class="books-wrapper">
-        <h1 *ngIf="genre !== null">{{genre}}</h1>
+        <h1>{{genre ? genre : 'Wszystkie'}}</h1>
         <a
             class="book-image"
             *ngFor="let book of books"

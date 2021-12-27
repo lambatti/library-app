@@ -8,7 +8,8 @@ import { BookRepository } from '../../../model/book/book.repository';
     styleUrls: ['bookCard.component.scss']
 })
 export class BookCardComponent {
-    @Input() selectedBook: number;
+    @Input() selectedBook?: number;
+    @Input() isMyBooks: boolean;
 
     constructor(private _repository: BookRepository) {}
 

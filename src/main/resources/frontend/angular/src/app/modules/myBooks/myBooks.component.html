@@ -1,1 +1,9 @@
-<div>o;dfsaihfodpsah</div>
+<appHeader [isHide]="false"></appHeader>
+<div class="wrapper">
+    <appBookCard
+        class="card"
+        [isMyBooks]="true"
+        *ngFor="let id of books"
+        [selectedBook]="id"
+    ></appBookCard>
+</div>

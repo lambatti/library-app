@@ -1,0 +1,10 @@
+.wrapper {
+    padding-top: 10vh;
+    margin: 0 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .card {
+        margin: 5vh 0;
+    }
+}

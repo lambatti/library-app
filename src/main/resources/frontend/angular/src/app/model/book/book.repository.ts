@@ -7,6 +7,7 @@ export class BookRepository {
     private books: Array<Book> = [];
     private authors: Array<string> = [];
     private genre: Array<string> = [];
+    private borrowedBooks: Array<Book> = [];
 
     //private category: string = '';
 
@@ -21,6 +22,9 @@ export class BookRepository {
                 .map(c => c.genre)
                 .filter((c, index, array) => array.indexOf(c) === index)
                 .sort();
+        });
+        _dataSource.getBorrowedBooks().subscribe(data => {
+            this.borrowedBooks = data;
         });
     }
 
@@ -38,5 +42,8 @@ export class BookRepository {
 
     getAuthors(): Array<string> {
         return this.authors;
+    }
+    getBorrowedBooks() {
+        return this.borrowedBooks;
     }
 }

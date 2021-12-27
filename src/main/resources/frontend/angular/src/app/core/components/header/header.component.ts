@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsideService } from '../../services/asideService.service';
 
@@ -8,9 +8,10 @@ import { AsideService } from '../../services/asideService.service';
     styleUrls: ['header.component.scss']
 })
 export class HeaderComponent {
+    @Input() isHide?: boolean;
+
     constructor(private router: Router, public _asideService: AsideService) {}
 
-    public isHome: boolean = true;
     public isLoggedIn: boolean = true;
     public user: string = 'kamil';
 
