@@ -52,6 +52,9 @@ aside {
 
         .filterItem {
             align-self: start;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }

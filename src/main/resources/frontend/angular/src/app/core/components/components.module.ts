@@ -6,11 +6,12 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AsideService } from '../services/asideService.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @NgModule({
     imports: [ModelModule, BrowserModule, RouterModule],
     exports: [FilterPanelComponent, HeaderComponent, BookCardComponent],
     declarations: [BookCardComponent, FilterPanelComponent, HeaderComponent],
-    providers: [AsideService]
+    providers: [AsideService, AuthenticationService]
 })
 export class ComponentsModule {}
