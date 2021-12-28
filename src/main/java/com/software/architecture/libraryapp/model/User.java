@@ -1,7 +1,10 @@
 package com.software.architecture.libraryapp.model;
 
+import com.software.architecture.libraryapp.model.converter.ListToArrayConveter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,6 +20,12 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
+
+    @Column(name="roles", columnDefinition = "text[]")
+    @Convert(converter = ListToArrayConveter.class)
+    private List<String> roles;
+
     // TODO: enum register question DONE
     private RegistrationQuestions registrationQuestion;
     private String registrationQuestionAnswer;
@@ -52,6 +61,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public List<String> getRoles() {
+        return roles;
     }
 
     public RegistrationQuestions getRegistrationQuestion() {
