@@ -53,3 +53,15 @@
 
 .login--form {
 }
+
+input.ng-dirty.ng-invalid {
+    border: 2px solid #ff0000;
+}
+input.ng-dirty.ng-valid {
+    border: 2px solid #6bc502;
+}
+.li--error {
+    list-style: none;
+    font-size: map-get($font-size, '13');
+    color: red;
+}

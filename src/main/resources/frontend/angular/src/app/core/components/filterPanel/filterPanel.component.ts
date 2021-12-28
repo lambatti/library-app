@@ -25,4 +25,6 @@ export class FilterPanelComponent {
     getGenre(): string[] {
         return this._service.getGenre();
     }
+
+    searchBook() {}
 }

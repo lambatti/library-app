@@ -4,37 +4,185 @@
     </div>
     <div class="secondSection">
         <h1>Rejestracja</h1>
-        <form class="login--form">
+        <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()" class="login--form">
             <div>
                 <label class="login--label">Imię</label>
-                <input class="input--primary" />
+                <input name="firstName" formControlName="firstName" class="input--primary" />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['firstName'].dirty) &&
+                        formGroup.controls['firstName'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('firstName')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
             <div>
                 <label class="login--label">Nazwisko</label>
-                <input class="input--primary" />
+                <input name="lastName" formControlName="lastName" class="input--primary" />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['lastName'].dirty) &&
+                        formGroup.controls['lastName'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('lastName')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
             <div>
                 <label class="login--label">Email</label>
-                <input class="input--primary" type="email" placeholder="przyklad@ex.com" />
+                <input
+                    class="input--primary"
+                    type="email"
+                    name="email"
+                    formControlName="email"
+                    placeholder="przyklad@ex.com"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['email'].dirty) &&
+                        formGroup.controls['email'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('email')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
             <div>
                 <label class="login--label">Hasło</label>
-                <input class="input--primary" type="password" />
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="password"
+                    formControlName="password"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['password'].dirty) &&
+                        formGroup.controls['password'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('password')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
             <div>
                 <label class="login--label">Powtórz hasło</label>
-                <input class="input--primary" type="password" />
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="confimPassword"
+                    formControlName="confimPassword"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['confimPassword'].dirty) &&
+                        formGroup.controls['confimPassword'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('confimPassword')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="login--label">Płeć</label>
+                <select class="input--primary" name="gender" formControlName="gender">
+                    <option value="Nie podano">Nie podano</option>
+                    <option value="male">Mężczyzna</option>
+                    <option value="female">Kobieta</option>
+                </select>
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['gender'].dirty) &&
+                        formGroup.controls['gender'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('gender')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="login--label">Data urodzenia</label>
+                <input class="input--primary" type="date" name="date" formControlName="date" />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['date'].dirty) &&
+                        formGroup.controls['date'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('date')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
 
-            <select class="input--primary">
-                <option [value]="">--Wybierz pytanie--</option>
-                <option [value]="question" *ngFor="let question of questions">
-                    {{ question }}
-                </option>
-            </select>
+            <div>
+                <label class="login--label">Pytanie weryfikacyjne</label>
+                <select class="input--primary" name="question" formControlName="question">
+                    <option [value]="">--Wybierz pytanie--</option>
+                    <option [value]="question" *ngFor="let question of questions">
+                        {{ question }}
+                    </option>
+                </select>
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['question'].dirty) &&
+                        formGroup.controls['question'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('question')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
             <div>
                 <label class="login--label">Odpowiedź</label>
-                <input class="input--primary" />
+                <input class="input--primary" name="answer" formControlName="answer" />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['answer'].dirty) &&
+                        formGroup.controls['answer'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('answer')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
             <p class="login--label redirect--login" routerLink="/login">
                 Posiadasz już konto, kliknij tutaj
@@ -42,7 +190,9 @@
             <p class="login--label redirect--login" routerLink="/">
                 Chcę kontynuować bez logowania.
             </p>
-            <button class="btn--secondary" type="submit">Zarejestruj</button>
+            <button [disabled]="formGroup.invalid" class="btn--secondary" type="submit">
+                Zarejestruj
+            </button>
         </form>
     </div>
 </div>
