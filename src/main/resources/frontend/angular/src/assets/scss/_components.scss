@@ -52,6 +52,10 @@
 }
 
 .login--form {
+    width: 100%;
+    @include respond-to('small') {
+        width: 50%;
+    }
 }
 
 input.ng-dirty.ng-invalid {

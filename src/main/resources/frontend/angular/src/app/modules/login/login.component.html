@@ -4,14 +4,45 @@
     </div>
     <div class="secondSection">
         <h1>Logowanie</h1>
-        <form class="login--form formWrapper">
+        <form class="login--form formWrapper" [formGroup]="formGroup" (ngSubmit)="submitForm()">
             <div>
                 <label class="login--label">Email</label>
-                <input class="input--primary" />
+                <input class="input--primary" type="email" name="email" formControlName="email" />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['email'].dirty) &&
+                        formGroup.controls['email'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('email')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
             <div>
                 <label class="login--label">Hasło</label>
-                <input class="input--primary" />
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="password"
+                    formControlName="password"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['password'].dirty) &&
+                        formGroup.controls['password'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('password')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
             </div>
             <p class="login--label redirect--login" routerLink="/register">
                 Nie posiadasz konta, kliknji tutaj
@@ -19,7 +50,9 @@
             <p class="login--label redirect--login" routerLink="/">
                 Chcę kontynuować bez logowania
             </p>
-            <button class="btn--secondary" type="submit">Zaloguj</button>
+            <button class="btn--secondary" [disabled]="formGroup.invalid" type="submit">
+                Zaloguj
+            </button>
         </form>
     </div>
 </div>

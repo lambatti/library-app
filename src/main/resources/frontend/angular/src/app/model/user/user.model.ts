@@ -10,3 +10,7 @@ export class UserRegister {
         public registractionQuestionAnswer?: string
     ) {}
 }
+
+export class UserLogin {
+    constructor(public email?: string, public password?: string) {}
+}

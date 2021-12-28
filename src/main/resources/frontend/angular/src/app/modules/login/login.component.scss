@@ -4,7 +4,7 @@
     display: grid;
     grid-template-rows: 2fr 3fr;
     height: 100vh;
-    justify-items: center;
+    //justify-items: center;
     @include respond-to('medium') {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserRegister } from '../../model/user/user.model';
-import { RegisterFormGroup } from '../../core/validators/registerForm.model';
+import { RegisterFormGroup } from '../../core/validators/form.model';
 
 @Component({
     selector: 'appRegisterPage',

@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-export class RegisterFormControl extends FormControl {
+export class CustomFormControl extends FormControl {
     label: string;
     modelProperty: string;
 
@@ -41,7 +41,7 @@ export class RegisterFormControl extends FormControl {
 export class RegisterFormGroup extends FormGroup {
     constructor() {
         super({
-            firstName: new RegisterFormControl(
+            firstName: new CustomFormControl(
                 'Imię',
                 'firstName',
                 '',
@@ -53,7 +53,7 @@ export class RegisterFormGroup extends FormGroup {
                 ])
             ),
 
-            lastName: new RegisterFormControl(
+            lastName: new CustomFormControl(
                 'Nazwisko',
                 'lastName',
                 '',
@@ -64,13 +64,13 @@ export class RegisterFormGroup extends FormGroup {
                     Validators.pattern('^[A-Z][a-z]+')
                 ])
             ),
-            email: new RegisterFormControl(
+            email: new CustomFormControl(
                 'Email',
                 'email',
                 '',
                 Validators.compose([Validators.required, Validators.email])
             ),
-            password: new RegisterFormControl(
+            password: new CustomFormControl(
                 'Hasło',
                 'password',
                 '',
@@ -81,7 +81,7 @@ export class RegisterFormGroup extends FormGroup {
                     Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
                 ])
             ),
-            confimPassword: new RegisterFormControl(
+            confimPassword: new CustomFormControl(
                 'Potwierdź hasło',
                 'confimPassword',
                 '',
@@ -92,15 +92,15 @@ export class RegisterFormGroup extends FormGroup {
                     Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
                 ])
             ),
-            gender: new RegisterFormControl('Płeć', 'gender', '', Validators.required),
-            date: new RegisterFormControl('Data urodzenia', 'date', '', Validators.required),
-            question: new RegisterFormControl(
+            gender: new CustomFormControl('Płeć', 'gender', '', Validators.required),
+            date: new CustomFormControl('Data urodzenia', 'date', '', Validators.required),
+            question: new CustomFormControl(
                 'Pytanie weryfikacyjne',
                 'question',
                 '',
                 Validators.required
             ),
-            answer: new RegisterFormControl(
+            answer: new CustomFormControl(
                 'Odpowiedź',
                 'answer',
                 '',
@@ -115,6 +115,34 @@ export class RegisterFormGroup extends FormGroup {
     }
 
     getValidationMessages(name: string): string[] {
-        return (this.controls[name] as RegisterFormControl).getValidationMessages();
+        return (this.controls[name] as CustomFormControl).getValidationMessages();
+    }
+}
+
+export class LoginFormGroup extends FormGroup {
+    constructor() {
+        super({
+            email: new CustomFormControl(
+                'Email',
+                'email',
+                '',
+                Validators.compose([Validators.required, Validators.email])
+            ),
+            password: new CustomFormControl(
+                'Hasło',
+                'password',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(20),
+                    Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
+                ])
+            )
+        });
+    }
+
+    getValidationMessages(name: string): string[] {
+        return (this.controls[name] as CustomFormControl).getValidationMessages();
     }
 }

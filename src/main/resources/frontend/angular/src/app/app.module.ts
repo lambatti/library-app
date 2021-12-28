@@ -8,6 +8,7 @@ import { ComponentsModule } from './core/components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from './core/http/http.module';
 import { FormsModule } from '@angular/forms';
+import { AuthenticateModule } from './core/authentication/authenticate.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
         ModelModule,
         ComponentsModule,
         HttpModule,
-        HttpClientModule
+        HttpClientModule,
+        AuthenticateModule
     ],
     providers: [],
     bootstrap: [AppComponent]
