@@ -32,13 +32,20 @@ aside {
         flex-direction: column;
         align-items: center;
 
-        .inputSearch {
-            margin-top: 10%;
-            height: 50px;
-            border-radius: 20px;
-            border: none;
-            padding-left: 20px;
+        .inputForm {
+            display: flex;
+            align-items: center;
             width: 100%;
+            margin-top: 10%;
+            justify-content: center;
+
+            .inputSearch {
+                height: 50px;
+                border-radius: 20px 0 0 20px;
+                border: none;
+                padding-left: 10px;
+                width: 70%;
+            }
         }
     }
 
@@ -52,6 +59,7 @@ aside {
 
         .filterItem {
             align-self: start;
+
             &:hover {
                 text-decoration: underline;
             }

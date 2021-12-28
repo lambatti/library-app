@@ -36,6 +36,10 @@ export class BookRepository {
         return this.books.find(i => i.id === id);
     }
 
+    getBookByName(name: string): Book {
+        return this.books.find(i => i.name.toLowerCase() === name.toLowerCase());
+    }
+
     getGenre(): Array<string> {
         return this.genre;
     }
@@ -43,6 +47,7 @@ export class BookRepository {
     getAuthors(): Array<string> {
         return this.authors;
     }
+
     getBorrowedBooks() {
         return this.borrowedBooks;
     }

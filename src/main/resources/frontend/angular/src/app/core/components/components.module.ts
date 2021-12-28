@@ -7,9 +7,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AsideService } from '../services/asideService.service';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [ModelModule, BrowserModule, RouterModule],
+    imports: [ModelModule, BrowserModule, RouterModule, FormsModule],
     exports: [FilterPanelComponent, HeaderComponent, BookCardComponent],
     declarations: [BookCardComponent, FilterPanelComponent, HeaderComponent],
     providers: [AsideService, AuthenticationService]

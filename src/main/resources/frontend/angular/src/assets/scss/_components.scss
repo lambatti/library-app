@@ -24,6 +24,10 @@
 }
 
 .btn--primary {
+    border-radius: 0 20px 20px 0;
+    height: 50px;
+    width: 30%;
+    border: 5px solid white;
 }
 
 .btn--secondary {
@@ -61,9 +65,11 @@
 input.ng-dirty.ng-invalid {
     border: 2px solid #ff0000;
 }
+
 input.ng-dirty.ng-valid {
     border: 2px solid #6bc502;
 }
+
 .li--error {
     list-style: none;
     font-size: map-get($font-size, '13');

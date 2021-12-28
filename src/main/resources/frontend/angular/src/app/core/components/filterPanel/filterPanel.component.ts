@@ -22,9 +22,20 @@ export class FilterPanelComponent {
         });
     }
 
+    errorMessage: boolean;
+
+    //    @Output() bookName = new EventEmitter<string>();
+
     getGenre(): string[] {
         return this._service.getGenre();
     }
 
-    searchBook() {}
+    onEnter(book: string) {
+        let newBook = this._service.getBookByName(book);
+        if (newBook !== undefined) {
+            this.router.navigate(['books', newBook.genre, newBook.id]);
+        } else {
+            this.errorMessage = true;
+        }
+    }
 }

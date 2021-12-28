@@ -20,7 +20,7 @@ export class StaticDataSource {
         new Book(
             2,
             'https://picsum.photos/id/27/200/300',
-            'Książka',
+            'Tomki na froncie',
             'Tomasz Comasz',
             '10-01-2011',
             'Podróżnicza',
