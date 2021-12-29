@@ -4,6 +4,7 @@ import com.software.architecture.libraryapp.model.authentication.AuthenticationR
 import com.software.architecture.libraryapp.model.authentication.AuthenticationResponse;
 import com.software.architecture.libraryapp.service.UserService;
 import com.software.architecture.libraryapp.util.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/")
+@Slf4j
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
@@ -40,6 +42,7 @@ public class LoginController {
 
         final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getEmail());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
+        log.info("User: {} | JWT: {}", authenticationRequest.getEmail(), jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }
