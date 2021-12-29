@@ -1,7 +1,7 @@
 package com.software.architecture.libraryapp.adapter;
 
 import com.software.architecture.libraryapp.model.BookBorrow;
-import com.software.architecture.libraryapp.model.BookBorrowRepository;
+import com.software.architecture.libraryapp.repository.BookBorrowRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

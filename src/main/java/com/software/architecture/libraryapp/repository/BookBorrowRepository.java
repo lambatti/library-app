@@ -1,4 +1,6 @@
-package com.software.architecture.libraryapp.model;
+package com.software.architecture.libraryapp.repository;
+
+import com.software.architecture.libraryapp.model.BookBorrow;
 
 import java.time.LocalDate;
 
