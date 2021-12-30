@@ -12,7 +12,7 @@ export class HeaderComponent {
 
     constructor(private router: Router, public _asideService: AsideService) {}
 
-    public isLoggedIn: boolean = true;
+    public isLoggedIn: boolean = false;
     public user: string = 'kamil';
 
     navigationSelect(location: string) {

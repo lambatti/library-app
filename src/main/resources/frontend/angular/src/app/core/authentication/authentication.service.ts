@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Authenticate } from './authenticate';
+import { Authenticate, IUserLogin } from './authenticate';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
     constructor(private auth: Authenticate, private router: Router) {}
 
-    authenticate(email: string, password: string): Observable<boolean> {
+    authenticate(email: string, password: string): Observable<IUserLogin> {
+        console.log(email, password);
         return this.auth.authenticate(email, password);
     }
 

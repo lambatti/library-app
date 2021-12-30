@@ -1,29 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
-interface IUserLogin {
-    email: string;
-    password: string;
+export interface IUserLogin {
+    token: string;
 }
 
 @Injectable()
 export class Authenticate {
-    constructor(private http: HttpClient) {}
+    private baseUrl: string;
 
-    authenticate(email: string, password: string): Observable<boolean> {
-        return this.http
-            .post<IUserLogin>('', {
-                email,
-                password
-            })
-            .pipe(
-                map((response: any) => {
-                    if (response.success) {
-                        localStorage.setItem('token', response.token);
-                    }
-                    return response.success;
-                })
-            );
+    constructor(private http: HttpClient) {
+        this.baseUrl = 'http://localhost:8080/api/login';
+    }
+
+    authenticate(email: string, password: string): Observable<IUserLogin> {
+        console.log(email, password);
+        return this.http.post<IUserLogin>(this.baseUrl, {
+            email: email,
+            password: password
+        });
     }
 }

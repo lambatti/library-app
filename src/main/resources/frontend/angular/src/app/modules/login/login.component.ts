@@ -14,7 +14,10 @@ export class LoginComponent {
     constructor(private authenticateService: AuthenticationService) {}
 
     logIn(user: UserLogin) {
-        this.authenticateService.authenticate(user.email, user.password);
+        console.log(user);
+        this.authenticateService
+            .authenticate(user.email, user.password)
+            .subscribe(x => localStorage.setItem('token', x.token));
     }
 
     loggedUser: UserLogin = new UserLogin();
