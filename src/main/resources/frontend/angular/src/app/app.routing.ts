@@ -6,6 +6,7 @@ import { RegisterComponent } from './modules/register/register.component';
 import { MyBooksComponent } from './modules/myBooks/myBooks.component';
 import { AccountComponent } from './modules/account/account.component';
 import { CurrentBookComponent } from './modules/currentBook/currentBook.component';
+import { AuthGuardService as AuthGuard } from './core/guards/authGuard.service';
 
 const routes: Routes = [
     {
@@ -16,8 +17,8 @@ const routes: Routes = [
     { path: 'books/:genre', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'myBooks', component: MyBooksComponent },
-    { path: 'account', component: AccountComponent }
+    { path: 'myBooks', component: MyBooksComponent, canActivate: [AuthGuard] },
+    { path: 'account', component: AccountComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

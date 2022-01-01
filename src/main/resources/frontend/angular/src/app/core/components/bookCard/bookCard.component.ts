@@ -10,6 +10,7 @@ import { BookRepository } from '../../../model/book/book.repository';
 export class BookCardComponent {
     @Input() selectedBook?: number;
     @Input() isMyBooks: boolean;
+    @Input() isLogged: boolean;
 
     constructor(private _repository: BookRepository) {}
 

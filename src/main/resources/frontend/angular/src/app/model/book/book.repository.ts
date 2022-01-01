@@ -23,9 +23,9 @@ export class BookRepository {
                 .filter((c, index, array) => array.indexOf(c) === index)
                 .sort();
         });
-        _dataSource.getBorrowedBooks().subscribe(data => {
-            this.borrowedBooks = data;
-        });
+        // _dataSource.getBorrowedBooks().subscribe(data => {
+        //     this.borrowedBooks = data;
+        // });
     }
 
     getBooks(category: string = null) {

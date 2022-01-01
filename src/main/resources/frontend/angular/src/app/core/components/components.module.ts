@@ -8,11 +8,12 @@ import { RouterModule } from '@angular/router';
 import { AsideService } from '../services/asideService.service';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { FormsModule } from '@angular/forms';
+import { ModalInfoComponent } from './modalInfo/modalInfo.component';
 
 @NgModule({
     imports: [ModelModule, BrowserModule, RouterModule, FormsModule],
-    exports: [FilterPanelComponent, HeaderComponent, BookCardComponent],
-    declarations: [BookCardComponent, FilterPanelComponent, HeaderComponent],
+    exports: [FilterPanelComponent, HeaderComponent, BookCardComponent, ModalInfoComponent],
+    declarations: [BookCardComponent, FilterPanelComponent, HeaderComponent, ModalInfoComponent],
     providers: [AsideService, AuthenticationService]
 })
 export class ComponentsModule {}

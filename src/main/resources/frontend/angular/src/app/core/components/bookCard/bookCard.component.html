@@ -36,7 +36,8 @@
         <p>{{ displayedBook?.description }}</p>
     </div>
     <div class="buttonWrapper" *ngIf="displayedBook.isAvailable">
-        <button *ngIf="!isMyBooks">Wypożycz</button>
+        <button *ngIf="!isMyBooks && isLogged">Wypożycz</button>
+        <button [routerLink]="'/'" *ngIf="!isMyBooks">Wróć</button>
         <button *ngIf="isMyBooks">Prolonguj</button>
         <button *ngIf="isMyBooks">Zwróć</button>
     </div>

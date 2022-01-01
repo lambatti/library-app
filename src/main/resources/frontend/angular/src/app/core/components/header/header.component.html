@@ -5,7 +5,7 @@
             <span class="line"></span>
             <span class="line"></span>
         </div>
-        <a [href]="'#'">LOGO</a>
+        <a [href]="'/'">LOGO</a>
     </div>
     <div *ngIf="!isLoggedIn" class="panel">
         <a routerLink="/register">Rejestracja</a>
@@ -17,7 +17,7 @@
             <option></option>
             <option class="option-panel" value="myBooks">Moje książki</option>
             <option class="option-panel" value="account">Moje konto</option>
-            <option class="option-panel">Wyloguj się</option>
+            <option class="option-panel" value="logout">Wyloguj się</option>
         </select>
     </div>
 </header>
