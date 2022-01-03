@@ -20,7 +20,20 @@
             height: 0;
             border-top: 50vh solid map-get($colors, 'main');
             border-right: 70vw solid transparent;
+
+            .modalImage {
+                width: 50%;
+                height: 50%;
+                background-image: url('/src/assets/forgotPassword.svg');
+            }
         }
+    }
+
+    .content {
+        width: 50%;
+        position: relative;
+        z-index: 100;
+        color: map-get($colors, 'main');
     }
 }
 

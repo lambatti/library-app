@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserRegister } from '../../model/user/user.model';
 import { RegisterFormGroup } from '../../core/validators/form.model';
+import { UserService } from '../../core/http/user.service';
 
 @Component({
     selector: 'appRegisterPage',
@@ -9,17 +10,28 @@ import { RegisterFormGroup } from '../../core/validators/form.model';
 })
 export class RegisterComponent {
     formGroup: RegisterFormGroup = new RegisterFormGroup();
-    public questions: Array<string> = [
-        'Czy masz kota?',
-        'Czy lubisz chodzić na studia?',
-        'Jaki jest twój ulubiony przedmiot?'
-    ];
+    private databaseQusetion: Array<string> = [];
+
+    constructor(private _userService: UserService) {
+        this._userService.getQuestionRegister().subscribe(data => {
+            this.databaseQusetion = data;
+        });
+    }
+
+    public questions: Array<string> =
+        this.databaseQusetion.length === 0
+            ? [
+                  'Czy masz kota?',
+                  'Czy lubisz chodzić na studia?',
+                  'Jaki jest twój ulubiony przedmiot?'
+              ]
+            : this.databaseQusetion;
 
     newUser: UserRegister = new UserRegister();
     formSubmitted: boolean = false;
 
-    addUser(u: UserRegister) {
-        console.log(`Nowy user ${JSON.stringify(u)}`);
+    addUser(user: UserRegister) {
+        this._userService.register(user);
     }
 
     submitForm() {

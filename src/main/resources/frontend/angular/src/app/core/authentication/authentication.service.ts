@@ -8,7 +8,6 @@ export class AuthenticationService {
     constructor(private auth: Authenticate, private router: Router) {}
 
     authenticate(email: string, password: string): Observable<ILoginToken> {
-        console.log(email, password);
         return this.auth.authenticate(email, password);
     }
 

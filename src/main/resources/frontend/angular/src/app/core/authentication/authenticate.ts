@@ -15,7 +15,6 @@ export class Authenticate {
     }
 
     authenticate(email: string, password: string): Observable<ILoginToken> {
-        console.log(email, password);
         return this.http.post<ILoginToken>(this.baseUrl + 'login', {
             email: email,
             password: password

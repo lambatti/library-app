@@ -28,8 +28,4 @@ export class HeaderComponent {
             this.router.navigateByUrl(`/${location}`);
         }
     }
-
-    zzz() {
-        console.log('siemka');
-    }
 }
