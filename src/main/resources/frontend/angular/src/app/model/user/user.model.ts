@@ -5,7 +5,7 @@ export class UserRegister {
         public email?: string,
         public password?: string,
         public gender?: string,
-        public dateOfBirth?: string,
+        public birthDate?: string,
         public registractionQuestion?: string,
         public registractionQuestionAnswer?: string
     ) {}

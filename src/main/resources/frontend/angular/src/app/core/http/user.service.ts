@@ -13,23 +13,27 @@ import { Observable } from 'rxjs';
 export class UserService {
     constructor(private http: HttpClient) {}
 
+    // /api/register
     register(data: UserRegister) {
         this.http.post('', data);
     }
 
+    // /api/user/changePassword
     changePassword(data: ChangePassword) {
         this.http.post('', data, UserService.httpOptions());
     }
 
-    changeQusetion(data: ChangeQuestion) {
+    // /api/user/changeQuestion
+    changeQuestion(data: ChangeQuestion) {
         this.http.post('', data, UserService.httpOptions());
     }
 
+    // /api/question
     getQuestionRegister(): Observable<Array<Question>> {
         return this.http.get<Array<Question>>('');
     }
 
-    // get /api/user/data
+    // get /api/user/summary
     getUserData(): Observable<User> {
         return this.http.get('', UserService.httpOptions());
     }

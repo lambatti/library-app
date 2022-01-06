@@ -7,7 +7,10 @@ import { Book } from '../../model/book/book.model';
 export class BookService {
     constructor(private http: HttpClient) {}
 
+    // /api/books
     getBooks(): Observable<Array<Book>> {
         return this.http.get<Array<Book>>('');
     }
+
+    getBorrow() {}
 }

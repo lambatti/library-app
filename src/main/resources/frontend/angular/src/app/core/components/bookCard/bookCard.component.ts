@@ -17,4 +17,16 @@ export class BookCardComponent {
     get displayedBook(): Book {
         return this._repository.getBookById(this.selectedBook);
     }
+
+    prolongation(bookId: number) {
+        console.log(bookId + ' Prolongacja');
+    }
+
+    borrow(bookId: number) {
+        console.log(bookId + ' Wypożyczenie');
+    }
+
+    returnBook(bookId: number) {
+        console.log(bookId + ' Zwracanie');
+    }
 }

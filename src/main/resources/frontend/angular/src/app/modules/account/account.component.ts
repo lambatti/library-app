@@ -74,7 +74,7 @@ export class AccountComponent {
         this.formSubmittedQuestion = true;
         console.log(this.newChangeQuestion);
         if (this.changeQuestionGroup.valid) {
-            this._userService.changeQusetion(this.newChangeQuestion);
+            this._userService.changeQuestion(this.newChangeQuestion);
             this.newChangeQuestion = new ChangeQuestion();
             this.changePasswordGroup.reset();
             this.formSubmittedQuestion = false;
