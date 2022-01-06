@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserRegister } from '../../model/user/user.model';
+import { Question, UserRegister } from '../../model/user/user.model';
 import { RegisterFormGroup } from '../../core/validators/form.model';
 import { UserService } from '../../core/http/user.service';
 
@@ -10,22 +10,13 @@ import { UserService } from '../../core/http/user.service';
 })
 export class RegisterComponent {
     formGroup: RegisterFormGroup = new RegisterFormGroup();
-    private databaseQuestion: Array<string> = [];
+    databaseQuestion: Array<Question> = [];
 
     constructor(private _userService: UserService) {
         this._userService.getQuestionRegister().subscribe(data => {
             this.databaseQuestion = data;
         });
     }
-
-    public questions: Array<string> =
-        this.databaseQuestion.length === 0
-            ? [
-                  'Czy masz kota?',
-                  'Czy lubisz chodzić na studia?',
-                  'Jaki jest twój ulubiony przedmiot?'
-              ]
-            : this.databaseQuestion;
 
     newUser: UserRegister = new UserRegister();
     formSubmitted: boolean = false;

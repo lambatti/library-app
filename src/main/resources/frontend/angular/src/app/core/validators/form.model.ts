@@ -146,3 +146,77 @@ export class LoginFormGroup extends FormGroup {
         return (this.controls[name] as CustomFormControl).getValidationMessages();
     }
 }
+
+export class ChangePasswordGroup extends FormGroup {
+    constructor() {
+        super({
+            oldPassword: new CustomFormControl(
+                'Aktualne hasło',
+                'oldPassword',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(20),
+                    Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
+                ])
+            ),
+            newPassword: new CustomFormControl(
+                'Nowe hasło',
+                'newPassword',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(20),
+                    Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
+                ])
+            ),
+            confimNewPassword: new CustomFormControl(
+                'Potwierdź nowe hasło',
+                'confimNewPassword',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(20),
+                    Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
+                ])
+            )
+        });
+    }
+
+    getValidationMessages(name: string): string[] {
+        return (this.controls[name] as CustomFormControl).getValidationMessages();
+    }
+}
+
+export class ChangeQuestionGroup extends FormGroup {
+    constructor() {
+        super({
+            password: new CustomFormControl(
+                'Hasło',
+                'password',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(20),
+                    Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
+                ])
+            ),
+            question: new CustomFormControl('Pytanie', 'question', '', Validators.required),
+            answer: new CustomFormControl(
+                'Odpowiedź',
+                'answer',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(3),
+                    Validators.maxLength(30),
+                    Validators.pattern('^[A-Za-z ]+$')
+                ])
+            )
+        });
+    }
+}

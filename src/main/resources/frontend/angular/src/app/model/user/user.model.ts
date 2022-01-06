@@ -20,8 +20,8 @@ export class User {
         public firstName?: string,
         public lastName?: string,
         public gender?: string,
-        public dateOfBirth?: string,
-        public creationDate?: string,
+        public birthDate?: string,
+        public accountCreationDate?: string,
         public email?: string
     ) {}
 }
@@ -35,5 +35,9 @@ export class ChangePassword {
 }
 
 export class ChangeQuestion {
-    constructor(public password?: string, public qusetion?: string, public answer?: string) {}
+    constructor(public password?: string, public question?: string, public answer?: string) {}
+}
+
+export class Question {
+    constructor(public key?: string, public value?: string) {}
 }

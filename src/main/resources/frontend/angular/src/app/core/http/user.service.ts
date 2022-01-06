@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ChangePassword, ChangeQuestion, User, UserRegister } from '../../model/user/user.model';
+import {
+    ChangePassword,
+    ChangeQuestion,
+    Question,
+    User,
+    UserRegister
+} from '../../model/user/user.model';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -19,8 +25,8 @@ export class UserService {
         this.http.post('', data, UserService.httpOptions());
     }
 
-    getQuestionRegister(): Observable<Array<string>> {
-        return this.http.get<Array<string>>('');
+    getQuestionRegister(): Observable<Array<Question>> {
+        return this.http.get<Array<Question>>('');
     }
 
     // get /api/user/data

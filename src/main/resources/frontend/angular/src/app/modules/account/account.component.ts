@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../model/user/user.model';
+import { ChangePassword, ChangeQuestion, Question, User } from '../../model/user/user.model';
 import { UserService } from '../../core/http/user.service';
+import { ChangePasswordGroup, ChangeQuestionGroup } from '../../core/validators/form.model';
 
 @Component({
     selector: 'appAccountPage',
@@ -11,7 +12,9 @@ import { UserService } from '../../core/http/user.service';
 export class AccountComponent {
     public location: string = '';
     public user: User = new User();
-    private databaseQuestion: Array<string> = [];
+    databaseQuestion: Array<Question> = [{ key: '', value: '' }];
+    changePasswordGroup = new ChangePasswordGroup();
+    changeQuestionGroup = new ChangeQuestionGroup();
 
     constructor(public router: Router, public _userService: UserService) {
         _userService.getUserData().subscribe(user => {
@@ -22,15 +25,6 @@ export class AccountComponent {
             this.databaseQuestion = data;
         });
     }
-
-    public questions: Array<string> =
-        this.databaseQuestion.length === 0
-            ? [
-                  'Czy masz kota?',
-                  'Czy lubisz chodzić na studia?',
-                  'Jaki jest twój ulubiony przedmiot?'
-              ]
-            : this.databaseQuestion;
 
     changeLocation(location: string) {
         this.location = location;
@@ -49,5 +43,41 @@ export class AccountComponent {
 
     get getUserData(): User {
         return this.user;
+    }
+
+    newChangePassword: ChangePassword = new ChangePassword();
+    formSubmittedPassowrd: boolean = false;
+
+    submitFormChangePassword() {
+        Object.keys(this.changePasswordGroup.controls).forEach(
+            // @ts-ignore
+            c => (this.newChangePassword[c] = this.changePasswordGroup.controls[c].value)
+        );
+        this.formSubmittedPassowrd = true;
+        if (this.changePasswordGroup.valid) {
+            console.log(this.newChangePassword);
+            this._userService.changePassword(this.newChangePassword);
+            this.newChangePassword = new ChangePassword();
+            this.changePasswordGroup.reset();
+            this.formSubmittedPassowrd = false;
+        }
+    }
+
+    formSubmittedQuestion: boolean = false;
+    newChangeQuestion: ChangeQuestion = new ChangeQuestion();
+
+    submitFormChangeQuestion() {
+        Object.keys(this.changeQuestionGroup.controls).forEach(
+            // @ts-ignore
+            c => (this.newChangeQuestion[c] = this.changeQuestionGroup.controls[c].value)
+        );
+        this.formSubmittedQuestion = true;
+        console.log(this.newChangeQuestion);
+        if (this.changeQuestionGroup.valid) {
+            this._userService.changeQusetion(this.newChangeQuestion);
+            this.newChangeQuestion = new ChangeQuestion();
+            this.changePasswordGroup.reset();
+            this.formSubmittedQuestion = false;
+        }
     }
 }
