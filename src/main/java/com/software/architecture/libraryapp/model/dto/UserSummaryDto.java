@@ -1,12 +1,10 @@
 package com.software.architecture.libraryapp.model.dto;
 
-import com.software.architecture.libraryapp.model.Genders;
-
 import java.time.LocalDate;
 
 public class UserSummaryDto {
 
-    public UserSummaryDto(String firstName, String lastName, String email, Genders gender, LocalDate birthDate, LocalDate accountCreationDate) {
+    public UserSummaryDto(String firstName, String lastName, String email, String gender, LocalDate birthDate, LocalDate accountCreationDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -18,7 +16,7 @@ public class UserSummaryDto {
     private String firstName;
     private String lastName;
     private String email;
-    private Genders gender;
+    private String gender;
     private LocalDate birthDate;
     private LocalDate accountCreationDate;
 
@@ -34,7 +32,7 @@ public class UserSummaryDto {
         return email;
     }
 
-    public Genders getGender() {
+    public String getGender() {
         return gender;
     }
 
