@@ -10,22 +10,22 @@ import { UserService } from '../../core/http/user.service';
 })
 export class RegisterComponent {
     formGroup: RegisterFormGroup = new RegisterFormGroup();
-    private databaseQusetion: Array<string> = [];
+    private databaseQuestion: Array<string> = [];
 
     constructor(private _userService: UserService) {
         this._userService.getQuestionRegister().subscribe(data => {
-            this.databaseQusetion = data;
+            this.databaseQuestion = data;
         });
     }
 
     public questions: Array<string> =
-        this.databaseQusetion.length === 0
+        this.databaseQuestion.length === 0
             ? [
                   'Czy masz kota?',
                   'Czy lubisz chodzić na studia?',
                   'Jaki jest twój ulubiony przedmiot?'
               ]
-            : this.databaseQusetion;
+            : this.databaseQuestion;
 
     newUser: UserRegister = new UserRegister();
     formSubmitted: boolean = false;

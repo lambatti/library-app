@@ -25,3 +25,15 @@ export class User {
         public email?: string
     ) {}
 }
+
+export class ChangePassword {
+    constructor(
+        public oldPassword?: string,
+        public newPassword?: string,
+        public confimNewPassword?: string
+    ) {}
+}
+
+export class ChangeQuestion {
+    constructor(public password?: string, public qusetion?: string, public answer?: string) {}
+}

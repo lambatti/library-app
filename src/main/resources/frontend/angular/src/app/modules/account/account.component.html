@@ -27,7 +27,7 @@
         </ul>
     </aside>
     <main>
-        <h1>Moje konto</h1>
+        <h1>{{ locationTitle() }}</h1>
         <div class="grid" *ngIf="location === 'summary'">
             <p class="gridLabel">Imię</p>
             <p>{{ getUserData.firstName || 'siemka' }}</p>
@@ -42,7 +42,33 @@
             <p class="gridLabel">Email</p>
             <p>{{ getUserData.email || 'siemka' }}</p>
         </div>
-        <div *ngIf="location === 'changePassword'">lkjgfdsl;gfhds</div>
-        <div *ngIf="location === 'changeQuestion'">jgjgh</div>
+        <div class="changeSection" *ngIf="location === 'changePassword'">
+            <form class="changeForm">
+                <label class="label--primary">Podaj aktualne hasło</label>
+                <input class="input--primary" />
+                <label class="label--primary">Podaj nowe hasło</label>
+                <input class="input--primary" />
+                <label class="label--primary">Potwierdź nowe hasło</label>
+                <input class="input--primary" />
+                <button class="btn--secondary">Zmień</button>
+            </form>
+        </div>
+        <div class="changeSection" *ngIf="location === 'changeQuestion'">
+            <form class="changeForm">
+                <label class="label--primary">Podaj hasło</label>
+                <input class="input--primary" />
+                <label class="label--primary">Pytanie weryfikacyjne</label>
+
+                <select class="input--primary" name="question" formControlName="question">
+                    <option [value]="">--Wybierz pytanie--</option>
+                    <option [value]="question" *ngFor="let question of questions">
+                        {{ question }}
+                    </option>
+                </select>
+                <label class="label--primary">Podaj nową odpowiedź</label>
+                <input class="input--primary" />
+                <button class="btn--secondary">Zmień</button>
+            </form>
+        </div>
     </main>
 </div>

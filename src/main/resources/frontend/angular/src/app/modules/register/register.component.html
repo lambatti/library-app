@@ -6,7 +6,7 @@
         <h1>Rejestracja</h1>
         <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()" class="">
             <div>
-                <label class="login--label">Imię</label>
+                <label class="label--primary">Imię</label>
                 <input name="firstName" formControlName="firstName" class="input--primary" />
                 <ul
                     *ngIf="
@@ -23,7 +23,7 @@
                 </ul>
             </div>
             <div>
-                <label class="login--label">Nazwisko</label>
+                <label class="label--primary">Nazwisko</label>
                 <input name="lastName" formControlName="lastName" class="input--primary" />
                 <ul
                     *ngIf="
@@ -40,7 +40,7 @@
                 </ul>
             </div>
             <div>
-                <label class="login--label">Email</label>
+                <label class="label--primary">Email</label>
                 <input
                     class="input--primary"
                     type="email"
@@ -63,7 +63,7 @@
                 </ul>
             </div>
             <div>
-                <label class="login--label">Hasło</label>
+                <label class="label--primary">Hasło</label>
                 <input
                     class="input--primary"
                     type="password"
@@ -85,7 +85,7 @@
                 </ul>
             </div>
             <div>
-                <label class="login--label">Powtórz hasło</label>
+                <label class="label--primary">Powtórz hasło</label>
                 <input
                     class="input--primary"
                     type="password"
@@ -107,7 +107,7 @@
                 </ul>
             </div>
             <div>
-                <label class="login--label">Płeć</label>
+                <label class="label--primary">Płeć</label>
                 <select class="input--primary" name="gender" formControlName="gender">
                     <option value="Nie podano">Nie podano</option>
                     <option value="male">Mężczyzna</option>
@@ -128,7 +128,7 @@
                 </ul>
             </div>
             <div>
-                <label class="login--label">Data urodzenia</label>
+                <label class="label--primary">Data urodzenia</label>
                 <input class="input--primary" type="date" name="date" formControlName="date" />
                 <ul
                     *ngIf="
@@ -146,7 +146,7 @@
             </div>
 
             <div>
-                <label class="login--label">Pytanie weryfikacyjne</label>
+                <label class="label--primary">Pytanie weryfikacyjne</label>
                 <select class="input--primary" name="question" formControlName="question">
                     <option [value]="">--Wybierz pytanie--</option>
                     <option [value]="question" *ngFor="let question of questions">
@@ -168,7 +168,7 @@
                 </ul>
             </div>
             <div>
-                <label class="login--label">Odpowiedź</label>
+                <label class="label--primary">Odpowiedź</label>
                 <input class="input--primary" name="answer" formControlName="answer" />
                 <ul
                     *ngIf="
@@ -184,10 +184,10 @@
                     </li>
                 </ul>
             </div>
-            <p class="login--label redirect--login" routerLink="/login">
+            <p class="label--primary redirect--login" routerLink="/login">
                 Posiadasz już konto, kliknij tutaj
             </p>
-            <p class="login--label redirect--login" routerLink="/">
+            <p class="label--primary redirect--login" routerLink="/">
                 Chcę kontynuować bez logowania.
             </p>
             <button [disabled]="formGroup.invalid" class="btn--secondary" type="submit">
