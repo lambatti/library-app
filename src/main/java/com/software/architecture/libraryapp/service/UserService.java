@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -21,23 +22,37 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> getUserById(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User tempUser = userRepository.findByEmail(email);
+        Optional<User> tempUser = userRepository.findByEmail(email);
 
         if (tempUser == null) {
             throw new UsernameNotFoundException("User not found");
         }
+        else {
+            User user = tempUser.get();
+            List<GrantedAuthority> authorities = new ArrayList<>();
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
+            user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
 
-        tempUser.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
+            org.springframework.security.core.userdetails.User userDetails =
+                    new org.springframework.security.core.userdetails.User(
+                            user.getEmail(), user.getPassword(),
+                            authorities);
 
-        org.springframework.security.core.userdetails.User user =
-                new org.springframework.security.core.userdetails.User(
-                        tempUser.getEmail(), tempUser.getPassword(),
-                        authorities);
-
-        return user;
+            return userDetails;
+        }
     }
 }
