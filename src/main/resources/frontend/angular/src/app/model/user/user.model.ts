@@ -5,7 +5,7 @@ export class UserRegister {
         public email?: string,
         public password?: string,
         public gender?: string,
-        public birthDate?: string,
+        public dateOfBirth?: string,
         public registractionQuestion?: string,
         public registractionQuestionAnswer?: string
     ) {}
@@ -13,4 +13,15 @@ export class UserRegister {
 
 export class UserLogin {
     constructor(public email?: string, public password?: string) {}
+}
+
+export class User {
+    constructor(
+        public firstName?: string,
+        public lastName?: string,
+        public gender?: string,
+        public dateOfBirth?: string,
+        public creationDate?: string,
+        public email?: string
+    ) {}
 }

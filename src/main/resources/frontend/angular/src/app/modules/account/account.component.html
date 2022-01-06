@@ -1,1 +1,48 @@
-<div>ldisaihfosdabjijp</div>
+<appHeader></appHeader>
+
+<div class="wrapper">
+    <aside>
+        <ul>
+            <li
+                routerLink="/account/summary"
+                routerLinkActive="active"
+                (click)="changeLocation('summary')"
+            >
+                Moje dane
+            </li>
+            <li
+                routerLink="/account/changePassword"
+                routerLinkActive="active"
+                (click)="changeLocation('changePassword')"
+            >
+                Zmiana hasła
+            </li>
+            <li
+                routerLink="/account/changeQuestion"
+                routerLinkActive="active"
+                (click)="changeLocation('changeQuestion')"
+            >
+                Zmana weryfikacji
+            </li>
+        </ul>
+    </aside>
+    <main>
+        <h1>Moje konto</h1>
+        <div class="grid" *ngIf="location === 'summary'">
+            <p class="gridLabel">Imię</p>
+            <p>{{ getUserData.firstName || 'siemka' }}</p>
+            <p class="gridLabel">Nazwisko</p>
+            <p>{{ getUserData.lastName || 'siemka' }}</p>
+            <p class="gridLabel">Płeć</p>
+            <p>{{ getUserData.gender || 'siemka' }}</p>
+            <p class="gridLabel">Data założenia konta</p>
+            <p>{{ getUserData.creationDate || 'siemka' }}</p>
+            <p class="gridLabel">Data urodzenia</p>
+            <p>{{ getUserData.gender || 'siemka' }}</p>
+            <p class="gridLabel">Email</p>
+            <p>{{ getUserData.email || 'siemka' }}</p>
+        </div>
+        <div *ngIf="location === 'changePassword'">lkjgfdsl;gfhds</div>
+        <div *ngIf="location === 'changeQuestion'">jgjgh</div>
+    </main>
+</div>
