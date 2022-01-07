@@ -13,6 +13,7 @@ public class Book {
     private String author;
     private String publicationDate;
     // TODO: private Genres genre(?) DONE
+    @Enumerated(EnumType.STRING)
     private Genres genre;
     private boolean isHardcover;
     private int count;
