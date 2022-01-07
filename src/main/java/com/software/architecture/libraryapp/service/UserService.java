@@ -92,6 +92,8 @@ public class UserService implements UserDetailsService {
                 userRegistrationDto.getBirthDate(),
                 LocalDate.now()
         );
+
+        //return userRepository.findByEmail(userRegistrationDto.getEmail());
     }
 
     @Override
@@ -114,5 +116,11 @@ public class UserService implements UserDetailsService {
 
             return userDetails;
         }
+    }
+
+    public User changePassword(User userData, String newPassword) {
+        String encodedPassword = passwordEncoder.passwordEncoder().encode(newPassword);
+        userRepository.changePassword(userData.getId(), encodedPassword);
+        return userRepository.findById(userData.getId()).get();
     }
 }

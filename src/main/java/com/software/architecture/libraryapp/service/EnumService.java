@@ -4,7 +4,6 @@ import com.software.architecture.libraryapp.model.Genders;
 import com.software.architecture.libraryapp.model.Genres;
 import com.software.architecture.libraryapp.model.RegistrationQuestions;
 import com.software.architecture.libraryapp.model.dto.EnumDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
