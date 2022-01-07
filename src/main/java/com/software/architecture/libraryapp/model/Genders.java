@@ -1,9 +1,9 @@
 package com.software.architecture.libraryapp.model;
 
 public enum Genders {
-    M("Male"),
-    F("Female"),
-    U("Unspecified");
+    M("mężczyzna"),
+    F("kobieta"),
+    U("nieokreślona");
 
     private final String gender;
 
