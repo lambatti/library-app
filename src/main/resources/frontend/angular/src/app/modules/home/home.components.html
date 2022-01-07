@@ -9,11 +9,11 @@
             [routerLink]='["/books",book.genre, book.id]'
         >
             <div
-                [class.available]="book.isAvailable"
-                [class.disabled]="!book.isAvailable"
+                [class.available]="book.available"
+                [class.disabled]="!book.available"
                 [ngStyle]='{"background-image":"url(" + book.coverUrl+")"}'
             ></div>
-            <p *ngIf="!book.isAvailable">Niedostępna</p>
+            <p *ngIf="!book.available">Niedostępna</p>
         </a>
         <div class="pageControlButton">
             <button *ngFor="let page of pageNumbers" (click)="changePage(page)">{{page}}</button>

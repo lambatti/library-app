@@ -9,7 +9,7 @@ export class BookService {
 
     // /api/books
     getBooks(): Observable<Array<Book>> {
-        return this.http.get<Array<Book>>('');
+        return this.http.get<Array<Book>>('/api/books');
     }
 
     getBorrow() {}
