@@ -23,9 +23,9 @@ export class BookRepository {
                 .sort();
         });
 
-        // _borrowedBook.getBorrowedBooks().subscribe(data => {
-        //     this.borrowedBooks = data;
-        // });
+        _borrowedBook.getBorrowedBooks().subscribe(data => {
+            this.borrowedBooks = data;
+        });
         // _dataSource.getBorrowedBooks().subscribe(data => {
         //     this.borrowedBooks = data;
         // });

@@ -15,27 +15,27 @@ export class UserService {
 
     // /api/register
     register(data: UserRegister) {
-        this.http.post('', data);
+        this.http.post('/api/register', data).subscribe();
     }
 
     // /api/user/changePassword
     changePassword(data: ChangePassword) {
-        this.http.post('', data, UserService.httpOptions());
+        this.http.patch('/api/user/changePassword', data, UserService.httpOptions()).subscribe();
     }
 
     // /api/user/changeQuestion
     changeQuestion(data: ChangeQuestion) {
-        this.http.post('', data, UserService.httpOptions());
+        this.http.patch('/api/user/changeQuestion', data, UserService.httpOptions()).subscribe();
     }
 
     // /api/question
     getQuestionRegister(): Observable<Array<Question>> {
-        return this.http.get<Array<Question>>('');
+        return this.http.get<Array<Question>>('/api/enum/registrationQuestions');
     }
 
     // get /api/user/summary
     getUserData(): Observable<User> {
-        return this.http.get('', UserService.httpOptions());
+        return this.http.get('/api/user/summary', UserService.httpOptions());
     }
 
     private static httpOptions() {

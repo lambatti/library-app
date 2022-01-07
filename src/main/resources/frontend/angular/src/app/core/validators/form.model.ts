@@ -93,14 +93,19 @@ export class RegisterFormGroup extends FormGroup {
                 ])
             ),
             gender: new CustomFormControl('Płeć', 'gender', '', Validators.required),
-            date: new CustomFormControl('Data urodzenia', 'date', '', Validators.required),
-            question: new CustomFormControl(
+            birthDate: new CustomFormControl(
+                'Data urodzenia',
+                'birthDate',
+                '',
+                Validators.required
+            ),
+            registrationQuestion: new CustomFormControl(
                 'Pytanie weryfikacyjne',
                 'question',
                 '',
                 Validators.required
             ),
-            answer: new CustomFormControl(
+            registrationQuestionAnswer: new CustomFormControl(
                 'Odpowiedź',
                 'answer',
                 '',
@@ -172,7 +177,7 @@ export class ChangePasswordGroup extends FormGroup {
                     Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
                 ])
             ),
-            confimNewPassword: new CustomFormControl(
+            newPasswordConfirmation: new CustomFormControl(
                 'Potwierdź nowe hasło',
                 'confimNewPassword',
                 '',

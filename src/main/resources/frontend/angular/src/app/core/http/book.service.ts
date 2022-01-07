@@ -11,6 +11,4 @@ export class BookService {
     getBooks(): Observable<Array<Book>> {
         return this.http.get<Array<Book>>('/api/books');
     }
-
-    getBorrow() {}
 }

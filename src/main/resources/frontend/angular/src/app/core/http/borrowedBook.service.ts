@@ -9,7 +9,7 @@ export class BorrowedBookService {
     constructor(private http: HttpClient) {}
 
     getBorrowedBooks(): Observable<Array<Book>> {
-        return this.http.get<Array<Book>>('', BorrowedBookService.httpOptions());
+        return this.http.get<Array<Book>>('/api/user/books', BorrowedBookService.httpOptions());
     }
 
     borrowBook(bookId: number): Observable<number> {

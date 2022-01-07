@@ -31,6 +31,7 @@ export class RegisterComponent {
             c => (this.newUser[c] = this.formGroup.controls[c].value)
         );
         this.formSubmitted = true;
+        console.log(this.newUser);
         if (this.formGroup.valid) {
             this.addUser(this.newUser);
             this.newUser = new UserRegister();

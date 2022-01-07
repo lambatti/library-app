@@ -6,8 +6,8 @@ export class UserRegister {
         public password?: string,
         public gender?: string,
         public birthDate?: string,
-        public registractionQuestion?: string,
-        public registractionQuestionAnswer?: string
+        public registrationQuestion?: string,
+        public registrationQuestionAnswer?: string
     ) {}
 }
 
@@ -30,7 +30,7 @@ export class ChangePassword {
     constructor(
         public oldPassword?: string,
         public newPassword?: string,
-        public confimNewPassword?: string
+        public newPasswordConfirmation?: string
     ) {}
 }
 

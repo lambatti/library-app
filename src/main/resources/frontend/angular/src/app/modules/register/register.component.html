@@ -129,16 +129,21 @@
             </div>
             <div>
                 <label class="label--primary">Data urodzenia</label>
-                <input class="input--primary" type="date" name="date" formControlName="date" />
+                <input
+                    class="input--primary"
+                    type="date"
+                    name="birthDate"
+                    formControlName="birthDate"
+                />
                 <ul
                     *ngIf="
-                        (formSubmitted || formGroup.controls['date'].dirty) &&
-                        formGroup.controls['date'].invalid
+                        (formSubmitted || formGroup.controls['birthDate'].dirty) &&
+                        formGroup.controls['birthDate'].invalid
                     "
                 >
                     <li
                         class="li--error"
-                        *ngFor="let error of formGroup.getValidationMessages('date')"
+                        *ngFor="let error of formGroup.getValidationMessages('birthDate')"
                     >
                         {{ error }}
                     </li>
@@ -147,7 +152,11 @@
 
             <div>
                 <label class="label--primary">Pytanie weryfikacyjne</label>
-                <select class="input--primary" name="question" formControlName="question">
+                <select
+                    class="input--primary"
+                    name="registrationQuestion"
+                    formControlName="registrationQuestion"
+                >
                     <option [value]="">--Wybierz pytanie--</option>
                     <option [value]="question.key" *ngFor="let question of databaseQuestion">
                         {{ question.value }}
@@ -155,13 +164,15 @@
                 </select>
                 <ul
                     *ngIf="
-                        (formSubmitted || formGroup.controls['question'].dirty) &&
-                        formGroup.controls['question'].invalid
+                        (formSubmitted || formGroup.controls['registrationQuestion'].dirty) &&
+                        formGroup.controls['registrationQuestion'].invalid
                     "
                 >
                     <li
                         class="li--error"
-                        *ngFor="let error of formGroup.getValidationMessages('question')"
+                        *ngFor="
+                            let error of formGroup.getValidationMessages('registrationQuestion')
+                        "
                     >
                         {{ error }}
                     </li>
@@ -169,16 +180,24 @@
             </div>
             <div>
                 <label class="label--primary">Odpowiedź</label>
-                <input class="input--primary" name="answer" formControlName="answer" />
+                <input
+                    class="input--primary"
+                    name="registrationQuestionAnswer"
+                    formControlName="registrationQuestionAnswer"
+                />
                 <ul
                     *ngIf="
-                        (formSubmitted || formGroup.controls['answer'].dirty) &&
-                        formGroup.controls['answer'].invalid
+                        (formSubmitted || formGroup.controls['registrationQuestionAnswer'].dirty) &&
+                        formGroup.controls['registrationQuestionAnswer'].invalid
                     "
                 >
                     <li
                         class="li--error"
-                        *ngFor="let error of formGroup.getValidationMessages('answer')"
+                        *ngFor="
+                            let error of formGroup.getValidationMessages(
+                                'registrationQuestionAnswer'
+                            )
+                        "
                     >
                         {{ error }}
                     </li>

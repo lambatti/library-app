@@ -72,8 +72,8 @@ export class AccountComponent {
             c => (this.newChangeQuestion[c] = this.changeQuestionGroup.controls[c].value)
         );
         this.formSubmittedQuestion = true;
-        console.log(this.newChangeQuestion);
         if (this.changeQuestionGroup.valid) {
+            console.log(this.newChangeQuestion);
             this._userService.changeQuestion(this.newChangeQuestion);
             this.newChangeQuestion = new ChangeQuestion();
             this.changePasswordGroup.reset();

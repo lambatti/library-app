@@ -50,7 +50,12 @@
                 class="changeForm"
             >
                 <label class="label--primary">Podaj aktualne hasło</label>
-                <input class="input--primary" name="oldPassword" formControlName="oldPassword" />
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="oldPassword"
+                    formControlName="oldPassword"
+                />
                 <ul
                     *ngIf="
                         (formSubmittedPassowrd ||
@@ -68,7 +73,12 @@
                     </li>
                 </ul>
                 <label class="label--primary">Podaj nowe hasło</label>
-                <input class="input--primary" name="newPassword" formControlName="newPassword" />
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="newPassword"
+                    formControlName="newPassword"
+                />
                 <ul
                     *ngIf="
                         (formSubmittedPassowrd ||
@@ -88,21 +98,22 @@
                 <label class="label--primary">Potwierdź nowe hasło</label>
                 <input
                     class="input--primary"
-                    name="confimNewPassword"
-                    formControlName="confimNewPassword"
+                    name="newPasswordConfirmation"
+                    formControlName="newPasswordConfirmation"
+                    type="password"
                 />
                 <ul
                     *ngIf="
                         (formSubmittedPassowrd ||
-                            changePasswordGroup.controls['confimNewPassword'].dirty) &&
-                        changePasswordGroup.controls['confimNewPassword'].invalid
+                            changePasswordGroup.controls['newPasswordConfirmation'].dirty) &&
+                        changePasswordGroup.controls['newPasswordConfirmation'].invalid
                     "
                 >
                     <li
                         class="li--error"
                         *ngFor="
                             let error of changePasswordGroup.getValidationMessages(
-                                'confimNewPassword'
+                                'newPasswordConfirmation'
                             )
                         "
                     >
@@ -120,7 +131,12 @@
                 class="changeForm"
             >
                 <label class="label--primary">Podaj hasło</label>
-                <input name="password" formControlName="password" class="input--primary" />
+                <input
+                    name="password"
+                    type="password"
+                    formControlName="password"
+                    class="input--primary"
+                />
                 <label class="label--primary">Pytanie weryfikacyjne</label>
 
                 <select class="input--primary" name="question" formControlName="question">
