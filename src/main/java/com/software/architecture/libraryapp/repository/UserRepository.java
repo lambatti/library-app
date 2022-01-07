@@ -14,4 +14,6 @@ public interface UserRepository {
               String gender, LocalDate birthDate, LocalDate accountCreationDate);
 
     void changePassword(Integer id, String newPassword);
+
+    void changeQuestion(Integer id, String registrationQuestion, String registrationQuestionAnswer);
 }

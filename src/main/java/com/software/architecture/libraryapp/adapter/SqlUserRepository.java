@@ -32,4 +32,10 @@ public interface SqlUserRepository extends UserRepository, JpaRepository<User,In
     @Modifying
     @Query(nativeQuery = true, value = "UPDATE users SET password=?2 WHERE id=?1")
     void changePassword(Integer id, String newPassword);
+
+    @Override
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true, value = "UPDATE users SET registration_question=?2, registration_question_answer=?3 WHERE id=?1")
+    void changeQuestion(Integer id, String registrationQuestion, String registrationQuestionAnswer);
 }

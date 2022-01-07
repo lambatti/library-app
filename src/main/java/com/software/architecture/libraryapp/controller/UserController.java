@@ -4,6 +4,7 @@ import com.software.architecture.libraryapp.config.PasswordEncoderBean;
 import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.User;
 import com.software.architecture.libraryapp.model.dto.UserChangePasswordDto;
+import com.software.architecture.libraryapp.model.dto.UserChangeQuestionDto;
 import com.software.architecture.libraryapp.model.dto.UserRegistrationDto;
 import com.software.architecture.libraryapp.model.dto.UserSummaryDto;
 import com.software.architecture.libraryapp.service.UserService;
@@ -110,19 +111,53 @@ public class UserController {
         }
         else {
             User userData = user.get();
-            log.info("Database password: {}", userData.getPassword() + " | password from request: "
-                    + userChangePasswordDto.getOldPassword());
 
-            boolean doesPassswordMatch = passwordEncoder.passwordEncoder().matches(
-                    userChangePasswordDto.getOldPassword(), userData.getPassword());
+            //boolean doesPassswordMatch = passwordEncoder.passwordEncoder().matches(
+            //        userChangePasswordDto.getOldPassword(), userData.getPassword());
 
-            if (!doesPassswordMatch) {
+            boolean doesPasswordMatch = userService.doesThePasswordMatch(
+                    userChangePasswordDto.getOldPassword(), userData);
+
+            if (!doesPasswordMatch) {
                 log.info("old password does not match");
                 return ResponseEntity.badRequest().build();
             }
             else {
                 User userWithNewPassword = userService.changePassword(userData, userChangePasswordDto.getNewPassword());
                 return ResponseEntity.ok(userWithNewPassword);
+            }
+        }
+    }
+
+    @PatchMapping("/user/changeQuestion")
+    public ResponseEntity<User> changeQuestion(@RequestHeader(name="Authorization") String token, @RequestBody UserChangeQuestionDto userChangeQuestionDto) {
+
+        token = jwtTokenUtil.removeBearer(token);
+        log.info("token: {}", token);
+        String email = jwtTokenUtil.extractEmail(token);
+        log.info("email: {}", email);
+
+        log.info(userChangeQuestionDto.getPassword() + " " + userChangeQuestionDto.getQuestion() + " " + userChangeQuestionDto.getAnswer());
+
+        Optional<User> user = userService.getUserByEmail(email);
+
+        if(user.isEmpty()) {
+            log.info("user not found");
+            return ResponseEntity.badRequest().build();
+        }
+        else {
+            User userData = user.get();
+            boolean doesPasswordMatch = userService.doesThePasswordMatch(userChangeQuestionDto.getPassword(), userData);
+
+            log.info("doesPasswordMatch: {}", doesPasswordMatch);
+
+            if (!doesPasswordMatch) {
+                log.info("password does not match");
+                return ResponseEntity.badRequest().build();
+            }
+            else {
+                User userWithNewQuestion = userService.changeQuestion(userData, userChangeQuestionDto.getQuestion(), userChangeQuestionDto.getAnswer());
+                return ResponseEntity.ok(userWithNewQuestion);
             }
         }
     }

@@ -118,9 +118,19 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public User changePassword(User userData, String newPassword) {
+    public User changePassword(User user, String newPassword) {
         String encodedPassword = passwordEncoder.passwordEncoder().encode(newPassword);
-        userRepository.changePassword(userData.getId(), encodedPassword);
-        return userRepository.findById(userData.getId()).get();
+        userRepository.changePassword(user.getId(), encodedPassword);
+        return userRepository.findById(user.getId()).get();
+    }
+
+    public boolean doesThePasswordMatch(String password, User user) {
+        return passwordEncoder.passwordEncoder().matches(password, user.getPassword());
+    }
+
+    // TODO: 07.01.2022 registration question is not refreshed with the return (but the function works) 
+    public User changeQuestion(User user, RegistrationQuestions question, String answer) {
+        userRepository.changeQuestion(user.getId(), question.name(), answer);
+        return userRepository.findById(user.getId()).get();
     }
 }
