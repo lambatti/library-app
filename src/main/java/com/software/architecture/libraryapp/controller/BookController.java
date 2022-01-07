@@ -15,11 +15,9 @@ import java.util.List;
 class BookController {
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
     private final BookService service;
-    private final BookRepository repository;
 
-    BookController(final BookService service, BookRepository repository) {
+    BookController(final BookService service) {
         this.service = service;
-        this.repository = repository;
     }
 
     @GetMapping(path = "/{id}")
