@@ -1,9 +1,13 @@
 package com.software.architecture.libraryapp.service;
 
+import com.software.architecture.libraryapp.adapter.SqlBookBorrowRepository;
 import com.software.architecture.libraryapp.adapter.SqlUserRepository;
 import com.software.architecture.libraryapp.config.PasswordEncoderBean;
+import com.software.architecture.libraryapp.model.Book;
+import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.RegistrationQuestions;
 import com.software.architecture.libraryapp.model.User;
+import com.software.architecture.libraryapp.model.dto.UserBorrowedBookDto;
 import com.software.architecture.libraryapp.model.dto.UserRegistrationDto;
 import com.software.architecture.libraryapp.model.dto.UserSummaryDto;
 import com.software.architecture.libraryapp.util.JwtUtil;
@@ -15,19 +19,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private final SqlUserRepository userRepository;
+    private final SqlBookBorrowRepository bookBorrowRepository;
     private final PasswordEncoderBean passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public UserService(SqlUserRepository userRepository, PasswordEncoderBean passwordEncoder, JwtUtil jwtUtil) {
+    public UserService(SqlUserRepository userRepository, SqlBookBorrowRepository bookBorrowRepository, PasswordEncoderBean passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
+        this.bookBorrowRepository = bookBorrowRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
@@ -98,6 +102,31 @@ public class UserService implements UserDetailsService {
     public User changeQuestion(User user, RegistrationQuestions question, String answer) {
         userRepository.changeQuestion(user.getId(), question.name(), answer);
         return userRepository.findById(user.getId()).get();
+    }
+
+    public Set<UserBorrowedBookDto> getBorrowedBooks(User user) {
+        List<BookBorrow> bookBorrows = bookBorrowRepository.getAllByUserId(user.getId());
+
+        Set<UserBorrowedBookDto> userBorrowedBooksSet = new HashSet<>();
+
+        for ( BookBorrow bookBorrow : bookBorrows ) {
+            Book book = bookBorrow.getBook();
+
+            UserBorrowedBookDto userBorrowedBook = new UserBorrowedBookDto(
+                    book.getCoverUrl(),
+                    book.getTitle(),
+                    book.getAuthor(),
+                    book.getPublicationDate(),
+                    book.getGenre().toString(),
+                    book.isHardcover(),
+                    bookBorrow.getBorrowDate().toString(),
+                    bookBorrow.getReturnDate().toString()
+                    );
+
+            userBorrowedBooksSet.add(userBorrowedBook);
+        }
+
+        return userBorrowedBooksSet;
     }
 
     public String extractEmailFromToken(String token) {

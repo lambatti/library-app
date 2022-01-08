@@ -81,15 +81,13 @@ public class BookBorrowController {
 
         Optional<User> user = userService.getUserByEmail(email);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
-        if(bookService.findById(id).isEmpty()) {
+        if (bookService.findById(id).isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-
-        else {
+        } else {
             BookBorrow bookBorrow = bookBorrowService.prolongate(user.get(), id);
 
             // TODO: 08.01.2022 - return bookBorrow (probably with DTO)

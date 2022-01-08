@@ -2,10 +2,7 @@ package com.software.architecture.libraryapp.controller;
 
 import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.User;
-import com.software.architecture.libraryapp.model.dto.UserChangePasswordDto;
-import com.software.architecture.libraryapp.model.dto.UserChangeQuestionDto;
-import com.software.architecture.libraryapp.model.dto.UserRegistrationDto;
-import com.software.architecture.libraryapp.model.dto.UserSummaryDto;
+import com.software.architecture.libraryapp.model.dto.*;
 import com.software.architecture.libraryapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/user/books")
-    ResponseEntity<Set<Book>> getUserBooks(@RequestHeader(name="Authorization") String token) {
+    ResponseEntity<Set<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name="Authorization") String token) {
 
         String email = userService.extractEmailFromToken(token);
 
@@ -45,7 +42,8 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
         else {
-            return ResponseEntity.ok(user.get().getBookSet());
+            Set<UserBorrowedBookDto> userBorrowedBookDtos = userService.getBorrowedBooks(user.get());
+            return ResponseEntity.ok(userBorrowedBookDtos);
         }
     }
 
