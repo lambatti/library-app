@@ -12,21 +12,27 @@ export class BorrowedBookService {
         return this.http.get<Array<Book>>('/api/user/books', BorrowedBookService.httpOptions());
     }
 
-    borrowBook(id: number): Observable<number> {
-        return this.http
-            .post<number>('/api/user/borrowBook', id, BorrowedBookService.httpOptions())
+    borrowBook(id: number) {
+        console.log(id);
+
+        this.http
+            .post<number>(`/api/user/borrowBook/${id}`, BorrowedBookService.httpOptions())
             .subscribe();
     }
 
-    prolongation(id: number): Observable<number> {
-        return this.http
-            .patch<number>('/api/user/prolongate', id, BorrowedBookService.httpOptions())
+    prolongation(id: number) {
+        this.http
+            .patch<number>(`/api/user/prolongate/${id}`, BorrowedBookService.httpOptions())
             .subscribe();
     }
 
-    returnBook(id: number): Observable<number> {
-        return this.http
-            .post<number>('/api/user/returnBook', id, BorrowedBookService.httpOptions())
+    returnBook(id: number) {
+        this.http
+            .delete<number>(`/api/user/returnBook/${id}`, {
+                headers: new HttpHeaders({
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                })
+            })
             .subscribe();
     }
 
