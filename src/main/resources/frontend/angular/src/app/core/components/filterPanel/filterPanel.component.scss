@@ -1,7 +1,7 @@
 @import 'src/styles.scss';
 
 aside {
-    width: 50vw;
+    width: 70vw;
     height: 100vh;
     position: fixed;
     top: 10vh;
@@ -10,6 +10,9 @@ aside {
     background-color: map-get($colors, 'main');
     display: none;
     padding: 3%;
+    @include respond-to('small') {
+        width: 50vw;
+    }
     @include respond-to('medium') {
         position: static;
         display: block;

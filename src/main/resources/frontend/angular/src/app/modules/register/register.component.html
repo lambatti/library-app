@@ -203,11 +203,11 @@
                     </li>
                 </ul>
             </div>
-            <p class="label--primary redirect--login" routerLink="/login">
-                Posiadasz już konto, kliknij tutaj
+            <p class="label--primary redirect--login">
+                <a routerLink="/login">Posiadasz już konto, kliknij tutaj</a>
             </p>
-            <p class="label--primary redirect--login" routerLink="/">
-                Chcę kontynuować bez logowania.
+            <p class="label--primary redirect--login">
+                <a routerLink="/">Wróć do strony głównej</a>
             </p>
             <button [disabled]="formGroup.invalid" class="btn--secondary" type="submit">
                 Zarejestruj

@@ -8,19 +8,6 @@
             <div>
                 <label class="label--primary">Email</label>
                 <input class="input--primary" type="email" name="email" formControlName="email" />
-                <ul
-                    *ngIf="
-                        (formSubmitted || formGroup.controls['email'].dirty) &&
-                        formGroup.controls['email'].invalid
-                    "
-                >
-                    <li
-                        class="li--error"
-                        *ngFor="let error of formGroup.getValidationMessages('email')"
-                    >
-                        {{ error }}
-                    </li>
-                </ul>
             </div>
             <div>
                 <label class="label--primary">Hasło</label>
@@ -30,25 +17,15 @@
                     name="password"
                     formControlName="password"
                 />
-                <ul
-                    *ngIf="
-                        (formSubmitted || formGroup.controls['password'].dirty) &&
-                        formGroup.controls['password'].invalid
-                    "
-                >
-                    <li
-                        class="li--error"
-                        *ngFor="let error of formGroup.getValidationMessages('password')"
-                    >
-                        {{ error }}
-                    </li>
-                </ul>
             </div>
-            <p class="label--primary redirect--login" routerLink="/register">
-                Nie posiadasz konta, kliknji tutaj
+            <p class="label--primary redirect--login">
+                <a routerLink="#">Nie pamiętam hasła</a>
             </p>
-            <p class="label--primary redirect--login" routerLink="/">
-                Chcę kontynuować bez logowania
+            <p class="label--primary redirect--login">
+                <a routerLink="/register">Nie posiadasz konta, kliknji tutaj</a>
+            </p>
+            <p class="label--primary redirect--login">
+                <a routerLink="/">Wróć do strony głównej</a>
             </p>
             <button class="btn--secondary" [disabled]="formGroup.invalid" type="submit">
                 Zaloguj

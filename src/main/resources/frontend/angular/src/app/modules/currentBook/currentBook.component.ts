@@ -25,6 +25,4 @@ export class CurrentBookComponent {
     get currentBook(): Book {
         return this._service.getBookById(this.id);
     }
-
-    borrowBook() {}
 }

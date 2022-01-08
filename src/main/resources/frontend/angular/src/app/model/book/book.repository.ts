@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book.model';
 import { BorrowedBookService } from '../../core/http/borrowedBook.service';
-import { BookService } from '../../core/http/book.service';
+import { StaticDataSource } from './static.datasource';
 
 @Injectable()
 export class BookRepository {
@@ -10,7 +10,7 @@ export class BookRepository {
     private genre: Array<string> = [];
     private borrowedBooks: Array<Book> = [];
 
-    constructor(private _dataSource: BookService, private _borrowedBook: BorrowedBookService) {
+    constructor(private _dataSource: StaticDataSource, private _borrowedBook: BorrowedBookService) {
         _dataSource.getBooks().subscribe(data => {
             this.books = data;
             this.authors = data
@@ -22,13 +22,13 @@ export class BookRepository {
                 .filter((c, index, array) => array.indexOf(c) === index)
                 .sort();
         });
-
-        _borrowedBook.getBorrowedBooks().subscribe(data => {
-            this.borrowedBooks = data;
-        });
-        // _dataSource.getBorrowedBooks().subscribe(data => {
+        //
+        // _borrowedBook.getBorrowedBooks().subscribe(data => {
         //     this.borrowedBooks = data;
         // });
+        _dataSource.getBorrowedBooks().subscribe(data => {
+            this.borrowedBooks = data;
+        });
     }
 
     getBooks(category: string = null) {

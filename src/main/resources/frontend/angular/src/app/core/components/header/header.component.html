@@ -12,7 +12,7 @@
         <a routerLink="/login">Logowanie</a>
     </div>
     <div class="user-control" *ngIf="isLoggedIn">
-        <p>Witaj {{ user }}</p>
+        <p>Witaj {{ firstName }}</p>
         <select (change)="navigationSelect($any($event.target).value)">
             <option></option>
             <option class="option-panel" value="myBooks">Moje książki</option>

@@ -31,7 +31,8 @@
             </div>
         </div>
     </div>
-    <div class="bookDescription">
+
+    <div class="bookDescription" *ngIf="isMyBooks">
         <h6>Opis:</h6>
         <p>{{ displayedBook?.description }}</p>
     </div>

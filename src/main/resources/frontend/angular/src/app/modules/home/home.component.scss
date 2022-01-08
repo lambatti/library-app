@@ -34,11 +34,13 @@
             width: 200px;
             height: 250px;
             position: relative;
+
             div {
                 width: 100%;
                 height: 100%;
                 background-size: cover;
             }
+
             .available {
                 &:hover {
                     filter: contrast(175%) brightness(103%);
@@ -62,10 +64,10 @@
 
     .pageControlButton {
         margin: 10px 0 20px 0;
-
         display: flex;
         justify-items: end;
         grid-column: 1/-1;
+        flex-flow: wrap;
 
         button {
             width: 40px;
