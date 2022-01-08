@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Book } from './book.model';
+import { Book, BorrowedBook } from './book.model';
 import { BorrowedBookService } from '../../core/http/borrowedBook.service';
 import { StaticDataSource } from './static.datasource';
 
@@ -8,7 +8,7 @@ export class BookRepository {
     private books: Array<Book> = [];
     private authors: Array<string> = [];
     private genre: Array<string> = [];
-    private borrowedBooks: Array<Book> = [];
+    private borrowedBooks: Array<BorrowedBook> = [];
 
     constructor(private _dataSource: StaticDataSource, private _borrowedBook: BorrowedBookService) {
         _dataSource.getBooks().subscribe(data => {

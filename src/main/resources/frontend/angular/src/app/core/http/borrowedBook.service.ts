@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Book } from '../../model/book/book.model';
+import { Book, BorrowedBook } from '../../model/book/book.model';
 
 @Injectable()
 export class BorrowedBookService {
     constructor(private http: HttpClient) {}
 
-    getBorrowedBooks(): Observable<Array<Book>> {
+    getBorrowedBooks(): Observable<Array<BorrowedBook>> {
         return this.http.get<Array<Book>>('/api/user/books', BorrowedBookService.httpOptions());
     }
 
