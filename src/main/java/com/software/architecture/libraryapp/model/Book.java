@@ -1,12 +1,9 @@
 package com.software.architecture.libraryapp.model;
 
-import lombok.ToString;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "books")
-@ToString
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

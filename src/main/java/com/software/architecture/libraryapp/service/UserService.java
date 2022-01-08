@@ -2,13 +2,11 @@ package com.software.architecture.libraryapp.service;
 
 import com.software.architecture.libraryapp.adapter.SqlUserRepository;
 import com.software.architecture.libraryapp.config.PasswordEncoderBean;
-import com.software.architecture.libraryapp.model.Genders;
 import com.software.architecture.libraryapp.model.RegistrationQuestions;
 import com.software.architecture.libraryapp.model.User;
 import com.software.architecture.libraryapp.model.dto.UserRegistrationDto;
 import com.software.architecture.libraryapp.model.dto.UserSummaryDto;
 import com.software.architecture.libraryapp.util.JwtUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 public class UserService implements UserDetailsService {
 
     private final SqlUserRepository userRepository;
