@@ -94,7 +94,7 @@ WITH books_json (doc) AS (
         "is_hardcover": true,
         "count": 1,
         "is_available": true,
-        "description": "Niezwykłe spotkanie w środku pustyni – pilot, który wraz ze swym samolotem spadł z nieba, mały przybysz z nieznanej planety i tajemniczy lis. Oto opowieść o dorastaniu do wiernej miłości, przyjaźni, lojalności i odpowiedzialności za drugiego człowieka.\""
+        "description": "Niezwykłe spotkanie w środku pustyni – pilot, który wraz ze swym samolotem spadł z nieba, mały przybysz z nieznanej planety i tajemniczy lis. Oto opowieść o dorastaniu do wiernej miłości, przyjaźni, lojalności i odpowiedzialności za drugiego człowieka."
       },
       {
         "id": 9,
@@ -285,7 +285,7 @@ WITH books_json (doc) AS (
         "genre": "powieść przygodowa",
         "is_hardcover": true,
         "count": 1,
-        "is_available": false,
+        "is_available": true,
         "description": "Bailey jest zszokowany – po krótkim i smętnym życiu, jakiego doświadczył w postaci bezpańskiego kundla, odradza się w ciele niesfornego szczeniaka. Kiedy trafia pod opiekę ośmiolatka Ethana, który kocha go całym sercem, odkrywa nowe oblicze – dobrego, poczciwego psiaka. Jednak życie u uwielbianej rodziny to nie koniec przygód Baileya. Ponownie odradza się w postaci kolejnego psa!"
       },
       {
