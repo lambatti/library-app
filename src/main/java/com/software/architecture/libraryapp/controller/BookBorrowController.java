@@ -24,8 +24,8 @@ public class BookBorrowController {
         this.userService = userService;
     }
 
-    @PostMapping("/user/borrowBook")
-    ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+    @PostMapping("/user/borrowBook/{id}")
+    ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
         String email = userService.extractEmailFromToken(token);
 
@@ -49,8 +49,8 @@ public class BookBorrowController {
         }
     }
 
-    @DeleteMapping("/user/returnBook")
-    ResponseEntity<BookBorrow> returnBook(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+    @DeleteMapping("/user/returnBook/{id}")
+    ResponseEntity<BookBorrow> returnBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
         String email = userService.extractEmailFromToken(token);
 
@@ -74,8 +74,8 @@ public class BookBorrowController {
         }
     }
 
-    @PatchMapping("/user/prolongate")
-    ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+    @PatchMapping("/user/prolongate/{id}")
+    ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
         String email = userService.extractEmailFromToken(token);
 
