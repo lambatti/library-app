@@ -10,6 +10,9 @@ import java.time.LocalDate;
 public interface SqlBookBorrowRepository extends BookBorrowRepository, JpaRepository<BookBorrow, Integer> {
 
     @Override
+    BookBorrow save(BookBorrow bookBorrow);
+
+    @Override
     @Query(nativeQuery = true, value="SELECT return_date FROM book_borrow WHERE book_borrow.book_id = ?1")
     LocalDate getReturnDate(String bookId);
 

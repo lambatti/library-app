@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -19,4 +20,6 @@ public interface SqlBookRepository extends BookRepository, JpaRepository<Book, I
     @Override
     List<Book> findByIsAvailable(boolean available);
 
+    @Override
+    Optional<Book> findById(Integer id);
 }

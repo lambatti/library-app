@@ -1,9 +1,12 @@
 package com.software.architecture.libraryapp.model;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "books")
+@ToString
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,4 +78,14 @@ public class Book {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+
 }
