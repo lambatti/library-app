@@ -2,9 +2,6 @@ package com.software.architecture.libraryapp.repository;
 
 import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.Genres;
-import com.software.architecture.libraryapp.repository.specs.BookSpecification;
-import com.software.architecture.libraryapp.repository.specs.SearchCriteria;
-import com.software.architecture.libraryapp.repository.specs.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.yaml.snakeyaml.util.EnumUtils;
@@ -19,8 +16,6 @@ public interface BookRepository extends JpaSpecificationExecutor<Book> {
     List<Book> findAll(Specification<Book> spec);
 
     Optional<Book> findById(Integer id);
-
-    boolean existsById(Integer id);
 
     List<Book> findByIsAvailable(boolean available);
 

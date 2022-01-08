@@ -2,8 +2,6 @@ package com.software.architecture.libraryapp.controller;
 
 import com.software.architecture.libraryapp.model.dto.BookDto;
 import com.software.architecture.libraryapp.service.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +45,4 @@ class BookController {
                 service.readAvailableBooks(state)
         );
     }
-
-
 }

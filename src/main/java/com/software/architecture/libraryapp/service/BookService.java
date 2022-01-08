@@ -13,9 +13,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-    private final BookRepository repository;
-
-    @Autowired
     private ModelMapper modelMapper;
 
     private BookDto convertEntityToDto(Book book) {
@@ -29,8 +26,11 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public BookService(BookRepository repository) {
+    private final BookRepository repository;
+
+    public BookService(BookRepository repository, ModelMapper modelMapper) {
         this.repository = repository;
+        this.modelMapper = modelMapper;
     }
 
     public Optional<BookDto> findById(Integer id) {
