@@ -5,7 +5,7 @@ import com.software.architecture.libraryapp.model.Genres;
 import org.yaml.snakeyaml.util.EnumUtils;
 
 public class BookDto {
-    // hidden id
+    private int id;
     private String coverUrl;
     private String title;
     private String author;
@@ -19,6 +19,14 @@ public class BookDto {
     private String description;
     // hidden User
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCoverUrl() {
         return coverUrl;
