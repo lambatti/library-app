@@ -28,10 +28,7 @@ public class BookBorrowService {
 
     public BookBorrow borrowBook(User user, Integer bookId) {
 
-        // TODO: 08.01.2022 Optional<Book>?
         Book book = bookRepository.getById(bookId);
-
-        // TODO: 08.01.2022 check if the book with given id exists
 
         if(!book.isAvailable()) {
             log.info("Book is not available");
