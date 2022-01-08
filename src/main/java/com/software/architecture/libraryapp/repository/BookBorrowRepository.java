@@ -10,7 +10,7 @@ public interface BookBorrowRepository {
 
     BookBorrow updateById(String bookId, LocalDate returnDate);
 
-    BookBorrow deleteById(String bookId);
+    void delete(Integer userId, Integer bookId);
 
     LocalDate getReturnDate(String bookId);
 }
