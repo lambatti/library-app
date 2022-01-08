@@ -49,7 +49,7 @@ public class BookBorrowController {
         }
     }
 
-    @PostMapping("/user/returnBook")
+    @DeleteMapping("/user/returnBook")
     ResponseEntity<BookBorrow> returnBook(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
 
         String email = userService.extractEmailFromToken(token);
@@ -74,7 +74,7 @@ public class BookBorrowController {
         }
     }
 
-    @PostMapping("/user/prolongate")
+    @PatchMapping("/user/prolongate")
     ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
 
         String email = userService.extractEmailFromToken(token);
