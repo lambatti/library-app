@@ -1,9 +1,6 @@
 package com.software.architecture.libraryapp.model;
 
 import com.software.architecture.libraryapp.model.converter.ListToArrayConveter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,8 +9,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@Builder
-@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

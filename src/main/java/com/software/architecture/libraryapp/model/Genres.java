@@ -1,5 +1,7 @@
 package com.software.architecture.libraryapp.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Genres {
     FSF("fantasy, science fiction"),
     KST("kryminał, sensacja, thriller"),
@@ -14,6 +16,11 @@ public enum Genres {
 
     Genres(final String text) {
         this.text = text;
+    }
+
+    @JsonValue
+    public String getText() {
+        return text;
     }
 
     @Override

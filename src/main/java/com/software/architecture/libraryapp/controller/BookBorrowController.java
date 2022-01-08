@@ -1,0 +1,102 @@
+package com.software.architecture.libraryapp.controller;
+
+import com.software.architecture.libraryapp.model.BookBorrow;
+import com.software.architecture.libraryapp.model.User;
+import com.software.architecture.libraryapp.service.BookBorrowService;
+import com.software.architecture.libraryapp.service.BookService;
+import com.software.architecture.libraryapp.service.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api")
+public class BookBorrowController {
+
+    private final BookBorrowService bookBorrowService;
+    private final BookService bookService;
+    private final UserService userService;
+
+    public BookBorrowController(BookBorrowService bookBorrowService, BookService bookService, UserService userService) {
+        this.bookBorrowService = bookBorrowService;
+        this.bookService = bookService;
+        this.userService = userService;
+    }
+
+    @PostMapping("/user/borrowBook")
+    ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+
+        String email = userService.extractEmailFromToken(token);
+
+        Optional<User> user = userService.getUserByEmail(email);
+
+        if(user.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if(bookService.findById(id).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        else {
+            BookBorrow bookBorrow = bookBorrowService.borrowBook(user.get(), id);
+
+            // TODO: 08.01.2022 - return bookBorrow (probably with DTO) or the book
+            //return ResponseEntity.ok(bookBorrow);
+
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @PostMapping("/user/returnBook")
+    ResponseEntity<BookBorrow> returnBook(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+
+        String email = userService.extractEmailFromToken(token);
+
+        Optional<User> user = userService.getUserByEmail(email);
+
+        if(user.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if(bookService.findById(id).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        else {
+            BookBorrow bookBorrow = bookBorrowService.returnBook(user.get(), id);
+
+            // TODO: 08.01.2022 - return bookBorrow (probably with DTO) or the book
+            //return ResponseEntity.ok(bookBorrow);
+
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @PostMapping("/user/prolongate")
+    ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+
+        String email = userService.extractEmailFromToken(token);
+
+        Optional<User> user = userService.getUserByEmail(email);
+
+        if(user.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if(bookService.findById(id).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        else {
+            BookBorrow bookBorrow = bookBorrowService.prolongate(user.get(), id);
+
+            // TODO: 08.01.2022 - return bookBorrow (probably with DTO)
+            //return ResponseEntity.ok(bookBorrow);
+
+            return ResponseEntity.ok().build();
+
+        }
+    }
+}
