@@ -69,6 +69,14 @@ public class UserController {
     @PostMapping("/register")
     ResponseEntity<?> registerUser(@RequestBody UserRegistrationDto userRegistrationDto) {
 
+        String email = userRegistrationDto.getEmail();
+
+        Optional<User> user = userService.getUserByEmail(email);
+
+        if(user.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         // TODO: 06.01.2022 - add support for ResponseEntity<User> or <UserRegistrationDto>
         userService.registerUser(userRegistrationDto);
 
