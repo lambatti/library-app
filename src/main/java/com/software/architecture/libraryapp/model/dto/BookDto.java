@@ -2,6 +2,7 @@ package com.software.architecture.libraryapp.model.dto;
 
 
 import com.software.architecture.libraryapp.model.Genres;
+import org.yaml.snakeyaml.util.EnumUtils;
 
 public class BookDto {
     // hidden id
@@ -11,6 +12,7 @@ public class BookDto {
     private String publicationDate;
     // converted genre:
     private Genres genre;
+
     private boolean isHardcover;
     private int count;
     private boolean isAvailable;
