@@ -1,4 +1,4 @@
-<div class="card" [id]="selectedBook">
+<div class="card" [id]="displayedBook.id">
     <img [src]="displayedBook?.coverUrl" alt="" />
     <div class="info">
         <h2>{{ displayedBook?.title }}</h2>
@@ -32,14 +32,12 @@
         </div>
     </div>
 
-    <div class="bookDescription" *ngIf="isMyBooks">
+    <div class="bookDescription">
         <h6>Opis:</h6>
         <p>{{ displayedBook?.description }}</p>
     </div>
     <div class="buttonWrapper" *ngIf="displayedBook.available">
-        <button *ngIf="!isMyBooks && isLogged" (click)="borrow(displayedBook.id)">Wypożycz</button>
         <button [routerLink]="'/'">Wróć</button>
-        <button *ngIf="isMyBooks" (click)="prolongation(displayedBook.id)">Prolonguj</button>
-        <button *ngIf="isMyBooks" (click)="returnBook(displayedBook.id)">Zwróć</button>
+        <button *ngIf="isLogged" (click)="borrow(displayedBook.id)">Wypożycz</button>
     </div>
 </div>

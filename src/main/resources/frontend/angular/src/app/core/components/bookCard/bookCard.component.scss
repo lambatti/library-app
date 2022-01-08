@@ -33,6 +33,7 @@
             display: grid;
             grid-template-rows: repeat(5, 1fr);
             row-gap: 10px;
+            margin: 20px 0;
 
             .bookPanelContent {
                 display: flex;
