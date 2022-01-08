@@ -1,7 +1,5 @@
 package com.software.architecture.libraryapp.adapter;
 
-import com.software.architecture.libraryapp.model.Genders;
-import com.software.architecture.libraryapp.model.RegistrationQuestions;
 import com.software.architecture.libraryapp.model.User;
 import com.software.architecture.libraryapp.repository.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;

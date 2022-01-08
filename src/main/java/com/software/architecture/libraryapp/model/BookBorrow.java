@@ -1,13 +1,20 @@
 package com.software.architecture.libraryapp.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "book_borrow")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookBorrow {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
