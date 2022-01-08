@@ -8,9 +8,9 @@ public interface BookBorrowRepository {
 
     BookBorrow save(BookBorrow bookBorrow);
 
-    BookBorrow updateById(String bookId, LocalDate returnDate);
+    BookBorrow updateById(Integer bookId, LocalDate returnDate);
 
     void delete(Integer userId, Integer bookId);
 
-    LocalDate getReturnDate(String bookId);
+    LocalDate getReturnDate(Integer bookId);
 }

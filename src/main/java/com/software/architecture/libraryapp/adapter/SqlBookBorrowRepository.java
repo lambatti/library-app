@@ -22,9 +22,9 @@ public interface SqlBookBorrowRepository extends BookBorrowRepository, JpaReposi
 
     @Override
     @Query(nativeQuery = true, value="SELECT return_date FROM book_borrow WHERE book_id = ?1")
-    LocalDate getReturnDate(String bookId);
+    LocalDate getReturnDate(Integer bookId);
 
     @Override
     @Query(nativeQuery = true, value="UPDATE book_borrow SET return_date = ?2 WHERE book_id = ?1")
-    BookBorrow updateById(String bookId, LocalDate returnDate);
+    BookBorrow updateById(Integer bookId, LocalDate returnDate);
 }
