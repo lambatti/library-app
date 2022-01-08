@@ -89,4 +89,33 @@ public class BookBorrowController {
         }
     }
 
+    @PostMapping("/user/prolongate")
+    public ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+
+        token = jwtTokenUtil.removeBearer(token);
+        log.info("token: {}", token);
+        String email = jwtTokenUtil.extractEmail(token);
+        log.info("email: {}", email);
+
+        Optional<User> user = userService.getUserByEmail(email);
+
+        if(user.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if(bookService.findById(id).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        else {
+            BookBorrow bookBorrow = bookBorrowService.prolongate(user.get(), id);
+
+            // TODO: 08.01.2022 - return bookBorrow (probably with DTO)
+            //return ResponseEntity.ok(bookBorrow);
+
+            return ResponseEntity.ok().build();
+
+        }
+    }
+
+
 }

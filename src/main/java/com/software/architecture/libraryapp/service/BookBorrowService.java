@@ -6,7 +6,6 @@ import com.software.architecture.libraryapp.adapter.SqlUserRepository;
 import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.User;
-import com.sun.xml.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +71,16 @@ public class BookBorrowService {
         book.setUser(null);
         // TODO: 08.01.2022 update BookRepository 
         bookRepository.save(book);
+        return new BookBorrow();
+    }
+
+    public BookBorrow prolongate(User user, Integer bookId) {
+        // the book must be in the users set
+        // TODO: 08.01.2022 move this to bookService and update BookBorrowController
+        Integer days = 30;
+        Book book = bookRepository.getById(bookId);
+        log.info(user.getId() + " " + bookId + " " + LocalDate.now().plusDays(30));
+        bookBorrowRepository.updateById(user.getId(), bookId, days);
         return new BookBorrow();
     }
 }

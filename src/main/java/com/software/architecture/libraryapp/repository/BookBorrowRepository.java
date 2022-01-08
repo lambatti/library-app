@@ -8,7 +8,7 @@ public interface BookBorrowRepository {
 
     BookBorrow save(BookBorrow bookBorrow);
 
-    BookBorrow updateById(Integer bookId, LocalDate returnDate);
+    void updateById(Integer userId, Integer bookId, Integer days);
 
     void delete(Integer userId, Integer bookId);
 
