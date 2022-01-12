@@ -113,6 +113,7 @@ public class UserService implements UserDetailsService {
             Book book = bookBorrow.getBook();
 
             UserBorrowedBookDto userBorrowedBook = new UserBorrowedBookDto(
+                    book.getId(),
                     book.getCoverUrl(),
                     book.getTitle(),
                     book.getAuthor(),
