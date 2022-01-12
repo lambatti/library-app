@@ -1,24 +1,31 @@
 package com.software.architecture.libraryapp.model.dto;
 
 public class UserBorrowedBookDto {
+
+    private Integer id;
     private String coverUrl;
     private String title;
     private String author;
     private String publicationDate;
     private String genre;
-    private String cover;
+    private boolean isHardcover;
     private String borrowDate;
     private String returnDate;
 
-    public UserBorrowedBookDto(String coverUrl, String title, String author, String publicationDate, String genre, String cover, String borrowDate, String returnDate) {
+    public UserBorrowedBookDto(Integer id, String coverUrl, String title, String author, String publicationDate, String genre, boolean isHardcover, String borrowDate, String returnDate) {
+        this.id = id;
         this.coverUrl = coverUrl;
         this.title = title;
         this.author = author;
         this.publicationDate = publicationDate;
         this.genre = genre;
-        this.cover = cover;
+        this.isHardcover = isHardcover;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getCoverUrl() {
@@ -41,8 +48,8 @@ public class UserBorrowedBookDto {
         return genre;
     }
 
-    public String getCover() {
-        return cover;
+    public boolean isHardcover() {
+        return isHardcover;
     }
 
     public String getBorrowDate() {

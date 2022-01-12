@@ -3,6 +3,7 @@ package com.software.architecture.libraryapp.repository;
 import com.software.architecture.libraryapp.model.BookBorrow;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface BookBorrowRepository {
 
@@ -13,4 +14,6 @@ public interface BookBorrowRepository {
     void delete(Integer userId, Integer bookId);
 
     LocalDate getReturnDate(Integer bookId);
+
+    List<BookBorrow> getAllByUserId(Integer userId);
 }

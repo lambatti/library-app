@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 
 public interface SqlBookBorrowRepository extends BookBorrowRepository, JpaRepository<BookBorrow, Integer> {
 
@@ -29,4 +30,7 @@ public interface SqlBookBorrowRepository extends BookBorrowRepository, JpaReposi
     @Modifying
     @Query(nativeQuery = true, value="UPDATE book_borrow SET return_date = return_date+?3 WHERE user_id = ?1 AND book_id = ?2")
     void updateById(Integer userId, Integer bookId, Integer days);
+
+    @Override
+    List<BookBorrow> getAllByUserId(Integer userId);
 }

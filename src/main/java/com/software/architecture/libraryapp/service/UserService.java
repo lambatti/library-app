@@ -1,9 +1,12 @@
 package com.software.architecture.libraryapp.service;
 
+import com.software.architecture.libraryapp.adapter.SqlBookBorrowRepository;
 import com.software.architecture.libraryapp.adapter.SqlUserRepository;
-import com.software.architecture.libraryapp.config.PasswordEncoderBean;
+import com.software.architecture.libraryapp.model.Book;
+import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.RegistrationQuestions;
 import com.software.architecture.libraryapp.model.User;
+import com.software.architecture.libraryapp.model.dto.UserBorrowedBookDto;
 import com.software.architecture.libraryapp.model.dto.UserRegistrationDto;
 import com.software.architecture.libraryapp.model.dto.UserSummaryDto;
 import com.software.architecture.libraryapp.util.JwtUtil;
@@ -12,22 +15,23 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private final SqlUserRepository userRepository;
-    private final PasswordEncoderBean passwordEncoder;
+    private final SqlBookBorrowRepository bookBorrowRepository;
+    private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public UserService(SqlUserRepository userRepository, PasswordEncoderBean passwordEncoder, JwtUtil jwtUtil) {
+    public UserService(SqlUserRepository userRepository, SqlBookBorrowRepository bookBorrowRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
+        this.bookBorrowRepository = bookBorrowRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
@@ -65,7 +69,7 @@ public class UserService implements UserDetailsService {
         roles.add("ROLE_USER");
         String rolesArrayInString = String.join(",", roles.toArray(new String[0]));
 
-        String encodedPassword = passwordEncoder.passwordEncoder().encode(userRegistrationDto.getPassword());
+        String encodedPassword = passwordEncoder.encode(userRegistrationDto.getPassword());
 
         userRepository.save(
                 userRegistrationDto.getFirstName(),
@@ -85,13 +89,13 @@ public class UserService implements UserDetailsService {
 
 
     public User changePassword(User user, String newPassword) {
-        String encodedPassword = passwordEncoder.passwordEncoder().encode(newPassword);
+        String encodedPassword = passwordEncoder.encode(newPassword);
         userRepository.changePassword(user.getId(), encodedPassword);
         return userRepository.findById(user.getId()).get();
     }
 
     public boolean doesThePasswordMatch(String password, User user) {
-        return passwordEncoder.passwordEncoder().matches(password, user.getPassword());
+        return passwordEncoder.matches(password, user.getPassword());
     }
 
     // TODO: 07.01.2022 registration question is not refreshed with the return (but the function works)
@@ -100,9 +104,39 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(user.getId()).get();
     }
 
+    public Set<UserBorrowedBookDto> getBorrowedBooks(User user) {
+        List<BookBorrow> bookBorrows = bookBorrowRepository.getAllByUserId(user.getId());
+
+        Set<UserBorrowedBookDto> userBorrowedBooksSet = new HashSet<>();
+
+        for ( BookBorrow bookBorrow : bookBorrows ) {
+            Book book = bookBorrow.getBook();
+
+            UserBorrowedBookDto userBorrowedBook = new UserBorrowedBookDto(
+                    book.getId(),
+                    book.getCoverUrl(),
+                    book.getTitle(),
+                    book.getAuthor(),
+                    book.getPublicationDate(),
+                    book.getGenre().toString(),
+                    book.isHardcover(),
+                    bookBorrow.getBorrowDate().toString(),
+                    bookBorrow.getReturnDate().toString()
+                    );
+
+            userBorrowedBooksSet.add(userBorrowedBook);
+        }
+
+        return userBorrowedBooksSet;
+    }
+
     public String extractEmailFromToken(String token) {
         token = jwtUtil.removeBearer(token);
         return jwtUtil.extractEmail(token);
+    }
+
+    public boolean doesTheRegistrationQuestionMatch(User user, RegistrationQuestions question, String answer) {
+        return user.getRegistrationQuestion().equals(question) && user.getRegistrationQuestionAnswer().equals(answer);
     }
 
     @Override

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/")
-@Slf4j
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
@@ -42,7 +41,6 @@ public class LoginController {
 
         final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getEmail());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        log.info("User: {} | JWT: {}", authenticationRequest.getEmail(), jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

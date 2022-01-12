@@ -24,8 +24,8 @@ public class BookBorrowController {
         this.userService = userService;
     }
 
-    @PostMapping("/user/borrowBook")
-    ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+    @PostMapping("/user/borrowBook/{id}")
+    ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
         String email = userService.extractEmailFromToken(token);
 
@@ -49,8 +49,8 @@ public class BookBorrowController {
         }
     }
 
-    @PostMapping("/user/returnBook")
-    ResponseEntity<BookBorrow> returnBook(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+    @DeleteMapping("/user/returnBook/{id}")
+    ResponseEntity<BookBorrow> returnBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
         String email = userService.extractEmailFromToken(token);
 
@@ -74,22 +74,20 @@ public class BookBorrowController {
         }
     }
 
-    @PostMapping("/user/prolongate")
-    ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @RequestBody Integer id) {
+    @PatchMapping("/user/prolongate/{id}")
+    ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
         String email = userService.extractEmailFromToken(token);
 
         Optional<User> user = userService.getUserByEmail(email);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
-        if(bookService.findById(id).isEmpty()) {
+        if (bookService.findById(id).isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-
-        else {
+        } else {
             BookBorrow bookBorrow = bookBorrowService.prolongate(user.get(), id);
 
             // TODO: 08.01.2022 - return bookBorrow (probably with DTO)

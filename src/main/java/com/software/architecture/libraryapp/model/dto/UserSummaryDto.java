@@ -4,6 +4,13 @@ import java.time.LocalDate;
 
 public class UserSummaryDto {
 
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String gender;
+    private LocalDate birthDate;
+    private LocalDate accountCreationDate;
+
     public UserSummaryDto(String firstName, String lastName, String email, String gender, LocalDate birthDate, LocalDate accountCreationDate) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -12,13 +19,6 @@ public class UserSummaryDto {
         this.birthDate = birthDate;
         this.accountCreationDate = accountCreationDate;
     }
-
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String gender;
-    private LocalDate birthDate;
-    private LocalDate accountCreationDate;
 
     public String getFirstName() {
         return firstName;
