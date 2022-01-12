@@ -16,15 +16,16 @@ export class BorrowedBookService {
         console.log(id);
 
         this.http
-            .post<number>(`/api/user/borrowBook/${id}`, BorrowedBookService.httpOptions())
+            .post<number>(`/api/user/borrowBook/${id}`, null, BorrowedBookService.httpOptions())
             .subscribe();
     }
 
     prolongation(id: number) {
         this.http
-            .patch<number>(`/api/user/prolongate/${id}`, BorrowedBookService.httpOptions())
+            .patch<number>(`/api/user/prolongate/${id}`, null, BorrowedBookService.httpOptions())
             .subscribe();
     }
+
 
     returnBook(id: number) {
         this.http

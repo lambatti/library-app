@@ -28,8 +28,8 @@ export class HeaderComponent {
 
     navigationSelect(location: string) {
         if (location === 'logout') {
-            this._authenticationService.logout();
-            window.location.reload();
+            localStorage.removeItem('token');
+            this.router.navigateByUrl('/');
         } else {
             this.router.navigateByUrl(`/${location}`);
         }
