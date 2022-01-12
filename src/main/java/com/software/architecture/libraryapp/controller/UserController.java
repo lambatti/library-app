@@ -1,6 +1,5 @@
 package com.software.architecture.libraryapp.controller;
 
-import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.User;
 import com.software.architecture.libraryapp.model.dto.*;
 import com.software.architecture.libraryapp.service.UserService;
@@ -79,6 +78,31 @@ public class UserController {
         userService.registerUser(userRegistrationDto);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/user/forgottenPassword")
+    ResponseEntity<?> forgottenPassword(@RequestBody UserForgottenPasswordDto userForgottenPasswordDto) {
+
+        String email = userForgottenPasswordDto.getEmail();
+
+        Optional<User> user = userService.getUserByEmail(email);
+
+        if(user.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        else if(!userForgottenPasswordDto.getNewPassword().equals(userForgottenPasswordDto.getNewPasswordConfirmation())) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        else if(userService.doesTheRegistrationQuestionMatch(user.get(), userForgottenPasswordDto.getQuestion(),
+                userForgottenPasswordDto.getAnswer())) {
+            userService.changePassword(user.get(), userForgottenPasswordDto.getNewPassword());
+            return ResponseEntity.ok().build();
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PatchMapping("/user/changePassword")

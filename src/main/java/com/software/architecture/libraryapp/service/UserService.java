@@ -135,6 +135,10 @@ public class UserService implements UserDetailsService {
         return jwtUtil.extractEmail(token);
     }
 
+    public boolean doesTheRegistrationQuestionMatch(User user, RegistrationQuestions question, String answer) {
+        return user.getRegistrationQuestion().equals(question) && user.getRegistrationQuestionAnswer().equals(answer);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> tempUser = userRepository.findByEmail(email);
