@@ -24,6 +24,6 @@ export class BorrowedBook {
         public isHard?: boolean,
         public available?: boolean,
         public borrowDate?: string,
-        public returnData?: string
+        public returnDate?: string
     ) {}
 }
