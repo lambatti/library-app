@@ -2,7 +2,6 @@ package com.software.architecture.libraryapp.service;
 
 import com.software.architecture.libraryapp.adapter.SqlBookBorrowRepository;
 import com.software.architecture.libraryapp.adapter.SqlUserRepository;
-import com.software.architecture.libraryapp.config.PasswordEncoderBean;
 import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.RegistrationQuestions;
@@ -16,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,10 +26,10 @@ public class UserService implements UserDetailsService {
 
     private final SqlUserRepository userRepository;
     private final SqlBookBorrowRepository bookBorrowRepository;
-    private final PasswordEncoderBean passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public UserService(SqlUserRepository userRepository, SqlBookBorrowRepository bookBorrowRepository, PasswordEncoderBean passwordEncoder, JwtUtil jwtUtil) {
+    public UserService(SqlUserRepository userRepository, SqlBookBorrowRepository bookBorrowRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.bookBorrowRepository = bookBorrowRepository;
         this.passwordEncoder = passwordEncoder;
@@ -69,7 +69,7 @@ public class UserService implements UserDetailsService {
         roles.add("ROLE_USER");
         String rolesArrayInString = String.join(",", roles.toArray(new String[0]));
 
-        String encodedPassword = passwordEncoder.passwordEncoder().encode(userRegistrationDto.getPassword());
+        String encodedPassword = passwordEncoder.encode(userRegistrationDto.getPassword());
 
         userRepository.save(
                 userRegistrationDto.getFirstName(),
@@ -89,13 +89,13 @@ public class UserService implements UserDetailsService {
 
 
     public User changePassword(User user, String newPassword) {
-        String encodedPassword = passwordEncoder.passwordEncoder().encode(newPassword);
+        String encodedPassword = passwordEncoder.encode(newPassword);
         userRepository.changePassword(user.getId(), encodedPassword);
         return userRepository.findById(user.getId()).get();
     }
 
     public boolean doesThePasswordMatch(String password, User user) {
-        return passwordEncoder.passwordEncoder().matches(password, user.getPassword());
+        return passwordEncoder.matches(password, user.getPassword());
     }
 
     // TODO: 07.01.2022 registration question is not refreshed with the return (but the function works)
