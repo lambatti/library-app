@@ -7,6 +7,15 @@ import java.time.LocalDate;
 
 public class UserRegistrationDto {
 
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private Genders gender;
+    private LocalDate birthDate;
+    private RegistrationQuestions registrationQuestion;
+    private String registrationQuestionAnswer;
+
     public UserRegistrationDto(String firstName, String lastName, String email, String password, Genders gender, LocalDate birthDate, RegistrationQuestions registrationQuestion, String registrationQuestionAnswer) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,15 +26,6 @@ public class UserRegistrationDto {
         this.registrationQuestion = registrationQuestion;
         this.registrationQuestionAnswer = registrationQuestionAnswer;
     }
-
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private Genders gender;
-    private LocalDate birthDate;
-    private RegistrationQuestions registrationQuestion;
-    private String registrationQuestionAnswer;
 
     public String getFirstName() {
         return firstName;
