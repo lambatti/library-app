@@ -17,10 +17,11 @@ export class LoginComponent {
     logIn(user: UserLogin) {
         this.authenticateService
             .authenticate(user.email, user.password)
-            .subscribe(x => localStorage.setItem('token', x.token));
-        if (this.authenticateService.authenticated) {
-            this.router.navigateByUrl('/');
-        }
+            .subscribe(x => {
+                localStorage.setItem('token', x.token);
+                this.router.navigateByUrl('/');
+            });
+
     }
 
     loggedUser: UserLogin = new UserLogin();
