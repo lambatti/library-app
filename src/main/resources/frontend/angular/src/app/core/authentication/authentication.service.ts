@@ -12,11 +12,17 @@ export class AuthenticationService {
     }
 
     get authenticated(): boolean {
-        return localStorage.getItem('token') !== null;
+        console.log(
+            localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null
+        );
+        return (
+            localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null
+        );
     }
 
     logout() {
         localStorage.removeItem('token');
         this.router.navigateByUrl('/');
+        window.location.reload();
     }
 }

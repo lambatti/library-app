@@ -5,14 +5,14 @@
             <span class="line"></span>
             <span class="line"></span>
         </div>
-        <a [href]="'/'">LOGO</a>
+        <a class="logo" [href]="'/'">Moja książka<span class="dot">.</span></a>
     </div>
     <div *ngIf="!isLoggedIn" class="panel">
         <a routerLink="/register">Rejestracja</a>
         <a routerLink="/login">Logowanie</a>
     </div>
     <div class="user-control" *ngIf="isLoggedIn">
-        <p>Witaj {{ firstName }}</p>
+        <p class="welcome">Witaj {{ firstName || 'siemka' }}</p>
         <select (change)="navigationSelect($any($event.target).value)">
             <option></option>
             <option class="option-panel" value="myBooks">Moje książki</option>

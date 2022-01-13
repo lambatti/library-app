@@ -74,14 +74,14 @@
             height: 40px;
             margin: 5px;
             border: 1px solid white;
-            background-color: map-get($colors, 'main');
+            background-color: map-get($colors, 'orange');
             color: map-get($colors, 'white');
             padding: 5px 10px;
 
             &:hover {
                 background: none;
-                border: 1px solid map-get($colors, 'main');
-                color: map-get($colors, 'main');
+                border: 1px solid map-get($colors, 'orange');
+                color: map-get($colors, 'orange');
             }
         }
     }

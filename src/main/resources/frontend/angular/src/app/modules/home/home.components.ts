@@ -28,7 +28,6 @@ export class HomeComponent {
 
     get books(): Array<Book> {
         let pageIndex = (this.selectedPage - 1) * this._asideService.breakPoints(this.widthSize);
-        console.log(pageIndex);
 
         return this._repository
             .getBooks()
@@ -38,7 +37,6 @@ export class HomeComponent {
 
     changePage(newPage: number) {
         this.selectedPage = newPage;
-        console.log(window.innerWidth);
     }
 
     get pageNumbers(): Array<number> {

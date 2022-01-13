@@ -83,8 +83,9 @@
             border-radius: 20px;
             background-color: map-get($colors, 'white');
             box-shadow: 10px -5px 20px map-get($colors, 'shadow');
+
             &:hover {
-                color: map-get($colors, 'main');
+                color: map-get($colors, 'orange');
             }
         }
     }

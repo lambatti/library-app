@@ -35,6 +35,10 @@ aside {
         flex-direction: column;
         align-items: center;
 
+        h1 {
+            color: map-get($colors, 'white');
+        }
+
         .inputForm {
             display: flex;
             align-items: center;
@@ -62,6 +66,8 @@ aside {
 
         .filterItem {
             align-self: start;
+            color: map-get($colors, 'white');
+            text-transform: capitalize;
 
             &:hover {
                 text-decoration: underline;

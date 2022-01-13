@@ -11,7 +11,7 @@
 .input--primary {
     border: none;
     border-radius: 20px;
-    background-color: map-get($colors, 'main');
+    background-color: map-get($colors, 'orange');
     height: 30px;
     padding-left: 10px;
     width: 100%;
@@ -28,13 +28,14 @@
     height: 50px;
     width: 30%;
     border: 5px solid white;
+    background: map-get($colors, 'orange');
 }
 
 .btn--secondary {
     background: none;
     border-radius: 20px;
-    border: 1px solid map-get($colors, 'main');
-    color: map-get($colors, 'main');
+    border: 1px solid map-get($colors, 'orange');
+    color: map-get($colors, 'orange');
     font-size: map-get($font-size, '20');
     padding: 5px 15px;
     cursor: pointer;
@@ -42,7 +43,7 @@
     &:hover {
         border-color: map-get($colors, 'white');
         color: map-get($colors, 'white');
-        background-color: map-get($colors, 'main');
+        background-color: map-get($colors, 'orange');
     }
 }
 

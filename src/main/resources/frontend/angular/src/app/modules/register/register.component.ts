@@ -11,6 +11,7 @@ import { UserService } from '../../core/http/user.service';
 export class RegisterComponent {
     formGroup: RegisterFormGroup = new RegisterFormGroup();
     databaseQuestion: Array<Question> = [];
+    modalOpener: boolean = false;
 
     constructor(private _userService: UserService) {
         this._userService.getQuestionRegister().subscribe(data => {
@@ -22,7 +23,10 @@ export class RegisterComponent {
     formSubmitted: boolean = false;
 
     addUser(user: UserRegister) {
-        this._userService.register(user);
+        this._userService.register(user).subscribe(null, () => {
+            console.log('To jest mój błąd');
+            this.modalOpener = true;
+        });
     }
 
     submitForm() {
