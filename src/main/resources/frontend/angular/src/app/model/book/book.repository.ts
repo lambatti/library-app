@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Book, BorrowedBook } from './book.model';
 import { BorrowedBookService } from '../../core/http/borrowedBook.service';
 import { BookService } from '../../core/http/book.service';
+import {StaticDataSource} from "./static.datasource";
 
 @Injectable()
-export class BookRepository {
+export class BookRepository{
     private books: Array<Book> = [];
     private authors: Array<string> = [];
     private genre: Array<string> = [];
@@ -30,7 +31,6 @@ export class BookRepository {
         //     this.borrowedBooks = data;
         // });
     }
-
     getBooks(category: string = null) {
         return this.books.filter(b => category === null || b.author === category);
     }

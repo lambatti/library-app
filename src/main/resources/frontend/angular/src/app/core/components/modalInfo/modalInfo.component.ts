@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: 'modalInfo.component.html',
     styleUrls: ['modalInfo.component.scss']
 })
-export class ModalInfoComponent {}
+export class ModalInfoComponent {
+
+}
