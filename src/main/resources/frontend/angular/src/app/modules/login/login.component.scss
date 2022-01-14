@@ -14,7 +14,9 @@
         justify-content: center;
         align-items: center;
         width: 100vw;
-        background-color: map-get($colors, 'main');
+        background: map-get($colors, 'gradient-login'); // map-get($colors, 'main');
+
+        //background-color: map-get($colors, 'main');
         @include respond-to('medium') {
             width: 50vw;
         }

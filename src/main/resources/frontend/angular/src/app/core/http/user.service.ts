@@ -15,7 +15,7 @@ export class UserService {
 
     // /api/register
     register(data: UserRegister) {
-        this.http.post('/api/register', data).subscribe();
+        return this.http.post('/api/register', data);
     }
 
     // /api/user/changePassword

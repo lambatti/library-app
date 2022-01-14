@@ -23,12 +23,14 @@
             list-style: none;
 
             li {
-                font-size: map-get($font-size, '13');
+                font-size: map-get($font-size, '16');
                 cursor: pointer;
+                color: map-get($colors, 'white');
+                font-weight: bold;
             }
 
             .active {
-                color: map-get($colors, 'white');
+                color: map-get($colors, 'orange');
                 text-decoration: underline;
             }
         }
@@ -61,7 +63,7 @@
             }
 
             .gridLabel {
-                color: map-get($colors, 'main');
+                color: map-get($colors, 'orange');
                 font-weight: bolder;
                 justify-self: start;
             }

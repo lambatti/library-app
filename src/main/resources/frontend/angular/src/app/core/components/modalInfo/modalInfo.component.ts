@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'appModalInfo',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['modalInfo.component.scss']
 })
 export class ModalInfoComponent {
+    @Input() isActive: boolean;
+}
 
 }

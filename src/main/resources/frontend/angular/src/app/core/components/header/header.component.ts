@@ -26,10 +26,9 @@ export class HeaderComponent {
 
     public isLoggedIn: boolean = this._authenticationService.authenticated;
 
-    navigationSelect(location: string) {
+    navigationSelect(location: string): any {
         if (location === 'logout') {
-            localStorage.removeItem('token');
-            this.router.navigateByUrl('/');
+            this._authenticationService.logout();
         } else {
             this.router.navigateByUrl(`/${location}`);
         }
