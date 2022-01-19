@@ -225,3 +225,51 @@ export class ChangeQuestionGroup extends FormGroup {
         });
     }
 }
+
+export class ChangeLoggedDataGroup extends FormGroup {
+    constructor() {
+        super({
+            email: new CustomFormControl(
+                'Email',
+                'email',
+                '',
+                Validators.compose([Validators.required, Validators.email])
+            ),
+            question: new CustomFormControl('Pytanie', 'question', '', Validators.required),
+
+            answer: new CustomFormControl(
+                'Odpowiedź',
+                'answer',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(3),
+                    Validators.maxLength(30),
+                    Validators.pattern('^[A-Za-z ]+$')
+                ])
+            ),
+            newPassword: new CustomFormControl(
+                'Nowe hasło',
+                'newPassword',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(20),
+                    Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
+                ])
+            ),
+            newPasswordConfirmation: new CustomFormControl(
+                'Potwierdź nowe hasło',
+                'confimNewPassword',
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8),
+                    Validators.maxLength(20),
+                    Validators.pattern('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')
+                ])
+            )
+        });
+    }
+}

@@ -3,6 +3,7 @@
 .wrapper {
     width: 100vw;
     padding-top: 10vh;
+    height: 90vh;
     display: flex;
 
     aside {
@@ -83,7 +84,10 @@
                 justify-content: space-between;
                 button {
                     align-self: end;
-                    width: 30%;
+                    width: 40%;
+                    @include respond-to('medium') {
+                        width: 20%;
+                    }
                 }
             }
         }

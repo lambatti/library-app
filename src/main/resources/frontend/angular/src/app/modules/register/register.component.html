@@ -1,4 +1,4 @@
-<appModalInfo *ngIf="modalOpener" [isActive]="modalOpener"></appModalInfo>
+<!--<appModalInfo *ngIf='modalOpener' [isActive]='modalOpener'></appModalInfo>-->
 <div class="wrapper">
     <div class="firstSection">
         <div class="image"></div>
@@ -204,10 +204,10 @@
                     </li>
                 </ul>
             </div>
-            <p class="label--primary redirect--login">
+            <p class="label--primary redirect--login marginRegister">
                 <a routerLink="/login">Posiadasz już konto, kliknij tutaj</a>
             </p>
-            <p class="label--primary redirect--login">
+            <p class="label--primary redirect--login marginRegister">
                 <a routerLink="/">Wróć do strony głównej</a>
             </p>
             <button [disabled]="formGroup.invalid" class="btn--secondary" type="submit">

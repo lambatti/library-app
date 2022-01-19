@@ -9,11 +9,24 @@ import { AsideService } from '../services/asideService.service';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { ModalInfoComponent } from './modalInfo/modalInfo.component';
+import { ModalFormComponent } from './modalForm/modalForm.component';
 
 @NgModule({
     imports: [ModelModule, BrowserModule, RouterModule, FormsModule],
-    exports: [FilterPanelComponent, HeaderComponent, BookCardComponent, ModalInfoComponent],
-    declarations: [BookCardComponent, FilterPanelComponent, HeaderComponent, ModalInfoComponent],
+    exports: [
+        FilterPanelComponent,
+        HeaderComponent,
+        BookCardComponent,
+        ModalFormComponent,
+        ModalInfoComponent
+    ],
+    declarations: [
+        BookCardComponent,
+        FilterPanelComponent,
+        HeaderComponent,
+        ModalFormComponent,
+        ModalInfoComponent
+    ],
     providers: [AsideService, AuthenticationService]
 })
 export class ComponentsModule {}

@@ -8,5 +8,3 @@ import { Component, Input } from '@angular/core';
 export class ModalInfoComponent {
     @Input() isActive: boolean;
 }
-
-}
