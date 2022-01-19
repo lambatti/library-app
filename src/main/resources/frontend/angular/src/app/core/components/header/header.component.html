@@ -1,0 +1,23 @@
+<header>
+    <div class="logo-section">
+        <div *ngIf="isHide" (click)="_asideService.hide()" class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        <a class="logo" [href]="'/'">Moja książka<span class="dot">.</span></a>
+    </div>
+    <div *ngIf="!isLoggedIn" class="panel">
+        <a routerLink="/register">Rejestracja</a>
+        <a routerLink="/login">Logowanie</a>
+    </div>
+    <div class="user-control" *ngIf="isLoggedIn">
+        <p class="welcome">Witaj {{ firstName || 'siemka' }}</p>
+        <select (change)="navigationSelect($any($event.target).value)">
+            <option></option>
+            <option class="option-panel" value="myBooks">Moje książki</option>
+            <option class="option-panel" value="account/summary">Moje konto</option>
+            <option class="option-panel" value="logout">Wyloguj się</option>
+        </select>
+    </div>
+</header>

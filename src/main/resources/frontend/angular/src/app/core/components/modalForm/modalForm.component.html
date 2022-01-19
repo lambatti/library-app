@@ -1,0 +1,33 @@
+<div *ngIf="isOpen" class="wrapper">
+    <div class="content">
+        <h2>Zmień hasło</h2>
+        <form>
+            <div>
+                <label class="label--primary">Podaj email</label>
+                <input class="input--primary" />
+            </div>
+            <div>
+                <label class="label--primary">Wybierz pytanie weryfikacyjne</label>
+                <select class="input--primary">
+                    <option>--Wybierz odpowiedź--</option>
+                </select>
+            </div>
+            <div>
+                <label class="label--primary">Podaj odpowiedź weryfikacyjną</label>
+                <input class="input--primary" />
+            </div>
+            <div>
+                <label class="label--primary">Podaj nowe hasło</label>
+                <input class="input--primary" />
+            </div>
+            <div>
+                <label class="label--primary">Powtórz nowe hasło</label>
+                <input class="input--primary" />
+            </div>
+            <div class="btnWrapper">
+                <button class="btn--secondary" (click)="changeVisibility()">Wróć</button>
+                <button class="btn--secondary">Zmień</button>
+            </div>
+        </form>
+    </div>
+</div>

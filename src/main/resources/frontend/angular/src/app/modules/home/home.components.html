@@ -1,0 +1,26 @@
+<appHeader [isHide]="true"></appHeader>
+<div class="wrapper">
+    <appFilter class="filterWrapper"></appFilter>
+    <div class="books-wrapper">
+        <h1>{{genre ? genre : 'Wszystkie'}}</h1>
+        <a
+            class="book-image"
+            *ngFor="let book of books"
+            [routerLink]='["/books",book.genre, book.id]'
+        >
+            <div
+                [class.available]="book.available"
+                [class.disabled]="!book.available"
+                [ngStyle]='{"background-image":"url(" + book.coverUrl+")"}'
+            ></div>
+            <p *ngIf="!book.available">Niedostępna</p>
+        </a>
+        <div class="pageControlButton">
+            <button *ngFor="let page of pageNumbers" (click)="changePage(page)">{{page}}</button>
+        </div>
+    </div>
+
+    <!--    <div *ngIf='isDisplayedBook !== null'>-->
+    <!--        <appBookCard [selectedBook]='this.isDisplayedBook'></appBookCard>-->
+    <!--    </div>-->
+</div>

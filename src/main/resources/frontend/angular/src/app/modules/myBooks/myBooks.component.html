@@ -1,0 +1,47 @@
+<appHeader [isHide]="false"></appHeader>
+<div class="wrapper">
+    <div class="card gridMyBooks" *ngFor="let book of books()">
+        <img [src]="book?.coverUrl" alt="" />
+        <div class="info">
+            <h2>{{ book?.title }}</h2>
+            <div class="bookPanel">
+                <div class="bookPanelContent">
+                    <h6>Autor:</h6>
+                    <p class="bookData">{{ book.author }}</p>
+                </div>
+                <div class="bookPanelContent">
+                    <h6>Rok wydania:</h6>
+                    <p class="bookData">
+                        {{ book.publicationDate }}
+                    </p>
+                </div>
+                <div class="bookPanelContent">
+                    <h6>Gatunek:</h6>
+                    <p class="bookData">{{ book.genre }}</p>
+                </div>
+                <div class="bookPanelContent">
+                    <h6>Oprawa:</h6>
+                    <p class="bookData">
+                        {{ book.isHard ? 'Twarda' : 'Miękka' }}
+                    </p>
+                </div>
+                <div class="bookPanelContent">
+                    <h6>Data wypożyczenia:</h6>
+                    <p class="bookData">
+                        {{ book.borrowDate }}
+                    </p>
+                </div>
+                <div class="bookPanelContent">
+                    <h6>Termin oddania:</h6>
+                    <p class="bookData">
+                        {{ book.returnDate }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="buttonWrapper buttonMyBooks">
+            <button (click)="prolongation(book.id)">Prolonguj</button>
+            <button (click)="returnBook(book.id)">Zwróć</button>
+        </div>
+    </div>
+</div>

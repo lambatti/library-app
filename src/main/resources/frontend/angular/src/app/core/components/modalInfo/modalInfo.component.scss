@@ -1,0 +1,45 @@
+@import 'src/styles';
+
+.wrapper {
+    position: fixed;
+    z-index: 99;
+    background: map-get($colors, 'gray');
+    width: 100vw;
+    height: 100vh;
+
+    .main {
+        background: map-get($colors, 'white');
+        width: 70%;
+        height: 50%;
+        position: relative;
+        left: 15%;
+        top: 25%;
+
+        .rightSide {
+            width: 0;
+            height: 0;
+            border-top: 50vh solid map-get($colors, 'main');
+            border-right: 70vw solid transparent;
+
+            .modalImage {
+                width: 50%;
+                height: 50%;
+                background-image: url('/src/assets/forgotPassword.svg');
+            }
+        }
+    }
+
+    .content {
+        width: 50%;
+        position: relative;
+        z-index: 100;
+        color: map-get($colors, 'main');
+    }
+}
+
+//
+//width: 0;
+//height: 0;
+//border-top: 121px solid #F34A53;
+//border-right: 121px solid transparent;
+//margin: 25px auto 0;

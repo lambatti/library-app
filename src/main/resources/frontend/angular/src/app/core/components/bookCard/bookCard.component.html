@@ -1,0 +1,43 @@
+<div class="card" [id]="displayedBook.id">
+    <img [src]="displayedBook?.coverUrl" alt="" />
+    <div class="info">
+        <h2>{{ displayedBook?.title }}</h2>
+        <div class="bookPanel">
+            <div class="bookPanelContent">
+                <h6>Autor:</h6>
+                <p class="bookData">{{ displayedBook.author }}</p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Rok wydania:</h6>
+                <p class="bookData">
+                    {{ displayedBook.publicationDate }}
+                </p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Gatunek:</h6>
+                <p class="bookData">{{ displayedBook.genre }}</p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Oprawa:</h6>
+                <p class="bookData">
+                    {{ displayedBook.isHard ? 'Twarda' : 'Miękka' }}
+                </p>
+            </div>
+            <div class="bookPanelContent">
+                <h6>Dostępność:</h6>
+                <p class="bookData">
+                    {{ displayedBook.count !== 0 ? displayedBook.count : 'Niedostępna' }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bookDescription">
+        <h6>Opis:</h6>
+        <p>{{ displayedBook?.description }}</p>
+    </div>
+    <div class="buttonWrapper" *ngIf="displayedBook.available">
+        <button [routerLink]="'/'">Wróć</button>
+        <button *ngIf="isLogged" (click)="borrow(displayedBook.id)">Wypożycz</button>
+    </div>
+</div>

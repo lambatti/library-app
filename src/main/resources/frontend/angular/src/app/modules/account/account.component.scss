@@ -1,0 +1,95 @@
+@import 'src/styles.scss';
+
+.wrapper {
+    width: 100vw;
+    padding-top: 10vh;
+    height: 90vh;
+    display: flex;
+
+    aside {
+        width: 40vw;
+        height: 90vh;
+        background-color: map-get($colors, 'main');
+        font-weight: bolder;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 3.5%;
+
+        ul {
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            list-style: none;
+
+            li {
+                font-size: map-get($font-size, '16');
+                cursor: pointer;
+                color: map-get($colors, 'white');
+                font-weight: bold;
+            }
+
+            .active {
+                color: map-get($colors, 'orange');
+                text-decoration: underline;
+            }
+        }
+    }
+
+    main {
+        width: 100%;
+        margin: 40px 3.5%;
+        @include respond-to('medium') {
+            margin: 40px 10%;
+        }
+        @include respond-to('large') {
+            margin: 40px 25%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                margin-top: 40px;
+                font-weight: 600;
+                justify-self: end;
+            }
+
+            .gridLabel {
+                color: map-get($colors, 'orange');
+                font-weight: bolder;
+                justify-self: start;
+            }
+        }
+
+        .changeSection {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px 3.5%;
+
+            .changeForm {
+                height: 30vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                button {
+                    align-self: end;
+                    width: 40%;
+                    @include respond-to('medium') {
+                        width: 20%;
+                    }
+                }
+            }
+        }
+    }
+}

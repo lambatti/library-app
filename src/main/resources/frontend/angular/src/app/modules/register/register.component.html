@@ -1,0 +1,218 @@
+<!--<appModalInfo *ngIf='modalOpener' [isActive]='modalOpener'></appModalInfo>-->
+<div class="wrapper">
+    <div class="firstSection">
+        <div class="image"></div>
+    </div>
+    <div class="secondSection">
+        <h1>Rejestracja</h1>
+        <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()" class="">
+            <div>
+                <label class="label--primary">Imię</label>
+                <input name="firstName" formControlName="firstName" class="input--primary" />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['firstName'].dirty) &&
+                        formGroup.controls['firstName'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('firstName')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="label--primary">Nazwisko</label>
+                <input name="lastName" formControlName="lastName" class="input--primary" />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['lastName'].dirty) &&
+                        formGroup.controls['lastName'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('lastName')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="label--primary">Email</label>
+                <input
+                    class="input--primary"
+                    type="email"
+                    name="email"
+                    formControlName="email"
+                    placeholder="przyklad@ex.com"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['email'].dirty) &&
+                        formGroup.controls['email'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('email')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="label--primary">Hasło</label>
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="password"
+                    formControlName="password"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['password'].dirty) &&
+                        formGroup.controls['password'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('password')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="label--primary">Powtórz hasło</label>
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="confimPassword"
+                    formControlName="confimPassword"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['confimPassword'].dirty) &&
+                        formGroup.controls['confimPassword'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('confimPassword')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="label--primary">Płeć</label>
+                <select class="input--primary" name="gender" formControlName="gender">
+                    <option value="U">Nie podano</option>
+                    <option value="M">Mężczyzna</option>
+                    <option value="F">Kobieta</option>
+                </select>
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['gender'].dirty) &&
+                        formGroup.controls['gender'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('gender')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="label--primary">Data urodzenia</label>
+                <input
+                    class="input--primary"
+                    type="date"
+                    name="birthDate"
+                    formControlName="birthDate"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['birthDate'].dirty) &&
+                        formGroup.controls['birthDate'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="let error of formGroup.getValidationMessages('birthDate')"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <label class="label--primary">Pytanie weryfikacyjne</label>
+                <select
+                    class="input--primary"
+                    name="registrationQuestion"
+                    formControlName="registrationQuestion"
+                >
+                    <option [value]="">--Wybierz pytanie--</option>
+                    <option [value]="question.key" *ngFor="let question of databaseQuestion">
+                        {{ question.value }}
+                    </option>
+                </select>
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['registrationQuestion'].dirty) &&
+                        formGroup.controls['registrationQuestion'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="
+                            let error of formGroup.getValidationMessages('registrationQuestion')
+                        "
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label class="label--primary">Odpowiedź</label>
+                <input
+                    class="input--primary"
+                    name="registrationQuestionAnswer"
+                    formControlName="registrationQuestionAnswer"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmitted || formGroup.controls['registrationQuestionAnswer'].dirty) &&
+                        formGroup.controls['registrationQuestionAnswer'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="
+                            let error of formGroup.getValidationMessages(
+                                'registrationQuestionAnswer'
+                            )
+                        "
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <p class="label--primary redirect--login marginRegister">
+                <a routerLink="/login">Posiadasz już konto, kliknij tutaj</a>
+            </p>
+            <p class="label--primary redirect--login marginRegister">
+                <a routerLink="/">Wróć do strony głównej</a>
+            </p>
+            <button [disabled]="formGroup.invalid" class="btn--secondary" type="submit">
+                Zarejestruj
+            </button>
+        </form>
+    </div>
+</div>

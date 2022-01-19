@@ -1,0 +1,29 @@
+<aside [class.toggle]="_asideService.isActive">
+    <div class="searchSection">
+        <h1>Znajdź swoją książkę</h1>
+        <div class="inputForm">
+            <input
+                class="inputSearch"
+                type="search"
+                placeholder="Podaj nazwę książki"
+                #input
+                maxlength="50"
+            />
+            <button (click)="onEnter(input.value)" class="btn--primary">Szukaj</button>
+        </div>
+        <p class="li--error" *ngIf="errorMessage">Nie ma książki o podanej nazwie</p>
+    </div>
+    <div class="filterSection">
+        <a class="filterItem" (click)="_asideService.isActive = false" [routerLink]="'/'"
+            >Wszystkie</a
+        >
+        <a
+            class="filterItem"
+            (click)="_asideService.isActive = false"
+            [routerLink]="['/books', item]"
+            *ngFor="let item of getGenre()"
+        >
+            {{ item }}
+        </a>
+    </div>
+</aside>

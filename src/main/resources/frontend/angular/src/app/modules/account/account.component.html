@@ -1,0 +1,154 @@
+<appHeader></appHeader>
+
+<div class="wrapper">
+    <aside>
+        <ul>
+            <li
+                routerLink="/account/summary"
+                routerLinkActive="active"
+                (click)="changeLocation('summary')"
+            >
+                Moje dane
+            </li>
+            <li
+                routerLink="/account/changePassword"
+                routerLinkActive="active"
+                (click)="changeLocation('changePassword')"
+            >
+                Zmiana hasła
+            </li>
+            <li
+                routerLink="/account/changeQuestion"
+                routerLinkActive="active"
+                (click)="changeLocation('changeQuestion')"
+            >
+                Zmana weryfikacji
+            </li>
+        </ul>
+    </aside>
+    <main>
+        <h1>{{ locationTitle() }}</h1>
+        <div class="grid" *ngIf="location === 'summary'">
+            <p class="gridLabel">Imię</p>
+            <p>{{ getUserData.firstName || 'siemka' }}</p>
+            <p class="gridLabel">Nazwisko</p>
+            <p>{{ getUserData.lastName || 'siemka' }}</p>
+            <p class="gridLabel">Płeć</p>
+            <p>{{ getUserData.gender || 'siemka' }}</p>
+            <p class="gridLabel">Data założenia konta</p>
+            <p>{{ getUserData.accountCreationDate || 'siemka' }}</p>
+            <p class="gridLabel">Data urodzenia</p>
+            <p>{{ getUserData.birthDate || 'siemka' }}</p>
+            <p class="gridLabel">Email</p>
+            <p>{{ getUserData.email || 'siemka' }}</p>
+        </div>
+        <div class="changeSection" *ngIf="location === 'changePassword'">
+            <form
+                novalidate
+                [formGroup]="changePasswordGroup"
+                (ngSubmit)="submitFormChangePassword()"
+                class="changeForm"
+            >
+                <label class="label--primary">Podaj aktualne hasło</label>
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="oldPassword"
+                    formControlName="oldPassword"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmittedPassowrd ||
+                            changePasswordGroup.controls['oldPassword'].dirty) &&
+                        changePasswordGroup.controls['oldPassword'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="
+                            let error of changePasswordGroup.getValidationMessages('oldPassword')
+                        "
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+                <label class="label--primary">Podaj nowe hasło</label>
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="newPassword"
+                    formControlName="newPassword"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmittedPassowrd ||
+                            changePasswordGroup.controls['newPassword'].dirty) &&
+                        changePasswordGroup.controls['newPassword'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="
+                            let error of changePasswordGroup.getValidationMessages('newPassword')
+                        "
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+                <label class="label--primary">Potwierdź nowe hasło</label>
+                <input
+                    class="input--primary"
+                    name="newPasswordConfirmation"
+                    formControlName="newPasswordConfirmation"
+                    type="password"
+                />
+                <ul
+                    *ngIf="
+                        (formSubmittedPassowrd ||
+                            changePasswordGroup.controls['newPasswordConfirmation'].dirty) &&
+                        changePasswordGroup.controls['newPasswordConfirmation'].invalid
+                    "
+                >
+                    <li
+                        class="li--error"
+                        *ngFor="
+                            let error of changePasswordGroup.getValidationMessages(
+                                'newPasswordConfirmation'
+                            )
+                        "
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+                <button class="btn--secondary" type="submit">Zmień</button>
+            </form>
+        </div>
+        <div class="changeSection" *ngIf="location === 'changeQuestion'">
+            <form
+                novalidate
+                [formGroup]="changeQuestionGroup"
+                (ngSubmit)="submitFormChangeQuestion()"
+                class="changeForm"
+            >
+                <label class="label--primary">Podaj hasło</label>
+                <input
+                    name="password"
+                    type="password"
+                    formControlName="password"
+                    class="input--primary"
+                />
+                <label class="label--primary">Pytanie weryfikacyjne</label>
+
+                <select class="input--primary" name="question" formControlName="question">
+                    <option [value]="">--Wybierz pytanie--</option>
+                    <option [value]="question.key" *ngFor="let question of databaseQuestion">
+                        {{ question.value }}
+                    </option>
+                </select>
+                <label class="label--primary">Podaj nową odpowiedź</label>
+                <input class="input--primary" name="answer" formControlName="answer" />
+                <button class="btn--secondary" type="submit">Zmień</button>
+            </form>
+        </div>
+    </main>
+</div>
