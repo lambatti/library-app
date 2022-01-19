@@ -1,0 +1,92 @@
+@import 'src/styles.scss';
+
+.card {
+    display: grid;
+    background-color: map-get($colors, 'main');
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 2fr 2fr;
+    padding: 5%;
+    box-shadow: 5px 5px 20px map-get($colors, 'shadow');
+    @include respond-to('medium') {
+        grid-template-columns: 1fr 2fr 2fr;
+        grid-template-rows: 1fr;
+    }
+
+    img {
+        max-width: 120px;
+        @include respond-to('small') {
+            max-width: 180px;
+        }
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        margin: 0 10px;
+
+        h3 {
+            justify-items: center;
+            margin-bottom: 10px;
+        }
+
+        .bookPanel {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            row-gap: 10px;
+            margin: 20px 0;
+
+            .bookPanelContent {
+                display: flex;
+                justify-content: space-between;
+
+                h6 {
+                    @include bookDescriptionFont;
+                }
+
+                .bookData {
+                    @include bookDescriptionFont;
+                    justify-self: end;
+                }
+            }
+        }
+    }
+
+    .bookDescription {
+        margin: 10px 0;
+        grid-column: 1/-1;
+
+        h6 {
+            @include bookDescriptionFont;
+        }
+
+        p {
+            @include bookDescriptionFont;
+        }
+
+        @include respond-to('medium') {
+            grid-column: 3/-1;
+        }
+    }
+
+    .buttonWrapper {
+        justify-self: flex-end;
+        grid-column: 1/-1;
+
+        button {
+            margin-left: 10px;
+            width: 100px;
+            height: 50px;
+            border: none;
+            font-size: map-get($font-size, '13');
+            color: map-get($colors, 'black');
+            font-weight: bold;
+            border-radius: 20px;
+            background-color: map-get($colors, 'white');
+            box-shadow: 10px -5px 20px map-get($colors, 'shadow');
+
+            &:hover {
+                color: map-get($colors, 'orange');
+            }
+        }
+    }
+}

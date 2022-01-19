@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <div class="firstSection">
+        <div class="image"></div>
+    </div>
+    <div class="secondSection">
+        <h1>Logowanie</h1>
+        <form class="login--form formWrapper" [formGroup]="formGroup" (ngSubmit)="submitForm()">
+            <div>
+                <label class="label--primary">Email</label>
+                <input class="input--primary" type="email" name="email" formControlName="email" />
+            </div>
+            <div>
+                <label class="label--primary">Hasło</label>
+                <input
+                    class="input--primary"
+                    type="password"
+                    name="password"
+                    formControlName="password"
+                />
+            </div>
+            <p class="label--primary redirect--login">
+                <a routerLink="#">Nie pamiętam hasła</a>
+            </p>
+            <p class="label--primary redirect--login">
+                <a routerLink="/register">Nie posiadasz konta, kliknji tutaj</a>
+            </p>
+            <p class="label--primary redirect--login">
+                <a routerLink="/">Wróć do strony głównej</a>
+            </p>
+            <button class="btn--secondary" [disabled]="formGroup.invalid" type="submit">
+                Zaloguj
+            </button>
+        </form>
+    </div>
+</div>

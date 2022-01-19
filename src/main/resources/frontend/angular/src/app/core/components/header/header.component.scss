@@ -1,0 +1,105 @@
+@import 'src/styles.scss';
+
+header {
+    width: 100vw;
+    height: 10vh;
+    background: map-get($colors, 'main-gradient');
+    padding: 0 3.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+
+        :first-child {
+            margin-right: 10px;
+        }
+
+        .logo {
+            font-weight: 900;
+            color: map-get($colors, 'white');
+            font-size: map-get($font-size, '20');
+
+            font-family: Moon Dance, sans-serif;
+            @include respond-to('medium') {
+                font-size: map-get($font-size, '49');
+            }
+
+            &:hover {
+                color: map-get($colors, 'orange');
+            }
+
+            .dot {
+                color: map-get($colors, 'orange');
+                font-family: Moon Dance, sans-serif;
+            }
+        }
+
+        .hamburger {
+            cursor: pointer;
+
+            .line {
+                display: block;
+                margin-top: 6px;
+                width: 30px;
+                height: 3px;
+                background-color: map-get($colors, 'white');
+                border-radius: 20px;
+            }
+
+            @include respond-to('medium') {
+                display: none;
+            }
+        }
+    }
+
+    .isActive {
+        display: none;
+    }
+
+    .panel {
+        font-size: map-get($font-size, '10');
+        font-weight: 600;
+
+        a {
+            color: map-get($colors, 'white');
+
+            &:hover {
+                color: map-get($colors, 'orange');
+                text-decoration: underline;
+            }
+        }
+
+        a:first-child {
+            padding: 15px;
+        }
+
+        @include respond-to('extra-small') {
+            font-size: map-get($font-size, '16');
+        }
+        @include respond-to('medium') {
+            font-size: map-get($font-size, '20');
+        }
+    }
+
+    .user-control {
+        display: flex;
+
+        .welcome {
+            color: map-get($colors, 'white');
+            font-weight: 700;
+        }
+
+        select {
+            background: none;
+            border: none;
+            width: 20px;
+
+            //TODO ostylować select element i option
+        }
+    }
+}

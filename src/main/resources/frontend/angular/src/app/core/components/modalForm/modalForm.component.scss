@@ -1,0 +1,36 @@
+@import 'src/styles.scss';
+
+.wrapper {
+    background: map-get($colors, 'gray');
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+
+    .content {
+        width: 90vw;
+        height: 60vh;
+        position: relative;
+        left: calc(50% - 45vw);
+        top: calc(50% - 30vh);
+        display: grid;
+        grid-template-rows: 0.5fr 3fr;
+        background: map-get($colors, 'white');
+        box-shadow: 10px -10px 20px map-get($colors, 'shadow');
+        padding: 5% 10%;
+        h2 {
+            text-align: center;
+            margin-bottom: 10%;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .btnWrapper {
+                align-self: end;
+                :first-child {
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}

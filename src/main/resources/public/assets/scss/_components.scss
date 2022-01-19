@@ -1,0 +1,78 @@
+@mixin bookDescriptionFont {
+    font-size: map-get($font-size, '10');
+    @include respond-to('small') {
+        font-size: map-get($font-size, '13');
+    }
+    @include respond-to('medium') {
+        font-size: map-get($font-size, '16');
+    }
+}
+
+.input--primary {
+    border: none;
+    border-radius: 20px;
+    background-color: map-get($colors, 'main');
+    height: 30px;
+    padding-left: 10px;
+    width: 100%;
+    margin-top: 2px;
+
+    ::placeholder {
+        color: map-get($colors, 'gray');
+        font-weight: 600;
+    }
+}
+
+.btn--primary {
+    border-radius: 0 20px 20px 0;
+    height: 50px;
+    width: 30%;
+    border: 5px solid white;
+}
+
+.btn--secondary {
+    background: none;
+    border-radius: 20px;
+    border: 1px solid map-get($colors, 'main');
+    color: map-get($colors, 'main');
+    font-size: map-get($font-size, '20');
+    padding: 5px 15px;
+    cursor: pointer;
+
+    &:hover {
+        border-color: map-get($colors, 'white');
+        color: map-get($colors, 'white');
+        background-color: map-get($colors, 'main');
+    }
+}
+
+.label--primary {
+    font-size: map-get($font-size, '13');
+    font-weight: 600;
+}
+
+.redirect--login {
+    color: map-get($colors, 'black');
+    text-decoration: underline;
+}
+
+.login--form {
+    width: 100%;
+    @include respond-to('small') {
+        width: 50%;
+    }
+}
+
+input.ng-dirty.ng-invalid {
+    border: 2px solid #ff0000;
+}
+
+input.ng-dirty.ng-valid {
+    border: 2px solid #6bc502;
+}
+
+.li--error {
+    list-style: none;
+    font-size: map-get($font-size, '13');
+    color: red;
+}

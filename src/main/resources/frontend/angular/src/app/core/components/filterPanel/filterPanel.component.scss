@@ -1,0 +1,81 @@
+@import 'src/styles.scss';
+
+aside {
+    width: 70vw;
+    height: 100vh;
+    position: fixed;
+    top: 10vh;
+    left: 0;
+    z-index: 10;
+    background-color: map-get($colors, 'main');
+    display: none;
+    padding: 3%;
+    @include respond-to('small') {
+        width: 50vw;
+    }
+    @include respond-to('medium') {
+        position: static;
+        display: block;
+        padding: 9vh 3.5vw 0 3.5vw;
+        width: 30vw;
+        height: 100%;
+    }
+
+    h1 {
+        margin-top: 10%;
+        font-size: map-get($font-size, '20');
+        text-align: center;
+        @include respond-to('medium') {
+            font-size: map-get($font-size, '25');
+        }
+    }
+
+    .searchSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            color: map-get($colors, 'white');
+        }
+
+        .inputForm {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-top: 10%;
+            justify-content: center;
+
+            .inputSearch {
+                height: 50px;
+                border-radius: 20px 0 0 20px;
+                border: none;
+                padding-left: 10px;
+                width: 70%;
+            }
+        }
+    }
+
+    .filterSection {
+        margin-top: 5vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-weight: bold;
+        height: 50%;
+
+        .filterItem {
+            align-self: start;
+            color: map-get($colors, 'white');
+            text-transform: capitalize;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.toggle {
+    display: block;
+}
