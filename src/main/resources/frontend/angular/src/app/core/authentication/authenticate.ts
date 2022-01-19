@@ -11,7 +11,7 @@ export class Authenticate {
     private readonly baseUrl: string;
 
     constructor(private http: HttpClient) {
-        this.baseUrl = 'http://localhost:8080/api/';
+        this.baseUrl = 'https://arch-library.herokuapp.com/api/';
     }
 
     authenticate(email: string, password: string): Observable<ILoginToken> {

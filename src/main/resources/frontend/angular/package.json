@@ -1,7 +1,7 @@
 {
   "name": "angular",
   "version": "0.0.0",
-  "proxy": "http://localhost:8080",
+  "proxy": "https://arch-library.herokuapp.com",
   "scripts": {
     "ng": "ng",
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\"",
