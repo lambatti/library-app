@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { BookRepository } from '../../model/book/book.repository';
 import { Book } from '../../model/book/book.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { AsideService } from '../../core/services/asideService.service';
     templateUrl: 'home.components.html',
     styleUrls: ['home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
     public selectedPage: number = 1;
     public genre: string;
     public isActive: boolean = true;
@@ -52,5 +52,9 @@ export class HomeComponent {
     @HostListener('window:resize', ['$event'])
     onResize(event: any) {
         this.widthSize = event.target.innerWidth;
+    }
+
+    ngOnInit(): void {
+        this._repository.reload();
     }
 }

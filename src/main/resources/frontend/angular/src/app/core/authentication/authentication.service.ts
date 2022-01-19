@@ -12,9 +12,6 @@ export class AuthenticationService {
     }
 
     get authenticated(): boolean {
-        console.log(
-            localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null
-        );
         return (
             localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null
         );
@@ -23,6 +20,5 @@ export class AuthenticationService {
     logout() {
         localStorage.removeItem('token');
         this.router.navigateByUrl('/');
-        window.location.reload();
     }
 }

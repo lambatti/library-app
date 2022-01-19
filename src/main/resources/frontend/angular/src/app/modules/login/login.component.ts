@@ -15,13 +15,10 @@ export class LoginComponent {
     constructor(private authenticateService: AuthenticationService, private router: Router) {}
 
     logIn(user: UserLogin) {
-        this.authenticateService
-            .authenticate(user.email, user.password)
-            .subscribe(x => {
-                localStorage.setItem('token', x.token);
-                this.router.navigateByUrl('/');
-            });
-
+        this.authenticateService.authenticate(user.email, user.password).subscribe(x => {
+            localStorage.setItem('token', x.token);
+            this.router.navigateByUrl('/');
+        });
     }
 
     loggedUser: UserLogin = new UserLogin();

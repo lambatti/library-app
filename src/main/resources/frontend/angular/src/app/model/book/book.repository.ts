@@ -28,6 +28,24 @@ export class BookRepository {
         });
     }
 
+    reload() {
+        this._dataSource.getBooks().subscribe(data => {
+            this.books = data;
+            this.authors = data
+                .map(a => a.author)
+                .filter((c, index, array) => array.indexOf(c) === index)
+                .sort();
+            this.genre = data
+                .map(c => c.genre)
+                .filter((c, index, array) => array.indexOf(c) === index)
+                .sort();
+        });
+
+        this._borrowedBook.getBorrowedBooks().subscribe(data => {
+            this.borrowedBooks = data;
+        });
+    }
+
     getBooks(category: string = null) {
         return this.books.filter(b => category === null || b.author === category);
     }
