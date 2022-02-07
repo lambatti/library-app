@@ -5,16 +5,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "books")
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String coverUrl;
     private String title;
     private String author;
     private String publicationDate;
-    // TODO: private Genres genre(?) DONE
+
     @Enumerated(EnumType.STRING)
     private Genres genre;
+
     private boolean isHardcover;
     private int count;
     private boolean isAvailable;
@@ -24,9 +27,7 @@ public class Book {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Book() {
-
-    }
+    public Book() { }
 
     public int getId() {
         return id;
