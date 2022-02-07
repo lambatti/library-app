@@ -26,23 +26,18 @@ public class User {
     @Convert(converter = ListToArrayConveter.class)
     private List<String> roles;
 
-    // TODO: enum register question DONE
     @Enumerated(EnumType.STRING)
     private RegistrationQuestions registrationQuestion;
 
     private String registrationQuestionAnswer;
 
-    // TODO: enum gender DONE
     @Enumerated(EnumType.STRING)
     private Genders gender;
 
     private LocalDate birthDate;
-    // TODO: how to insert it to table?
     private LocalDate accountCreationDate = LocalDate.now();
 
-    public User() {
-
-    }
+    public User() { }
 
     public void setAccountCreationDate(LocalDate createAccountDate) {
         this.accountCreationDate = createAccountDate;
