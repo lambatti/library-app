@@ -27,9 +27,7 @@ public class BookBorrowController {
     @PostMapping("/user/borrowBook/{id}")
     ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
-        String email = userService.extractEmailFromToken(token);
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByToken(token);
 
         if(user.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -52,9 +50,7 @@ public class BookBorrowController {
     @DeleteMapping("/user/returnBook/{id}")
     ResponseEntity<BookBorrow> returnBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
-        String email = userService.extractEmailFromToken(token);
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByToken(token);
 
         if(user.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -77,9 +73,7 @@ public class BookBorrowController {
     @PatchMapping("/user/prolongate/{id}")
     ResponseEntity<BookBorrow> prolongate(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
-        String email = userService.extractEmailFromToken(token);
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByToken(token);
 
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();

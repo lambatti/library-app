@@ -130,9 +130,14 @@ public class UserService implements UserDetailsService {
         return userBorrowedBooksSet;
     }
 
-    public String extractEmailFromToken(String token) {
+    private String extractEmailFromToken(String token) {
         token = jwtUtil.removeBearer(token);
         return jwtUtil.extractEmail(token);
+    }
+
+    public Optional<User> getUserByToken(String token) {
+        String email = extractEmailFromToken(token);
+        return userRepository.findByEmail(email);
     }
 
     public boolean doesTheRegistrationQuestionMatch(User user, RegistrationQuestions question, String answer) {

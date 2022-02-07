@@ -34,9 +34,7 @@ public class UserController {
     @GetMapping("/user/books")
     ResponseEntity<Set<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name="Authorization") String token) {
 
-        String email = userService.extractEmailFromToken(token);
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByToken(token);
 
         if(user.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -50,9 +48,7 @@ public class UserController {
     @GetMapping("/user/summary")
     ResponseEntity<UserSummaryDto> getUserSummary(@RequestHeader(name="Authorization") String token) {
 
-        String email = userService.extractEmailFromToken(token);
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByToken(token);
 
         if(user.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -110,9 +106,7 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
 
-        String email = userService.extractEmailFromToken(token);
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByToken(token);
 
         if(user.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -136,9 +130,7 @@ public class UserController {
     @PatchMapping("/user/changeQuestion")
     ResponseEntity<User> changeQuestion(@RequestHeader(name="Authorization") String token, @RequestBody UserChangeQuestionDto userChangeQuestionDto) {
 
-        String email = userService.extractEmailFromToken(token);
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByToken(token);
 
         if(user.isEmpty()) {
             return ResponseEntity.badRequest().build();
