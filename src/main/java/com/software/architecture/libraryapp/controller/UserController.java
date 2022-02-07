@@ -5,6 +5,7 @@ import com.software.architecture.libraryapp.model.dto.*;
 import com.software.architecture.libraryapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,18 +67,15 @@ public class UserController {
     @PostMapping("/register")
     ResponseEntity<?> registerUser(@RequestBody UserRegistrationDto userRegistrationDto) {
 
-        String email = userRegistrationDto.getEmail();
-
-        Optional<User> user = userService.getUserByEmail(email);
+        Optional<User> user = userService.getUserByEmail(userRegistrationDto.getEmail());
 
         if(user.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
 
-        // TODO: 06.01.2022 - add support for ResponseEntity<User> or <UserRegistrationDto>
         userService.registerUser(userRegistrationDto);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().build().toUri()).build();
     }
 
     @PatchMapping("/user/forgottenPassword")
