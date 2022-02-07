@@ -16,13 +16,9 @@ import java.util.Optional;
 public class BookBorrowController {
 
     private final BookBorrowService bookBorrowService;
-    private final BookService bookService;
-    private final UserService userService;
 
-    public BookBorrowController(BookBorrowService bookBorrowService, BookService bookService, UserService userService) {
+    public BookBorrowController(BookBorrowService bookBorrowService) {
         this.bookBorrowService = bookBorrowService;
-        this.bookService = bookService;
-        this.userService = userService;
     }
 
     @PostMapping("/user/borrowBook/{id}")
