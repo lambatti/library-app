@@ -8,6 +8,7 @@ import com.software.architecture.libraryapp.model.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class BookBorrowService {
@@ -17,9 +18,15 @@ public class BookBorrowService {
     private final SqlBookRepository bookRepository;
     private final SqlBookBorrowRepository bookBorrowRepository;
 
-    public BookBorrowService(SqlBookRepository bookRepository, SqlBookBorrowRepository bookBorrowRepository) {
+    private final BookService bookService;
+    private final UserService userService;
+
+    public BookBorrowService(SqlBookRepository bookRepository, SqlBookBorrowRepository bookBorrowRepository,
+                             BookService bookService, UserService userService) {
         this.bookRepository = bookRepository;
         this.bookBorrowRepository = bookBorrowRepository;
+        this.bookService = bookService;
+        this.userService = userService;
     }
 
     public BookBorrow borrowBook(User user, Integer bookId) {
@@ -77,5 +84,43 @@ public class BookBorrowService {
 
         bookBorrowRepository.updateById(user.getId(), bookId, PROLONGATE_DAYS);
         return new BookBorrow();
+    }
+
+    private Optional<User> doesTheUserAndBookExist(String token, Integer bookId) {
+
+        Optional<User> user = userService.getUserByToken(token);
+
+        if (user.isPresent() && bookService.findById(bookId).isPresent()) {
+            return user;
+        }
+
+        return Optional.empty();
+    }
+
+    public boolean handleAction(String token, Integer bookId, Actions action) {
+
+        Optional<User> user = doesTheUserAndBookExist(token, bookId);
+
+        if (user.isPresent()) {
+            switch (action) {
+                case BORROW: {
+                    borrowBook(user.get(), bookId);
+                    break;
+                }
+                case RETURN: {
+                    returnBook(user.get(), bookId);
+                    break;
+                }
+                case PROLONGATE: {
+                    prolongate(user.get(), bookId);
+                    break;
+                }
+                default: {
+                    throw new IllegalArgumentException("Action is not supported");
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

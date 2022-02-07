@@ -2,6 +2,7 @@ package com.software.architecture.libraryapp.controller;
 
 import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.User;
+import com.software.architecture.libraryapp.service.Actions;
 import com.software.architecture.libraryapp.service.BookBorrowService;
 import com.software.architecture.libraryapp.service.BookService;
 import com.software.architecture.libraryapp.service.UserService;
@@ -27,42 +28,30 @@ public class BookBorrowController {
     @PostMapping("/user/borrowBook/{id}")
     ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
-        Optional<User> user = userService.getUserByToken(token);
-
-        if(user.isEmpty() || bookService.findById(id).isEmpty()) {
-            return ResponseEntity.badRequest().build();
+        if (bookBorrowService.handleAction(token, id, Actions.BORROW)) {
+            return ResponseEntity.ok().build();
         }
 
-        bookBorrowService.borrowBook(user.get(), id);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/user/returnBook/{id}")
     ResponseEntity<?> returnBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
-        Optional<User> user = userService.getUserByToken(token);
-
-        if(user.isEmpty() || bookService.findById(id).isEmpty()) {
-            return ResponseEntity.badRequest().build();
+        if (bookBorrowService.handleAction(token, id, Actions.RETURN)) {
+            return ResponseEntity.ok().build();
         }
 
-        bookBorrowService.returnBook(user.get(), id);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
     }
 
     @PatchMapping("/user/prolongate/{id}")
     ResponseEntity<?> prolongate(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
 
-        Optional<User> user = userService.getUserByToken(token);
-
-        if (user.isEmpty() || bookService.findById(id).isEmpty()) {
-            return ResponseEntity.badRequest().build();
+        if (bookBorrowService.handleAction(token, id, Actions.PROLONGATE)) {
+            return ResponseEntity.ok().build();
         }
 
-        bookBorrowService.prolongate(user.get(), id);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
     }
 }
