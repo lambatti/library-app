@@ -1,15 +1,9 @@
 package com.software.architecture.libraryapp.controller;
 
-import com.software.architecture.libraryapp.model.BookBorrow;
-import com.software.architecture.libraryapp.model.User;
 import com.software.architecture.libraryapp.service.Actions;
 import com.software.architecture.libraryapp.service.BookBorrowService;
-import com.software.architecture.libraryapp.service.BookService;
-import com.software.architecture.libraryapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -21,30 +15,30 @@ public class BookBorrowController {
         this.bookBorrowService = bookBorrowService;
     }
 
-    @PostMapping("/user/borrowBook/{id}")
-    ResponseEntity<BookBorrow> borrowBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
+    @PostMapping("/user/borrowBook/{bookId}")
+    ResponseEntity<?> borrowBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer bookId) {
 
-        if (bookBorrowService.handleAction(token, id, Actions.BORROW)) {
+        if (bookBorrowService.handleAction(token, bookId, Actions.BORROW)) {
             return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.badRequest().build();
     }
 
-    @DeleteMapping("/user/returnBook/{id}")
-    ResponseEntity<?> returnBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
+    @DeleteMapping("/user/returnBook/{bookId}")
+    ResponseEntity<?> returnBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer bookId) {
 
-        if (bookBorrowService.handleAction(token, id, Actions.RETURN)) {
+        if (bookBorrowService.handleAction(token, bookId, Actions.RETURN)) {
             return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.badRequest().build();
     }
 
-    @PatchMapping("/user/prolongate/{id}")
-    ResponseEntity<?> prolongate(@RequestHeader(name="Authorization") String token, @PathVariable Integer id) {
+    @PatchMapping("/user/prolongate/{bookId}")
+    ResponseEntity<?> prolongate(@RequestHeader(name="Authorization") String token, @PathVariable Integer bookId) {
 
-        if (bookBorrowService.handleAction(token, id, Actions.PROLONGATE)) {
+        if (bookBorrowService.handleAction(token, bookId, Actions.PROLONGATE)) {
             return ResponseEntity.ok().build();
         }
 
