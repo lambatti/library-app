@@ -128,7 +128,7 @@ public class UserController {
     }
 
     @PatchMapping("/user/changeQuestion")
-    ResponseEntity<User> changeQuestion(@RequestHeader(name="Authorization") String token, @RequestBody UserChangeQuestionDto userChangeQuestionDto) {
+    ResponseEntity<?> changeQuestion(@RequestHeader(name="Authorization") String token, @RequestBody UserChangeQuestionDto userChangeQuestionDto) {
 
         Optional<User> user = userService.getUserByToken(token);
 
@@ -143,8 +143,8 @@ public class UserController {
                 return ResponseEntity.badRequest().build();
             }
             else {
-                User userWithNewQuestion = userService.changeQuestion(userData, userChangeQuestionDto.getQuestion(), userChangeQuestionDto.getAnswer());
-                return ResponseEntity.ok(userWithNewQuestion);
+                userService.changeQuestion(userData, userChangeQuestionDto.getQuestion(), userChangeQuestionDto.getAnswer());
+                return ResponseEntity.ok().build();
             }
         }
     }

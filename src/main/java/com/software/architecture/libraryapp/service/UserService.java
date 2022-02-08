@@ -29,7 +29,8 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public UserService(SqlUserRepository userRepository, SqlBookBorrowRepository bookBorrowRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+    public UserService(SqlUserRepository userRepository, SqlBookBorrowRepository bookBorrowRepository,
+                       PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.bookBorrowRepository = bookBorrowRepository;
         this.passwordEncoder = passwordEncoder;
@@ -98,10 +99,8 @@ public class UserService implements UserDetailsService {
         return passwordEncoder.matches(password, user.getPassword());
     }
 
-    // TODO: 07.01.2022 registration question is not refreshed with the return (but the function works)
-    public User changeQuestion(User user, RegistrationQuestions question, String answer) {
+    public void changeQuestion(User user, RegistrationQuestions question, String answer) {
         userRepository.changeQuestion(user.getId(), question.name(), answer);
-        return userRepository.findById(user.getId()).get();
     }
 
     public Set<UserBorrowedBookDto> getBorrowedBooks(User user) {
@@ -143,6 +142,7 @@ public class UserService implements UserDetailsService {
     public boolean doesTheRegistrationQuestionMatch(User user, RegistrationQuestions question, String answer) {
         return user.getRegistrationQuestion().equals(question) && user.getRegistrationQuestionAnswer().equals(answer);
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
