@@ -65,8 +65,14 @@ public class UserService implements UserDetailsService {
 
     public void registerUser(UserRegistrationDto userRegistrationDto) {
 
-        // TODO: 06.01.2022 add support for user registration with different roles (admin, user, etc.)
-        ArrayList<String> roles = new ArrayList<>();
+        Set<String> roles;
+
+        if (userRegistrationDto.getRoles() != null) {
+            roles = userRegistrationDto.getRoles();
+        } else {
+            roles = new HashSet<>();
+        }
+
         roles.add("ROLE_USER");
         String rolesArrayInString = String.join(",", roles.toArray(new String[0]));
 
@@ -84,8 +90,6 @@ public class UserService implements UserDetailsService {
                 userRegistrationDto.getBirthDate(),
                 LocalDate.now()
         );
-
-        //return userRepository.findByEmail(userRegistrationDto.getEmail());
     }
 
 
@@ -108,7 +112,7 @@ public class UserService implements UserDetailsService {
 
         Set<UserBorrowedBookDto> userBorrowedBooksSet = new HashSet<>();
 
-        for ( BookBorrow bookBorrow : bookBorrows ) {
+        for (BookBorrow bookBorrow : bookBorrows) {
             Book book = bookBorrow.getBook();
 
             UserBorrowedBookDto userBorrowedBook = new UserBorrowedBookDto(
@@ -121,7 +125,7 @@ public class UserService implements UserDetailsService {
                     book.isHardcover(),
                     bookBorrow.getBorrowDate().toString(),
                     bookBorrow.getReturnDate().toString()
-                    );
+            );
 
             userBorrowedBooksSet.add(userBorrowedBook);
         }
@@ -150,8 +154,7 @@ public class UserService implements UserDetailsService {
 
         if (tempUser.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
-        }
-        else {
+        } else {
             User user = tempUser.get();
             List<GrantedAuthority> authorities = new ArrayList<>();
 

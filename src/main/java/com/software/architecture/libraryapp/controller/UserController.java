@@ -32,28 +32,26 @@ public class UserController {
     }
 
     @GetMapping("/user/books")
-    ResponseEntity<Set<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name="Authorization") String token) {
+    ResponseEntity<Set<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name = "Authorization") String token) {
 
         Optional<User> user = userService.getUserByToken(token);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-        else {
+        } else {
             Set<UserBorrowedBookDto> userBorrowedBookDtos = userService.getBorrowedBooks(user.get());
             return ResponseEntity.ok(userBorrowedBookDtos);
         }
     }
 
     @GetMapping("/user/summary")
-    ResponseEntity<UserSummaryDto> getUserSummary(@RequestHeader(name="Authorization") String token) {
+    ResponseEntity<UserSummaryDto> getUserSummary(@RequestHeader(name = "Authorization") String token) {
 
         Optional<User> user = userService.getUserByToken(token);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-        else {
+        } else {
             User userData = user.get();
             UserSummaryDto userDto = userService.createUserSummaryDto(userData);
             return ResponseEntity.ok(userDto);
@@ -61,11 +59,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    ResponseEntity<?> registerUser(@RequestBody UserRegistrationDto userRegistrationDto) {
+    ResponseEntity<?> registerUser(@RequestBody(required = false) UserRegistrationDto userRegistrationDto) {
 
         Optional<User> user = userService.getUserByEmail(userRegistrationDto.getEmail());
 
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -81,37 +79,31 @@ public class UserController {
 
         Optional<User> user = userService.getUserByEmail(email);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-
-        else if(!userForgottenPasswordDto.getNewPassword().equals(userForgottenPasswordDto.getNewPasswordConfirmation())) {
+        } else if (!userForgottenPasswordDto.getNewPassword().equals(userForgottenPasswordDto.getNewPasswordConfirmation())) {
             return ResponseEntity.badRequest().build();
-        }
-
-        else if(userService.doesTheRegistrationQuestionMatch(user.get(), userForgottenPasswordDto.getQuestion(),
+        } else if (userService.doesTheRegistrationQuestionMatch(user.get(), userForgottenPasswordDto.getQuestion(),
                 userForgottenPasswordDto.getAnswer())) {
             userService.changePassword(user.get(), userForgottenPasswordDto.getNewPassword());
             return ResponseEntity.ok().build();
-        }
-        else {
+        } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @PatchMapping("/user/changePassword")
-    ResponseEntity<User> changePassword(@RequestHeader(name="Authorization") String token, @RequestBody UserChangePasswordDto userChangePasswordDto) {
+    ResponseEntity<User> changePassword(@RequestHeader(name = "Authorization") String token, @RequestBody UserChangePasswordDto userChangePasswordDto) {
 
-        if(!userChangePasswordDto.getNewPassword().equals(userChangePasswordDto.getNewPasswordConfirmation())) {
+        if (!userChangePasswordDto.getNewPassword().equals(userChangePasswordDto.getNewPasswordConfirmation())) {
             return ResponseEntity.badRequest().build();
         }
 
         Optional<User> user = userService.getUserByToken(token);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-        else {
+        } else {
             User userData = user.get();
 
             boolean doesPasswordMatch = userService.doesThePasswordMatch(
@@ -119,8 +111,7 @@ public class UserController {
 
             if (!doesPasswordMatch) {
                 return ResponseEntity.badRequest().build();
-            }
-            else {
+            } else {
                 User userWithNewPassword = userService.changePassword(userData, userChangePasswordDto.getNewPassword());
                 return ResponseEntity.ok(userWithNewPassword);
             }
@@ -128,21 +119,19 @@ public class UserController {
     }
 
     @PatchMapping("/user/changeQuestion")
-    ResponseEntity<?> changeQuestion(@RequestHeader(name="Authorization") String token, @RequestBody UserChangeQuestionDto userChangeQuestionDto) {
+    ResponseEntity<?> changeQuestion(@RequestHeader(name = "Authorization") String token, @RequestBody UserChangeQuestionDto userChangeQuestionDto) {
 
         Optional<User> user = userService.getUserByToken(token);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        }
-        else {
+        } else {
             User userData = user.get();
             boolean doesPasswordMatch = userService.doesThePasswordMatch(userChangeQuestionDto.getPassword(), userData);
 
             if (!doesPasswordMatch) {
                 return ResponseEntity.badRequest().build();
-            }
-            else {
+            } else {
                 userService.changeQuestion(userData, userChangeQuestionDto.getQuestion(), userChangeQuestionDto.getAnswer());
                 return ResponseEntity.ok().build();
             }
