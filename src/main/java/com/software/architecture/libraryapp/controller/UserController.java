@@ -38,10 +38,10 @@ public class UserController {
 
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        } else {
-            Set<UserBorrowedBookDto> userBorrowedBookDtos = userService.getBorrowedBooks(user.get());
-            return ResponseEntity.ok(userBorrowedBookDtos);
         }
+
+        Set<UserBorrowedBookDto> userBorrowedBookDtos = userService.getBorrowedBooks(user.get());
+        return ResponseEntity.ok(userBorrowedBookDtos);
     }
 
     @GetMapping("/user/summary")
@@ -51,11 +51,10 @@ public class UserController {
 
         if (user.isEmpty()) {
             return ResponseEntity.badRequest().build();
-        } else {
-            User userData = user.get();
-            UserSummaryDto userDto = userService.createUserSummaryDto(userData);
-            return ResponseEntity.ok(userDto);
         }
+
+        UserSummaryDto userDto = userService.createUserSummaryDto(user.get());
+        return ResponseEntity.ok(userDto);
     }
 
     @PostMapping("/register")
@@ -75,66 +74,30 @@ public class UserController {
     @PatchMapping("/user/forgottenPassword")
     ResponseEntity<?> forgottenPassword(@RequestBody UserForgottenPasswordDto userForgottenPasswordDto) {
 
-        String email = userForgottenPasswordDto.getEmail();
-
-        Optional<User> user = userService.getUserByEmail(email);
-
-        if (user.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        } else if (!userForgottenPasswordDto.getNewPassword().equals(userForgottenPasswordDto.getNewPasswordConfirmation())) {
-            return ResponseEntity.badRequest().build();
-        } else if (userService.doesTheRegistrationQuestionMatch(user.get(), userForgottenPasswordDto.getQuestion(),
-                userForgottenPasswordDto.getAnswer())) {
-            userService.changePassword(user.get(), userForgottenPasswordDto.getNewPassword());
+        if (userService.changeForgottenPassword(userForgottenPasswordDto)) {
             return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.badRequest().build();
         }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @PatchMapping("/user/changePassword")
     ResponseEntity<User> changePassword(@RequestHeader(name = "Authorization") String token, @RequestBody UserChangePasswordDto userChangePasswordDto) {
 
-        if (!userChangePasswordDto.getNewPassword().equals(userChangePasswordDto.getNewPasswordConfirmation())) {
-            return ResponseEntity.badRequest().build();
+        if (userService.changePassword(token, userChangePasswordDto)) {
+            return ResponseEntity.ok().build();
         }
 
-        Optional<User> user = userService.getUserByToken(token);
-
-        if (user.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        } else {
-            User userData = user.get();
-
-            boolean doesPasswordMatch = userService.doesThePasswordMatch(
-                    userChangePasswordDto.getOldPassword(), userData);
-
-            if (!doesPasswordMatch) {
-                return ResponseEntity.badRequest().build();
-            } else {
-                User userWithNewPassword = userService.changePassword(userData, userChangePasswordDto.getNewPassword());
-                return ResponseEntity.ok(userWithNewPassword);
-            }
-        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PatchMapping("/user/changeQuestion")
     ResponseEntity<?> changeQuestion(@RequestHeader(name = "Authorization") String token, @RequestBody UserChangeQuestionDto userChangeQuestionDto) {
 
-        Optional<User> user = userService.getUserByToken(token);
-
-        if (user.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        } else {
-            User userData = user.get();
-            boolean doesPasswordMatch = userService.doesThePasswordMatch(userChangeQuestionDto.getPassword(), userData);
-
-            if (!doesPasswordMatch) {
-                return ResponseEntity.badRequest().build();
-            } else {
-                userService.changeQuestion(userData, userChangeQuestionDto.getQuestion(), userChangeQuestionDto.getAnswer());
-                return ResponseEntity.ok().build();
-            }
+        if (userService.changeQuestion(token, userChangeQuestionDto)) {
+            return ResponseEntity.ok().build();
         }
+
+        return ResponseEntity.badRequest().build();
     }
 }

@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public interface SqlUserRepository extends UserRepository, JpaRepository<User,Integer> {
+public interface SqlUserRepository extends UserRepository, JpaRepository<User, Integer> {
 
     @Override
     Optional<User> findByEmail(String email);
@@ -29,7 +29,7 @@ public interface SqlUserRepository extends UserRepository, JpaRepository<User,In
     @Transactional
     @Modifying
     @Query(nativeQuery = true, value = "UPDATE users SET password=?2 WHERE id=?1")
-    void changePassword(Integer id, String newPassword);
+    void setPassword(Integer id, String newPassword);
 
     @Override
     @Transactional

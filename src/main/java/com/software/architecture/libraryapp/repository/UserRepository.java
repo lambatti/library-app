@@ -13,7 +13,7 @@ public interface UserRepository {
               String registrationQuestion, String registrationQuestionAnswer,
               String gender, LocalDate birthDate, LocalDate accountCreationDate);
 
-    void changePassword(Integer id, String newPassword);
+    void setPassword(Integer id, String newPassword);
 
     void changeQuestion(Integer id, String registrationQuestion, String registrationQuestionAnswer);
 }

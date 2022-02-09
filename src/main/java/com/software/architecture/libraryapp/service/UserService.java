@@ -6,9 +6,7 @@ import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.RegistrationQuestions;
 import com.software.architecture.libraryapp.model.User;
-import com.software.architecture.libraryapp.model.dto.UserBorrowedBookDto;
-import com.software.architecture.libraryapp.model.dto.UserRegistrationDto;
-import com.software.architecture.libraryapp.model.dto.UserSummaryDto;
+import com.software.architecture.libraryapp.model.dto.*;
 import com.software.architecture.libraryapp.util.JwtUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -93,9 +91,9 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User changePassword(User user, String newPassword) {
+    public User setPassword(User user, String newPassword) {
         String encodedPassword = passwordEncoder.encode(newPassword);
-        userRepository.changePassword(user.getId(), encodedPassword);
+        userRepository.setPassword(user.getId(), encodedPassword);
         return userRepository.findById(user.getId()).get();
     }
 
@@ -103,7 +101,7 @@ public class UserService implements UserDetailsService {
         return passwordEncoder.matches(password, user.getPassword());
     }
 
-    public void changeQuestion(User user, RegistrationQuestions question, String answer) {
+    public void setQuestion(User user, RegistrationQuestions question, String answer) {
         userRepository.changeQuestion(user.getId(), question.name(), answer);
     }
 
@@ -143,10 +141,55 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public boolean doesTheRegistrationQuestionMatch(User user, RegistrationQuestions question, String answer) {
+    private boolean doesTheRegistrationQuestionMatch(User user, RegistrationQuestions question, String answer) {
         return user.getRegistrationQuestion().equals(question) && user.getRegistrationQuestionAnswer().equals(answer);
     }
 
+    public boolean changeForgottenPassword(UserForgottenPasswordDto userForgottenPasswordDto) {
+
+        String email = userForgottenPasswordDto.getEmail();
+        Optional<User> user = getUserByEmail(email);
+
+        if (user.isEmpty()
+                || !userForgottenPasswordDto.getNewPassword()
+                .equals(userForgottenPasswordDto.getNewPasswordConfirmation())
+                || !doesTheRegistrationQuestionMatch(user.get(), userForgottenPasswordDto.getQuestion(),
+                userForgottenPasswordDto.getAnswer())) {
+            return false;
+        }
+
+        setPassword(user.get(), userForgottenPasswordDto.getNewPassword());
+        return true;
+    }
+
+    public boolean changePassword(String token, UserChangePasswordDto userChangePasswordDto) {
+
+        if (!userChangePasswordDto.getNewPassword().equals(userChangePasswordDto.getNewPasswordConfirmation())) {
+            return false;
+        }
+
+        Optional<User> user = getUserByToken(token);
+
+        if (user.isEmpty() || !doesThePasswordMatch(userChangePasswordDto.getOldPassword(), user.get())) {
+            return false;
+        }
+
+        setPassword(user.get(), userChangePasswordDto.getNewPassword());
+        return true;
+
+    }
+
+    public boolean changeQuestion(String token, UserChangeQuestionDto userChangeQuestionDto) {
+
+        Optional<User> user = getUserByToken(token);
+
+        if (user.isEmpty() || !doesThePasswordMatch(userChangeQuestionDto.getPassword(), user.get())) {
+            return false;
+        }
+
+        setQuestion(user.get(), userChangeQuestionDto.getQuestion(), userChangeQuestionDto.getAnswer());
+        return true;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
