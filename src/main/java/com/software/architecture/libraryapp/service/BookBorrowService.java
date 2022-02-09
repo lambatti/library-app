@@ -42,12 +42,7 @@ public class BookBorrowService {
         // TODO: 08.01.2022 update this when multiple books are supported
         book.setCount(0);
 
-        BookBorrow bookBorrow = BookBorrow.builder()
-                .user(user)
-                .book(book)
-                .borrowDate(LocalDate.now())
-                .returnDate(LocalDate.now().plusDays(30))
-                .build();
+        BookBorrow bookBorrow = new BookBorrow(user, book, LocalDate.now(), LocalDate.now().plusDays(30));
 
         user.getBookSet().add(book);
         book.setUser(user);

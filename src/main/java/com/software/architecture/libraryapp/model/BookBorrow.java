@@ -1,17 +1,10 @@
 package com.software.architecture.libraryapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "book_borrow")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class BookBorrow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +20,16 @@ public class BookBorrow {
 
     private LocalDate borrowDate;
     private LocalDate returnDate;
+
+    public BookBorrow(User user, Book book, LocalDate borrowDate, LocalDate returnDate) {
+        this.user = user;
+        this.book = book;
+        this.borrowDate = borrowDate;
+        this.returnDate = returnDate;
+    }
+
+    public BookBorrow() {
+    }
 
     public Integer getId() {
         return id;
