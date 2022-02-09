@@ -16,9 +16,9 @@ public class BookBorrowController {
     }
 
     @PostMapping("/user/borrowBook/{bookId}")
-    ResponseEntity<?> borrowBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer bookId) {
+    ResponseEntity<?> borrowBook(@RequestHeader(name = "Authorization") String token, @PathVariable Integer bookId) {
 
-        if (bookBorrowService.handleAction(token, bookId, Actions.BORROW)) {
+        if (bookBorrowService.handleBookBorrowAction(token, bookId, Actions.BORROW)) {
             return ResponseEntity.ok().build();
         }
 
@@ -26,9 +26,9 @@ public class BookBorrowController {
     }
 
     @DeleteMapping("/user/returnBook/{bookId}")
-    ResponseEntity<?> returnBook(@RequestHeader(name="Authorization") String token, @PathVariable Integer bookId) {
+    ResponseEntity<?> returnBook(@RequestHeader(name = "Authorization") String token, @PathVariable Integer bookId) {
 
-        if (bookBorrowService.handleAction(token, bookId, Actions.RETURN)) {
+        if (bookBorrowService.handleBookBorrowAction(token, bookId, Actions.RETURN)) {
             return ResponseEntity.ok().build();
         }
 
@@ -36,9 +36,9 @@ public class BookBorrowController {
     }
 
     @PatchMapping("/user/prolongate/{bookId}")
-    ResponseEntity<?> prolongate(@RequestHeader(name="Authorization") String token, @PathVariable Integer bookId) {
+    ResponseEntity<?> prolongate(@RequestHeader(name = "Authorization") String token, @PathVariable Integer bookId) {
 
-        if (bookBorrowService.handleAction(token, bookId, Actions.PROLONGATE)) {
+        if (bookBorrowService.handleBookBorrowAction(token, bookId, Actions.PROLONGATE)) {
             return ResponseEntity.ok().build();
         }
 

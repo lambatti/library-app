@@ -4,6 +4,7 @@ import com.software.architecture.libraryapp.model.BookBorrow;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface BookBorrowRepository {
 
@@ -16,4 +17,6 @@ public interface BookBorrowRepository {
     LocalDate getReturnDate(Integer bookId);
 
     List<BookBorrow> getAllByUserId(Integer userId);
+
+    Optional<BookBorrow> findById(Integer userId, Integer bookId);
 }

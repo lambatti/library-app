@@ -34,7 +34,7 @@ public class BookBorrowService {
         Book book = bookRepository.getById(bookId);
 
         // TODO: 08.01.2022 move it to bookService and update the controller
-        if(!book.isAvailable()) {
+        if (!book.isAvailable()) {
             throw new IllegalArgumentException("Book is not available");
         }
 
@@ -77,31 +77,26 @@ public class BookBorrowService {
         return new BookBorrow();
     }
 
-    public BookBorrow prolongate(User user, Integer bookId) {
+    public boolean prolongate(User user, Integer bookId) {
 
-        // the book must be in the users set
-        // TODO: 08.01.2022 move this to bookService and update BookBorrowController
+        if (doesTheUserHasTheBook(user, bookId)) {
+            bookBorrowRepository.updateById(user.getId(), bookId, PROLONGATE_DAYS);
+            return true;
+        }
 
-        bookBorrowRepository.updateById(user.getId(), bookId, PROLONGATE_DAYS);
-        return new BookBorrow();
+        return false;
     }
 
-    private Optional<User> doesTheUserAndBookExist(String token, Integer bookId) {
+    private boolean doesTheUserHasTheBook(User user, Integer bookId) {
+        return bookBorrowRepository.findById(user.getId(), bookId).isPresent();
+    }
+
+    public boolean handleBookBorrowAction(String token, Integer bookId, Actions action) {
 
         Optional<User> user = userService.getUserByToken(token);
 
-        if (user.isPresent() && bookService.findById(bookId).isPresent()) {
-            return user;
-        }
+        if (user.isPresent() && doesTheUserHasTheBook(user.get(), bookId) && bookService.findById(bookId).isPresent()) {
 
-        return Optional.empty();
-    }
-
-    public boolean handleAction(String token, Integer bookId, Actions action) {
-
-        Optional<User> user = doesTheUserAndBookExist(token, bookId);
-
-        if (user.isPresent()) {
             switch (action) {
                 case BORROW: {
                     borrowBook(user.get(), bookId);
@@ -112,8 +107,7 @@ public class BookBorrowService {
                     break;
                 }
                 case PROLONGATE: {
-                    prolongate(user.get(), bookId);
-                    break;
+                    return prolongate(user.get(), bookId);
                 }
                 default: {
                     throw new IllegalArgumentException("Action is not supported");
