@@ -44,18 +44,23 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public UserSummaryDto createUserSummaryDto(User user) {
+    public Optional<UserSummaryDto> createUserSummaryDto(String token) {
 
-        UserSummaryDto userDto = new UserSummaryDto(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getGender().toString(),
-                user.getBirthDate(),
-                user.getAccountCreationDate()
-        );
+        Optional<User> user = getUserByToken(token);
 
-        return userDto;
+        if (user.isPresent()) {
+            User userData = user.get();
+            return Optional.of(new UserSummaryDto(
+                    userData.getFirstName(),
+                    userData.getLastName(),
+                    userData.getEmail(),
+                    userData.getGender().toString(),
+                    userData.getBirthDate(),
+                    userData.getAccountCreationDate()
+            ));
+        }
+
+        return Optional.empty();
     }
 
     public void registerUser(UserRegistrationDto userRegistrationDto) {

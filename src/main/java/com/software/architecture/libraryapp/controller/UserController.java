@@ -38,14 +38,7 @@ public class UserController {
 
     @GetMapping("/user/summary")
     ResponseEntity<UserSummaryDto> getUserSummary(@RequestHeader(name = "Authorization") String token) {
-
-        Optional<User> user = userService.getUserByToken(token);
-
-        if (user.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        return ResponseEntity.ok(userService.createUserSummaryDto(user.get()));
+        return userService.createUserSummaryDto(token).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/register")
