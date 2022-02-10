@@ -5,10 +5,11 @@ import com.software.architecture.libraryapp.adapter.SqlBookRepository;
 import com.software.architecture.libraryapp.model.Book;
 import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.User;
+import com.software.architecture.libraryapp.model.dto.UserBorrowedBookDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BookBorrowService {
@@ -88,6 +89,8 @@ public class BookBorrowService {
 
     public boolean handleBookBorrowAction(String token, Integer bookId, Actions action) {
 
+        // TODO: 09.02.2022 handle all actions with return
+
         Optional<User> user = userService.getUserByToken(token);
 
         if (user.isPresent() && doesTheUserHasTheBook(user.get(), bookId) && bookService.findById(bookId).isPresent()) {
@@ -111,5 +114,32 @@ public class BookBorrowService {
             return true;
         }
         return false;
+    }
+
+    public Set<UserBorrowedBookDto> getBorrowedBooks(User user) {
+        List<BookBorrow> bookBorrows = bookBorrowRepository.getAllByUserId(user.getId());
+
+        Set<UserBorrowedBookDto> userBorrowedBooksSet =
+                new TreeSet<>(Comparator.comparing(UserBorrowedBookDto::getReturnDate));
+
+        for (BookBorrow bookBorrow : bookBorrows) {
+            Book book = bookBorrow.getBook();
+
+            UserBorrowedBookDto userBorrowedBook = new UserBorrowedBookDto(
+                    book.getId(),
+                    book.getCoverUrl(),
+                    book.getTitle(),
+                    book.getAuthor(),
+                    book.getPublicationDate(),
+                    book.getGenre().toString(),
+                    book.isHardcover(),
+                    bookBorrow.getBorrowDate().toString(),
+                    bookBorrow.getReturnDate().toString()
+            );
+
+            userBorrowedBooksSet.add(userBorrowedBook);
+        }
+
+        return userBorrowedBooksSet;
     }
 }

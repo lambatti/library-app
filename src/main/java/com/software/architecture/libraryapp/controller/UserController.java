@@ -27,21 +27,13 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    ResponseEntity<Optional<User>> getUserById(@PathVariable Integer id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+    ResponseEntity<User> getUserById(@PathVariable Integer id) {
+        return userService.getUserById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/user/books")
     ResponseEntity<Set<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name = "Authorization") String token) {
-
-        Optional<User> user = userService.getUserByToken(token);
-
-        if (user.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        Set<UserBorrowedBookDto> userBorrowedBookDtos = userService.getBorrowedBooks(user.get());
-        return ResponseEntity.ok(userBorrowedBookDtos);
+        return userService.getBorrowedBooks(token).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/user/summary")
@@ -53,8 +45,7 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
 
-        UserSummaryDto userDto = userService.createUserSummaryDto(user.get());
-        return ResponseEntity.ok(userDto);
+        return ResponseEntity.ok(userService.createUserSummaryDto(user.get()));
     }
 
     @PostMapping("/register")
@@ -82,7 +73,7 @@ public class UserController {
     }
 
     @PatchMapping("/user/changePassword")
-    ResponseEntity<User> changePassword(@RequestHeader(name = "Authorization") String token, @RequestBody UserChangePasswordDto userChangePasswordDto) {
+    ResponseEntity<?> changePassword(@RequestHeader(name = "Authorization") String token, @RequestBody UserChangePasswordDto userChangePasswordDto) {
 
         if (userService.changePassword(token, userChangePasswordDto)) {
             return ResponseEntity.ok().build();

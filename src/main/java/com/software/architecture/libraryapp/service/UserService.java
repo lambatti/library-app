@@ -1,9 +1,6 @@
 package com.software.architecture.libraryapp.service;
 
-import com.software.architecture.libraryapp.adapter.SqlBookBorrowRepository;
 import com.software.architecture.libraryapp.adapter.SqlUserRepository;
-import com.software.architecture.libraryapp.model.Book;
-import com.software.architecture.libraryapp.model.BookBorrow;
 import com.software.architecture.libraryapp.model.RegistrationQuestions;
 import com.software.architecture.libraryapp.model.User;
 import com.software.architecture.libraryapp.model.dto.*;
@@ -23,14 +20,14 @@ import java.util.*;
 public class UserService implements UserDetailsService {
 
     private final SqlUserRepository userRepository;
-    private final SqlBookBorrowRepository bookBorrowRepository;
+    private final BookBorrowService bookBorrowService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public UserService(SqlUserRepository userRepository, SqlBookBorrowRepository bookBorrowRepository,
+    public UserService(SqlUserRepository userRepository, BookBorrowService bookBorrowService,
                        PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
-        this.bookBorrowRepository = bookBorrowRepository;
+        this.bookBorrowService = bookBorrowService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
@@ -105,30 +102,11 @@ public class UserService implements UserDetailsService {
         userRepository.changeQuestion(user.getId(), question.name(), answer);
     }
 
-    public Set<UserBorrowedBookDto> getBorrowedBooks(User user) {
-        List<BookBorrow> bookBorrows = bookBorrowRepository.getAllByUserId(user.getId());
+    public Optional<Set<UserBorrowedBookDto>> getBorrowedBooks(String token) {
 
-        Set<UserBorrowedBookDto> userBorrowedBooksSet = new HashSet<>();
+        Optional<User> user = getUserByToken(token);
 
-        for (BookBorrow bookBorrow : bookBorrows) {
-            Book book = bookBorrow.getBook();
-
-            UserBorrowedBookDto userBorrowedBook = new UserBorrowedBookDto(
-                    book.getId(),
-                    book.getCoverUrl(),
-                    book.getTitle(),
-                    book.getAuthor(),
-                    book.getPublicationDate(),
-                    book.getGenre().toString(),
-                    book.isHardcover(),
-                    bookBorrow.getBorrowDate().toString(),
-                    bookBorrow.getReturnDate().toString()
-            );
-
-            userBorrowedBooksSet.add(userBorrowedBook);
-        }
-
-        return userBorrowedBooksSet;
+        return user.map(bookBorrowService::getBorrowedBooks);
     }
 
     private String extractEmailFromToken(String token) {
