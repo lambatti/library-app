@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -29,11 +28,6 @@ public class UserController {
     @GetMapping("/user/{id}")
     ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return userService.getUserById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/user/books")
-    ResponseEntity<Set<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name = "Authorization") String token) {
-        return userService.getBorrowedBooks(token).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/user/summary")

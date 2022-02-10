@@ -20,14 +20,11 @@ import java.util.*;
 public class UserService implements UserDetailsService {
 
     private final SqlUserRepository userRepository;
-    private final BookBorrowService bookBorrowService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public UserService(SqlUserRepository userRepository, BookBorrowService bookBorrowService,
-                       PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+    public UserService(SqlUserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
-        this.bookBorrowService = bookBorrowService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
@@ -105,13 +102,6 @@ public class UserService implements UserDetailsService {
 
     public void setQuestion(User user, RegistrationQuestions question, String answer) {
         userRepository.changeQuestion(user.getId(), question.name(), answer);
-    }
-
-    public Optional<Set<UserBorrowedBookDto>> getBorrowedBooks(String token) {
-
-        Optional<User> user = getUserByToken(token);
-
-        return user.map(bookBorrowService::getBorrowedBooks);
     }
 
     private String extractEmailFromToken(String token) {
