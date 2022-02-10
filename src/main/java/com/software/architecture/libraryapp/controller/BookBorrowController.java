@@ -7,7 +7,7 @@ import com.software.architecture.libraryapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -22,7 +22,7 @@ public class BookBorrowController {
     }
 
     @GetMapping("/user/books")
-    ResponseEntity<Set<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name = "Authorization") String token) {
+    ResponseEntity<List<UserBorrowedBookDto>> getUserBooks(@RequestHeader(name = "Authorization") String token) {
         return userService.getUserByToken(token).map(bookBorrowService::getBorrowedBooks)
                 .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }

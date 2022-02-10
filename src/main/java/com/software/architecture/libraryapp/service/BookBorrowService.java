@@ -9,7 +9,10 @@ import com.software.architecture.libraryapp.model.dto.UserBorrowedBookDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookBorrowService {
@@ -49,7 +52,7 @@ public class BookBorrowService {
         book.setUser(user);
         bookBorrowRepository.save(bookBorrow);
 
-        // TODO: 08.01.2022 what to return? 
+        // TODO: 08.01.2022 what to return?
         return new BookBorrow();
     }
 
@@ -73,14 +76,8 @@ public class BookBorrowService {
         return new BookBorrow();
     }
 
-    public boolean prolongate(User user, Integer bookId) {
-
-        if (doesTheUserHasTheBook(user, bookId)) {
-            bookBorrowRepository.updateById(user.getId(), bookId, PROLONGATE_DAYS);
-            return true;
-        }
-
-        return false;
+    private void prolongate(User user, Integer bookId) {
+        bookBorrowRepository.updateById(user.getId(), bookId, PROLONGATE_DAYS);
     }
 
     private boolean doesTheUserHasTheBook(User user, Integer bookId) {
@@ -93,34 +90,42 @@ public class BookBorrowService {
 
         Optional<User> user = userService.getUserByToken(token);
 
-        if (user.isPresent() && doesTheUserHasTheBook(user.get(), bookId) && bookService.findById(bookId).isPresent()) {
+        if (user.isPresent() && bookService.findById(bookId).isPresent()) {
 
             switch (action) {
                 case BORROW: {
-                    borrowBook(user.get(), bookId);
+                    if (!doesTheUserHasTheBook(user.get(), bookId)) {
+                        borrowBook(user.get(), bookId);
+                        return true;
+                    }
                     break;
                 }
                 case RETURN: {
-                    returnBook(user.get(), bookId);
+                    if (doesTheUserHasTheBook(user.get(), bookId)) {
+                        returnBook(user.get(), bookId);
+                        return true;
+                    }
                     break;
                 }
                 case PROLONGATE: {
-                    return prolongate(user.get(), bookId);
+                    if (doesTheUserHasTheBook(user.get(), bookId)) {
+                        prolongate(user.get(), bookId);
+                        return true;
+                    }
+                    break;
                 }
                 default: {
                     throw new IllegalArgumentException("Action is not supported");
                 }
             }
-            return true;
         }
         return false;
     }
 
-    public Set<UserBorrowedBookDto> getBorrowedBooks(User user) {
+    public List<UserBorrowedBookDto> getBorrowedBooks(User user) {
         List<BookBorrow> bookBorrows = bookBorrowRepository.getAllByUserId(user.getId());
 
-        Set<UserBorrowedBookDto> userBorrowedBooksSet =
-                new TreeSet<>(Comparator.comparing(UserBorrowedBookDto::getReturnDate));
+        List<UserBorrowedBookDto> userBorrowedBooksSet = new ArrayList<>();
 
         for (BookBorrow bookBorrow : bookBorrows) {
             Book book = bookBorrow.getBook();
@@ -139,6 +144,9 @@ public class BookBorrowService {
 
             userBorrowedBooksSet.add(userBorrowedBook);
         }
+
+        userBorrowedBooksSet.sort(Comparator.comparing(UserBorrowedBookDto::getReturnDate)
+                .thenComparing(UserBorrowedBookDto::getTitle));
 
         return userBorrowedBooksSet;
     }
