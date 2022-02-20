@@ -2,45 +2,33 @@ package com.software.architecture.libraryapp.controller;
 
 import com.software.architecture.libraryapp.model.authentication.AuthenticationRequest;
 import com.software.architecture.libraryapp.model.authentication.AuthenticationResponse;
-import com.software.architecture.libraryapp.service.UserService;
-import com.software.architecture.libraryapp.util.JwtUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.software.architecture.libraryapp.service.LoginService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/")
 public class LoginController {
 
-    private final AuthenticationManager authenticationManager;
-    private final UserService userService;
-    private final JwtUtil jwtTokenUtil;
+    private final LoginService loginService;
 
-    public LoginController(AuthenticationManager authenticationManager, UserService userService, JwtUtil jwtTokenUtil) {
-        this.authenticationManager = authenticationManager;
-        this.userService = userService;
-        this.jwtTokenUtil = jwtTokenUtil;
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
     }
 
     @PostMapping("/login")
-    ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())
-            );
-        } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password!", e);
-        }
+    ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
 
-        final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getEmail());
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        Optional<AuthenticationResponse> authenticationResponse = loginService.generateToken(authenticationRequest);
+
+        if (authenticationResponse.isPresent()) {
+            return ResponseEntity.ok(authenticationResponse.get());
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
