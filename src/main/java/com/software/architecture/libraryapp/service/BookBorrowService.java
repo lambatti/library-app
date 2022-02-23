@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -144,9 +143,6 @@ public class BookBorrowService {
 
             userBorrowedBooksSet.add(userBorrowedBook);
         }
-
-        userBorrowedBooksSet.sort(Comparator.comparing(UserBorrowedBookDto::getReturnDate)
-                .thenComparing(UserBorrowedBookDto::getTitle));
 
         return userBorrowedBooksSet;
     }

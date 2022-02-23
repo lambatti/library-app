@@ -33,6 +33,8 @@ public interface SqlBookBorrowRepository extends BookBorrowRepository, JpaReposi
     void updateById(Integer userId, Integer bookId, Integer days);
 
     @Override
+    @Query(nativeQuery = true, value = "SELECT * FROM book_borrow WHERE user_id = ?1 " +
+            "ORDER BY return_date, ( SELECT MIN(title) FROM books WHERE book_borrow.book_id = books.id)")
     List<BookBorrow> getAllByUserId(Integer userId);
 
     @Override
